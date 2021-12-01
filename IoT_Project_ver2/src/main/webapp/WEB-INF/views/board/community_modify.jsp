@@ -15,16 +15,17 @@
 	<div class="col-md-8">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-				<i class="fas fa-comments"></i>커뮤니티 - 게시글 조회
+				<i class="fas fa-comments"></i>커뮤니티 - 게시글 수정
 			</h2>
 		</div>
 
 		<div class="panel-body">
-			
+
+		<form id="modifyForm" action="/board/community_modify" method="post">
 			<div class="row">
 				<div class="col-md-10 mb-3">
 					<label class="form-label">제목</label> <input type="text"
-						class="form-control" name="title" readonly
+						class="form-control" name="title" 
 						value='<c:out value="${board.title}"/>'>
 				</div>
 				
@@ -58,7 +59,7 @@
 
 			<div class="mb-3">
 				<label class="form-label">내용</label>
-				<textarea class="form-control" rows="6" name='content' readonly><c:out
+				<textarea class="form-control" rows="6" name='content' ><c:out
 						value="${board.content}" /></textarea>
 			</div>
 
@@ -66,26 +67,14 @@
 
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
-					<button type="button" class="btn btn-outline-primary btn_list">목록</button>
-					<button type="button" class="btn btn-outline-primary btn_modify">수정</button>
-					<button type="button" class="btn btn-outline-danger btn_remove">삭제</button>
+					<button type="button" class="btn btn-outline-primary btn_list" data-oper="list">목록</button>
+					<button type="button" class="btn btn-outline-primary btn_modify" data-oper="modify">수정</button>
+					<button type="button" class="btn btn-outline-danger btn_remove" data-oper="remove">삭제</button>
 				</div>
 			</div>
+		</form>
 			
-			<!-- Page 264 조회페이지에서 <form>처리 -->
-			<form id='actionForm' action="/board/community" method='get'>
-				<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno }"/>'>	
-			</form>
 			
-			<form id='modifyForm' action="/board/community_modify" method='get'>
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-				
-				<!-- Page 345 조회 페이지에서 검색 처리 -->
-				<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
-				<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
-			</form>
-
 
 		</div>
 	</div>
@@ -93,28 +82,36 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
+$(document).ready(function(){
+	
+	var modifyForm = $("#modifyForm");
+	
+	$('button').on("click", function(e){
 		
-		var actionForm = $("#actionForm");
+		e.preventDefault();
 		
+		var operation = $(this).data("oper");
 		
-		$(".btn_list").on("click", function(e){
-			actionForm.find("#bno").remove();
-			actionForm.attr("action", "/board/community").submit();
-		});
-		
-		$(".btn_modify").on("click", function(e){
-			actionForm.attr("action", "/board/community_modify").submit();
-		});
-		
-		$(".btn_remove").on("click", function(e){
-			actionForm.attr("action", "/board/community_remove").attr("method", "post").submit();
+		if(operation === 'list'){
+			modifyForm.attr("action", "/board/community").attr("method", "get");
+			modifyForm.empty().submit();
+		}
+		else if(operation === 'modify'){
+			modifyForm.submit();
+			alert("수정 완료");
+		}
+		else if(operation === 'remove'){
+			modifyForm.attr("action", "/board/community_remove").submit();
 			alert("삭제 완료");
+		}
+		
+		
 		});
+	
+
 		
 
-
-	});
+});
 </script>
 
 

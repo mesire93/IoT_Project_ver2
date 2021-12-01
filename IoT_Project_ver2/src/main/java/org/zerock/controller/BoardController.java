@@ -37,8 +37,8 @@ public class BoardController {
 	
 	@GetMapping("/community")
 	public void list(Criteria cri, Model model) {
-
-		model.addAttribute("list", service.getList(cri));
+		log.info("=== 커뮤니티 ===");
+		model.addAttribute("community", service.getList(cri));
 	
 		// Page 324 전체 페이지 개수 처리
 		int total = service.getTotal(cri);
@@ -60,89 +60,35 @@ public class BoardController {
 		return "redirect:/board/community";
 	}
 	
-	@GetMapping("/community_get")
+	@GetMapping({"/community_get", "/community_modify"})
 	public void community_get(@RequestParam("bno") Long bno, Model model) {
 		model.addAttribute("board", service.get(bno));
 	}
 
-	/*
-	@GetMapping("/list")
-	public void list(Model model) {
-		
-		model.addAttribute("list", service.getList());
-	}
-	*/
-/*
-	// Page 300 
-	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
-
-		model.addAttribute("list", service.getList(cri));
-//		model.addAttribute("pageMaker", new PageDTO(cri, 123));
 	
-		// Page 324 전체 페이지 개수 처리
-		int total = service.getTotal(cri);
-		log.info("total : " + total);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-	
-	}
-*/
-	
-	// Page 215 등록 처리와 테스트
-	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
-
-		service.register(board);
-		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/community";
-		
-	}
-	
-	// Page 217 조회 처리와 테스트
-	// Page 259 게시물의 수정 / 삭제처리
-	@GetMapping({"/get", "/modify"})
-	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("board", service.get(bno));
-	}
-	
-	// Page 219 수정 처리와 테스트
-	@PostMapping("/modify")
+	@PostMapping("/community_modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-
+		
+		log.info("=== 게시글 수정 ===");
 		// 수정 여부 (boolean 값)
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		
-		// 페이지, 게시물 총량 
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-		
-		// 검색 조건, 키워드 
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-		
+			
 		// Page 350 UriComponentsBuilder
 		return "redirect:/board/community" + cri.getListLink();
 		
 	}
+
 	
 	// Page 220 삭제 처리와 테스트
-	@PostMapping("/remove")
+	@PostMapping("/community_remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
-
+		log.info("=== 게시글 삭제 ===");
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		
-		// 페이지, 게시물 총량 
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-		
-		// 검색 조건, 키워드 
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		// Page 350 UriComponentsBuilder
 		return "redirect:/board/community" + cri.getListLink();

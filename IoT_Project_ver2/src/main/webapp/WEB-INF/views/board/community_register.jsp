@@ -11,31 +11,12 @@
 
 	<div class="row">
 
-		<!-- 왼쪽 사이드바 -->
-		<div class="col-md-2 sidebar ">
-			<a href="#"
-				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
-				<h4>
-					<i class="fas fa-bullhorn"></i>공지사항
-				</h4>
-			</a> <a href="#"
-				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
-				<h4>
-					<i class="fas fa-comments"></i>커뮤니티
-				</h4>
-			</a> <a href="#"
-				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4">
-				<h4>
-					<i class="fas fa-question-circle"></i>질문답변
-				</h4>
-			</a>
-		</div>
-		<!-- 왼쪽 사이드바 종료 -->
+	<%@ include file="/WEB-INF/views/include/leftSidebar.jsp"  %>	
 
 		<div class="col-md-8">
 			<div class="panel-heading">
 				<h2 class="panel-title">
-					<i class="fas fa-comments"></i>커뮤니티
+					<i class="fas fa-comments"></i>커뮤니티 - 게시글 등록
 				</h2>
 			</div>
 			
@@ -73,7 +54,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	// 글쓰기 버튼 클릭이벤트 
+	
 	$(".btn_cancel").on("click", function(){
 		self.location = "/board/community";
 	});

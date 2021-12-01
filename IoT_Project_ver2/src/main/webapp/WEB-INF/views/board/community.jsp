@@ -10,26 +10,7 @@
 
 	<div class="row">
 
-		<!-- 왼쪽 사이드바 -->
-		<div class="col-md-2 sidebar ">
-			<a href="#"
-				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
-				<h4>
-					<i class="fas fa-bullhorn"></i>공지사항
-				</h4>
-			</a> <a href="#"
-				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
-				<h4>
-					<i class="fas fa-comments"></i>커뮤니티
-				</h4>
-			</a> <a href="#"
-				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4">
-				<h4>
-					<i class="fas fa-question-circle"></i>질문답변
-				</h4>
-			</a>
-		</div>
-		<!-- 왼쪽 사이드바 종료 -->
+	<%@ include file="/WEB-INF/views/include/leftSidebar.jsp"  %>
 
 
 		<div class="col-md-10">
@@ -51,7 +32,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list}" var="board">
+							<c:forEach items="${community}" var="board">
 								<tr>
 									<td><c:out value="${board.bno}" /></td>
 									<!-- Page 254 목록 페이지와 뒤로가기 문제 -->
@@ -61,7 +42,7 @@
 										</a>
 									</td>
 									<td><c:out value="${board.writer}" /></td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd  hh시 MM분 ss초"
+									<td><fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
 											value="${board.regdate }" /></td>
 								</tr>
 							</c:forEach>
@@ -166,6 +147,11 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	
+	// Page 257 뒤로가기 처리 
+	history.replaceState({}, null, null);
+	
 	
 	
 	// 글쓰기 버튼 클릭이벤트 
