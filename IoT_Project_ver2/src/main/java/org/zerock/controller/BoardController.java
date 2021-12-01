@@ -35,7 +35,7 @@ public class BoardController {
 	}
 */	
 	
-	@GetMapping("/community")
+	@GetMapping("/community/list")
 	public void list(Criteria cri, Model model) {
 		log.info("=== 커뮤니티 ===");
 		model.addAttribute("community", service.getList(cri));
@@ -47,26 +47,26 @@ public class BoardController {
 	
 	}
 	
-	@GetMapping("/community_register")
+	@GetMapping("/community/register")
 	public void community_register() {
 		log.info("=== 커뮤니티 등록 ===");
 	}
 	
-	@PostMapping("/community_register")
+	@PostMapping("/community/register")
 	public String community_register(BoardVO board, RedirectAttributes rttr) {
 		log.info("=== 커뮤니티 등록 ===");
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/community";
+		return "redirect:/board/community/list";
 	}
 	
-	@GetMapping({"/community_get", "/community_modify"})
+	@GetMapping({"/community/get", "/community/modify"})
 	public void community_get(@RequestParam("bno") Long bno, Model model) {
 		model.addAttribute("board", service.get(bno));
 	}
 
 	
-	@PostMapping("/community_modify")
+	@PostMapping("/community/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("=== 게시글 수정 ===");
@@ -76,13 +76,13 @@ public class BoardController {
 		}
 			
 		// Page 350 UriComponentsBuilder
-		return "redirect:/board/community" + cri.getListLink();
+		return "redirect:/board/community/list" + cri.getListLink();
 		
 	}
 
 	
 	// Page 220 삭제 처리와 테스트
-	@PostMapping("/community_remove")
+	@PostMapping("/community/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("=== 게시글 삭제 ===");
@@ -91,7 +91,7 @@ public class BoardController {
 		}
 		
 		// Page 350 UriComponentsBuilder
-		return "redirect:/board/community" + cri.getListLink();
+		return "redirect:/board/community/list" + cri.getListLink();
 		
 	}
 	

@@ -73,11 +73,11 @@
 			</div>
 			
 			<!-- Page 264 조회페이지에서 <form>처리 -->
-			<form id='actionForm' action="/board/community" method='get'>
+			<form id='actionForm' action="/board/community/list" method='get'>
 				<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno }"/>'>	
 			</form>
 			
-			<form id='modifyForm' action="/board/community_modify" method='get'>
+			<form id='modifyForm' action="/board/community/modify" method='get'>
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				
@@ -100,15 +100,15 @@
 		
 		$(".btn_list").on("click", function(e){
 			actionForm.find("#bno").remove();
-			actionForm.attr("action", "/board/community").submit();
+			actionForm.attr("action", "/board/community/list").submit();
 		});
 		
 		$(".btn_modify").on("click", function(e){
-			actionForm.attr("action", "/board/community_modify").submit();
+			actionForm.attr("action", "/board/community/modify").submit();
 		});
 		
 		$(".btn_remove").on("click", function(e){
-			actionForm.attr("action", "/board/community_remove").attr("method", "post").submit();
+			actionForm.attr("action", "/board/community/remove").attr("method", "post").submit();
 			alert("삭제 완료");
 		});
 		

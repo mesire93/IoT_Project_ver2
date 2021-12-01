@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/main/webapp/WEB-INF/views/board/community.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/board/community_get.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/board/community_register.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/community/get.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/community/list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/board/community/register.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/header.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/leftSidebar.jsp=UTF-8

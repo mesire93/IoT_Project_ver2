@@ -22,7 +22,7 @@
 			</header>
 			<div class="panel-body">
 				<div class="table-responsive">
-					<table class="table mb-none table-hover">
+					<table class="table mb-none table-hover table-striped" >
 						<thead>
 							<tr>
 								<th>번호</th>
@@ -83,61 +83,53 @@
 				</div>
 			</div>
 			
-			<!-- Page 311 페이지 번호 이벤트 처리 -->
-			<form id='actionForm' action="/board/community" method='get'>
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-				
-				<!-- Page 344 검색조건, 키워드 처리
-				<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type }"/>'>
-				<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>' >
-				 -->
-			</form>
 
 
 			<div class="row justify-content-center" style="margin-top: 20px;">
 				<div class="col-md-8 col-md-offset-3  ">
-
+					<form id="searchForm" action="/board/community/list" method="get">
 					<div class="input-group ">
-						<input type="hidden" name="page" value="1">
+						<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>'/>
+						<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>'/>
 						<div class="input-group-prepend ">
 							<select class="custom-select" name="type" style="height: 38px;">
-								<option selected="${pageRequestDTO.type == null}">== 선택
-									==</option>
-								<option value="t" selected="${pageRequestDTO.type == 't'}">
-									제목</option>
-								<option value="c" selected="${pageRequestDTO.type == 'c'}">
-									내용</option>
-								<option value="w" selected="${pageRequestDTO.type == 'w'}">
-									작성자</option>
-								<option value="tc" selected="${pageRequestDTO.type == 'tc'}">
-									제목+내용</option>
-								<option value="tcw" selected="${pageRequestDTO.type == 'tcw'}">
-									제목+내용+작성자</option>
+								<option value=""<c:out value="${pageMaker.cri.type == null ? 'selected' : '' }"/>>검색 조건</option>
+									<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : '' }"/>>제목</option>
+									<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : '' }"/>>내용</option>
+									<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : '' }"/>>작성자</option>
+									<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : '' }"/>>제목 + 내용</option>
+									<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : '' }"/>>제목 + 작성자</option>
+									<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : '' }"/>>제목 + 내용 + 작성자</option>	
 							</select>
 						</div>
 
-						<input class="form-control" name="keyword"
-							value="${pageRequestDTO.keyword}"
-							style="margin: 0px 12px 0px 0px;" placeholder="검색">
-
+						<input class="form-control" name="keyword" value="${pageRequestDTO.keyword}" style="margin: 0px 12px 0px 0px;" placeholder="검색">
 
 						<div class="input-group-append" id="button-addon4">
-							<button class="btn btn-outline-secondary btn-search"
-								type="button">
-								<i class="fa fa-search"></i>검색
-							</button>
-							<button class="btn btn-outline-secondary btn-clear" type="button">
-								clear</button>
+							<button type="button" class="btn btn-outline-secondary btn-search"><i class="fa fa-search"></i>검색</button>
+							<button type="button" class="btn btn-outline-secondary btn-clear" >clear</button>
 						</div>
 					</div>
-
+				</form>
 				</div>
 			</div>
+			
+			<!-- Page 311 페이지 번호 이벤트 처리 -->
+			<form id='actionForm' action="/board/community/list" method='get'>
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+				
+				<!-- Page 344 검색조건, 키워드 처리 -->
+				<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type }"/>'>
+				<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>' >
+			</form>
+			
 
 		</div>
 	</div>
 
+
+	
 
 	<div class="row">
 		<br> <br>
@@ -156,7 +148,7 @@ $(document).ready(function(){
 	
 	// 글쓰기 버튼 클릭이벤트 
 	$("#btn_register").on("click", function(){
-		self.location = "/board/community_register";
+		self.location = "/board/community/register";
 	});
 	
 	
@@ -173,11 +165,38 @@ $(document).ready(function(){
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "/board/community_get");
+		actionForm.attr("action", "/board/community/get");
 		actionForm.submit();
 	});
 	
 	
+	
+	
+	
+	// Page 342 검색버튼의 이벤트처리
+	var searchForm = $("#searchForm");
+	
+	$(".btn-search").on('click', function(e){
+		
+		if(!searchForm.find("option:selected").val()){
+			alert("검색 조건을 선택하세요.");
+			return false;
+		}
+		
+		if(!searchForm.find("input[name='keyword']").val()){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+		
+		searchForm.find("input[name='pageNum']").val("1");
+		e.preventDefault();
+		searchForm.submit();
+		
+	});
+	
+	$(".btn-clear").on('click', function(e){
+		searchForm.empty().submit();
+	});
 	
 });
 

@@ -31,15 +31,15 @@ $(document).ready(function(){
 	
 				
 	$("#notice").on("click", function(){
-		self.location = "/board/notice";
+		self.location = "/board/notice/list";
 	});
 	
 	$("#community").on("click", function(){
-		self.location = "/board/community";
+		self.location = "/board/community/list";
 	});
 	
 	$("#qna").on("click", function(){
-		self.location = "/board/qna";
+		self.location = "/board/qna/list";
 	});
 	
 	
