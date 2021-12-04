@@ -105,10 +105,7 @@
 						<button type="button" id="addReplyBtn" class="btn btn-outline-primary"  style="float:right;">등록</button>
 					</div>
 					
-					<div class="card-footer">
-						<ul id="replies">
-						</ul>
-					</div>
+
 					<div class="card-footer">
 						<nav aria-label="Contacts Page Navigation">
 							<ul class="pagination pagination-sm no-margin justify-content-center m-0">
@@ -118,37 +115,6 @@
 				</div>
 			</div>
 			<!-- 댓글 -->
-			
-			
-			
-			<!-- Page 414 댓글 목록 처리 -->
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i> 답변
-					<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">답변 작성</button>
-				</div>
-
-				<div class="panel-body">
-					<ul class="chat">
-						<!-- <li class="left clearfix" data-rno='12'>
-							<div>
-								<div class="header">
-									<strong class="primary-font">user00</strong> 
-									<small class="pull-right text-muted">2021-11-08 09:15 </small>
-								</div>
-								<p>Good Job</p>
-							</div>
-						</li> -->
-					</ul>
-				</div>
-				 
-				 <div class="panel-footer">
-				 
-				 </div>
-				 
-			</div>
-			<!-- 댓글목록처리 END -->
-			
 
 
 
@@ -183,10 +149,10 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" id="modalModBtn" class="btn btn-warning">수정</button>
-				<button type="button" id="modalRemoveBtn" class="btn btn-danger">삭제</button>
-				<button type="button" id='modalRegisterBtn' class="btn btn-primary">등록</button>
-				<button type="button" id='modalCloseBtn'  class="btn btn-default" data-dismiss="modal" aria-hidden="true">닫기</button>
+				<button type="button" id="modalModBtn" class="btn btn-outline-primary">수정</button>
+				<button type="button" id="modalRemoveBtn" class="btn btn-outline-danger">삭제</button>
+				<button type="button" id='modalRegisterBtn' class="btn btn-outline-primary">등록</button>
+				<button type="button" id='modalCloseBtn'  class="btn btn-outline-default" data-dismiss="modal" aria-hidden="true">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -375,7 +341,7 @@
 				next = true;
 			}
 			
-			var str ="<ul class='pagination pull-right'>";
+			var str ="<ul class='pagination pagination-sm no-margin justify-content-center m-0'>";
 			
 			if(prev){
 				str += "<li class='page-item'><a class='page-link' href='"+(startNum - 1)+"'>이전</a></li>";
