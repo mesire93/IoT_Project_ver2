@@ -15,7 +15,7 @@
 	<div class="col-md-8">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-				<i class="fas fa-comments"></i>커뮤니티 - 게시글 조회
+				<i class="fas fa-comments"></i>공지사항 - 게시글 조회
 			</h2>
 		</div>
 
@@ -72,11 +72,11 @@
 			</div>
 			
 			<!-- Page 264 조회페이지에서 <form>처리 -->
-			<form id='actionForm' action="/board/community/list" method='get'>
+			<form id='actionForm' action="/board/notice/list" method='get'>
 				<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno }"/>'>	
 			</form>
 			
-			<form id='modifyForm' action="/board/community/modify" method='get'>
+			<form id='modifyForm' action="/board/notice/modify" method='get'>
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				
@@ -84,88 +84,11 @@
 				<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
 				<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
 			</form>
-			
-			<hr>
-			
-			<div class="container">
-				
-			</div>
-			
-			
-			
-			
-			<!-- Page 414 댓글 목록 처리 -->
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i> 답변
-					<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">답변 작성</button>
-				</div>
-
-				<div class="panel-body">
-					<ul class="chat">
-						 <li class="left clearfix" data-rno='12'>
-							<div>
-								<div class="header">
-									<strong class="primary-font">user00</strong> 
-									<small class="pull-right text-muted">2021-11-08 09:15 </small>
-								</div>
-								<p>Good Job</p>
-							</div>
-						</li> 
-					</ul>
-				</div>
-				 
-				 <div class="panel-footer">
-				 
-				 </div>
-				 
-			</div>
-			<!-- 댓글목록처리 END -->
 
 
 		</div>
 	</div>
 </div>
-
-
-
-<!-- Page 420 새로운 댓글 처리 → 모달창 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">답변 모달</h4>
-			</div>
-			
-			<div class="modal-body">
-				<div class="form-group">
-					<label>답변</label>
-					<input class="form-control" name="reply" value="새로운 답변">
-				</div>
-				<div class="form-group">
-					<label>작성자</label>
-					<input class="form-control" name="replyer" value="replyer">
-				</div>
-				<div class="form-group">
-					<label>작성일</label>
-					<input class="form-control" name="replyDate" value="">
-				</div>
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" id="modalModBtn" class="btn btn-warning">수정</button>
-				<button type="button" id="modalRemoveBtn" class="btn btn-danger">삭제</button>
-				<button type="button" id='modalRegisterBtn' class="btn btn-primary">등록</button>
-				<button type="button" id='modalCloseBtn'  class="btn btn-default" data-dismiss="modal" aria-hidden="true">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
-
 
 
 <script type="text/javascript">
@@ -176,20 +99,20 @@
 		
 		$(".btn_list").on("click", function(e){
 			actionForm.find("#bno").remove();
-			actionForm.append("<input type='hidden' name='type' value='community'>");
-			actionForm.attr("action", "/board/community/list").submit();
+			actionForm.append("<input type='hidden' name='type' value='notice'>");
+			actionForm.attr("action", "/board/notice/list").submit();
 		});
 		
 		$(".btn_modify").on("click", function(e){
 			actionForm.append("<input type='hidden' name='type' value='qna'>");
-			actionForm.attr("action", "/board/community/modify").submit();
+			actionForm.attr("action", "/board/notice/modify").submit();
 		});
 		
 		$(".btn_remove").on("click", function(e){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
 				actionForm.append("<input type='hidden' name='type' value='qna'>");
-				actionForm.attr("action", "/board/community/remove").attr("method", "post").submit();
+				actionForm.attr("action", "/board/notice/remove").attr("method", "post").submit();
 			}
 			else return;
 		});
@@ -381,7 +304,5 @@
 	});
 	
 </script>
-
-
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

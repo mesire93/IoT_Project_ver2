@@ -45,14 +45,6 @@ public class BoardServiceImpl implements BoardService{
 
 		return mapper.delete(bno) == 1;
 	}
-/*
-	// PAGE 206 목록(리스트) 작업의 구현과 테스트
-	@Override
-	public List<BoardVO> getList() {
-		log.info("getList..................");
-		return mapper.getList();
-	}
-*/
 
 	// Page 299 
 	@Override

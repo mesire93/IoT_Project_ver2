@@ -15,7 +15,7 @@
 	<div class="col-md-8">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-				<i class="fas fa-comments"></i>커뮤니티 - 게시글 수정
+				<i class="fas fa-comments"></i>질문답변 - 게시글 수정
 			</h2>
 		</div>
 
@@ -92,14 +92,14 @@ $(document).ready(function(){
 		var operation = $(this).data("oper");
 		
 		if(operation === 'list'){
-			modifyForm.append("<input type='hidden' name='type' value='community'>");
+			modifyForm.append("<input type='hidden' name='type' value='qna'>").attr("method", "get");
 			modifyForm.attr("action", "/board/community/list").attr("method", "get");
 			modifyForm.empty().submit();
 		}
 		else if(operation === 'remove'){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
-				modifyForm.append("<input type='hidden' name='type' value='community'>");
+				modifyForm.append("<input type='hidden' name='type' value='qna'>").attr("method", "get");
 				modifyForm.attr("action", "/board/community/remove").submit();
 			}
 			else return;
@@ -107,6 +107,8 @@ $(document).ready(function(){
 		
 		
 	});
+	
+	
 	
 	
 	

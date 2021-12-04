@@ -15,13 +15,13 @@
 	<div class="col-md-8">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-				<i class="fas fa-comments"></i>커뮤니티 - 게시글 수정
+				<i class="fas fa-comments"></i>공지사항 - 게시글 수정
 			</h2>
 		</div>
 
 		<div class="panel-body">
 
-		<form id="modifyForm" action="/board/community/modify" method="post" class="needs-validation"  novalidate>
+		<form id="modifyForm" action="/board/notice/modify" method="post" class="needs-validation"  novalidate>
 			<div class="row">
 				<div class="col-md-10 mb-3">
 					<label class="form-label" for="valid01">제목</label>
@@ -92,21 +92,23 @@ $(document).ready(function(){
 		var operation = $(this).data("oper");
 		
 		if(operation === 'list'){
-			modifyForm.append("<input type='hidden' name='type' value='community'>");
-			modifyForm.attr("action", "/board/community/list").attr("method", "get");
+			modifyForm.append("<input type='hidden' name='type' value='notice'>");
+			modifyForm.attr("action", "/board/notice/list").attr("method", "get");
 			modifyForm.empty().submit();
 		}
 		else if(operation === 'remove'){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
-				modifyForm.append("<input type='hidden' name='type' value='community'>");
-				modifyForm.attr("action", "/board/community/remove").submit();
+				modifyForm.append("<input type='hidden' name='type' value='notice'>");
+				modifyForm.attr("action", "/board/notice/remove").submit();
 			}
 			else return;
 		}
 		
 		
 	});
+	
+	
 	
 	
 	

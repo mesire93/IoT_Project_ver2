@@ -2,8 +2,9 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.zerock.domain.Criteria;
+import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 // PAGE 184 Mapper인터페이스와 Mapper XML
 public interface BoardMapper {
@@ -31,5 +32,8 @@ public interface BoardMapper {
 	
 	// Page 322 MyBatis에서 전체 데이터의 개수 처리
 	public int getTotalCount(Criteria cri);
+	
+	
+	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
 	
 }

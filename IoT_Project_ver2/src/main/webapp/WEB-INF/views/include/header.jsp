@@ -31,13 +31,16 @@
 <link href="/resources/css/styles.css" rel="stylesheet" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
 </head>
 
 
 
 <body>
 	<!-- Responsive navbar-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
 		<div class="container">
 			<a class="navbar-brand" href="#!">Start Bootstrap</a>
 			<button class="navbar-toggler" type="button"
@@ -48,11 +51,17 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-md-0">
-					<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Blog</a></li>
+					<li class="nav-item"><a class="nav-link active" href="#">상품</a></li>
+					<li class="nav-item dropdown"><a class="nav-link active  dropdown-toggle board" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
+						 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+       				     	<li><a class="dropdown-item" href="#" id="notice"><i class="fas fa-bullhorn"></i>&nbsp;공지사항</a></li>
+      				   	 	<li><a class="dropdown-item" href="#" id="community"><i class="fas fa-comments"></i>&nbsp;커뮤니티</a></li>
+      				  	    <li><a class="dropdown-item" href="#" id="qna"><i class="fas fa-question-circle"></i>&nbsp;질문답변</a></li>
+       				  	 </ul>
+       				</li>
+					<li class="nav-item"><a class="nav-link active" href="#!">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link "  href="#">로그인</a></li>
+					<li class="nav-item"><a class="nav-link "  href="#">회원가입</a></li>
 				</ul>
 			</div>
 		</div>
@@ -66,4 +75,32 @@
 			</div>
 		</div>
 	</header>
+	
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#board").on("click", function(){
+		self.location = "/board/";
+	});
+	
+	$("#notice").on("click", function(e){
+		e.preventDefault();
+		location.href="/board/notice/list?type=notice";
+	});
+	
+	$("#community").on("click", function(e){
+		e.preventDefault();
+		location.href="/board/community/list?type=community";
+	});
+	
+	$("#qna").on("click", function(e){
+		e.preventDefault();
+		location.href="/board/qna/list?type=qna";
+	});
+	
+});
+</script>
 	

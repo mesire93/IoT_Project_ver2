@@ -16,12 +16,12 @@
 		<div class="col-md-8">
 			<div class="panel-heading">
 				<h2 class="panel-title">
-					<i class="fas fa-comments"></i>커뮤니티 - 게시글 등록
+					<i class="fas fa-comments"></i>공지사항 - 게시글 등록
 				</h2>
 			</div>
 			
 			<div class="panel-body">
-				<form action="/board/community/register" method="post" class="needs-validation" novalidate>	
+				<form action="/board/notice/register" method="post" class="needs-validation" novalidate>	
 					<div class="mb-3">
   						<label class="form-label" for="valid01">제목</label>
   						<input type="text" class="form-control" name="title" id="valid01" required>
@@ -41,11 +41,11 @@
 						<div class="invalid-feedback">내용을 입력하세요</div>
 					</div>
 
-					 <input type="hidden" name="type" value="community">
-
+					<input type="hidden" name="type" value="notice">
+					
 					<div class="row" style="margin-top:10px; margin-bottom:10px;">
 						<div class="col" align="right">
-							<button type="submit" class="btn btn-outline-primary" id="btn_register" >등록</button>
+							<button type="submit" class="btn btn-outline-primary btn_register" id="btn_register" >등록</button>
 							<button type="button" class="btn btn-outline-danger btn_cancel">취소</button>
 						</div>
 					</div>
@@ -61,8 +61,10 @@
 $(document).ready(function(){
 	
 	
+	
+	
 	$(".btn_cancel").on("click", function(){
-		self.location = "/board/community/list?type=community";
+		self.location = "/board/notice/list?type=notice";
 	});
 
 	

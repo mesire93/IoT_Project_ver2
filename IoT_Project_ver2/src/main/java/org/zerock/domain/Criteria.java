@@ -15,7 +15,8 @@ public class Criteria {
 	
 	private int pageNum;
 	private int amount;
-	
+	private String type;
+		
 	public Criteria() {
 		this(1,10);
 	}
@@ -26,11 +27,11 @@ public class Criteria {
 	}
 	
 	// Page 333 검색조건 처리를 위한 Criteria 확장
-	private String type;
+	private String typeSearch;
 	private String keyword;
 	
 	public String[] getTypeArr() {
-		return type == null ? new String[] {} : type.split("");
+		return typeSearch == null ? new String[] {} : typeSearch.split("");
 	}
 	
 	
@@ -40,7 +41,7 @@ public class Criteria {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
 				.queryParam("pageNum", this.pageNum)
 				.queryParam("amount", this.getAmount())
-				.queryParam("type", this.getType())
+				.queryParam("typeSearch", this.getTypeSearch())
 				.queryParam("keyword", this.getKeyword());
 		
 		return builder.toUriString();

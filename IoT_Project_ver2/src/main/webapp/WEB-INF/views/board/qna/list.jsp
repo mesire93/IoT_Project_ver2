@@ -17,7 +17,7 @@
 			<header class="panel-heading">
 
 				<h2 class="panel-title">
-					<i class="fas fa-comments"></i>커뮤니티
+					<i class="fas fa-comments"></i>질문답변
 				</h2>
 			</header>
 			<div class="panel-body">
@@ -86,11 +86,10 @@
 
 			<div class="row justify-content-center" style="margin-top: 20px;">
 				<div class="col-md-8 col-md-offset-3  ">
-					<form id="searchForm" action="/board/community/list" method="get">
+					<form id="searchForm" action="/board/qna/list" method="get">
 					<div class="input-group ">
 						<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum }"/>'/>
 						<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount }"/>'/>
-						
 						<div class="input-group-prepend ">
 							<select class="custom-select" name="typeSearch" style="height: 38px;">
 								<option value=""<c:out value="${pageMaker.cri.type == null ? 'selected' : '' }"/>>검색 조건</option>
@@ -104,6 +103,7 @@
 						</div>
 
 						<input class="form-control" name="keyword" value="${pageRequestDTO.keyword}" style="margin: 0px 12px 0px 0px;" placeholder="검색">
+
 						<div class="input-group-append" id="button-addon4">
 							<button type="button" class="btn btn-outline-secondary btn-search"><i class="fa fa-search"></i>검색</button>
 						</div>
@@ -113,7 +113,7 @@
 			</div>
 			
 			<!-- Page 311 페이지 번호 이벤트 처리 -->
-			<form id='actionForm' action="/board/community/list" method='get'>
+			<form id='actionForm' action="/board/qna/list" method='get'>
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 				
@@ -130,9 +130,7 @@
 	
 
 	<div class="row">
-		<br> 
-
-		<br>
+		<br> <br>
 	</div>
 
 
@@ -140,34 +138,38 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-
-		  
+	
 	// Page 257 뒤로가기 처리 
 	history.replaceState({}, null, null);
 	
-		
+	
+	
+	// 글쓰기 버튼 클릭이벤트 
+	$("#btn_register").on("click", function(){
+		self.location = "/board/qna/register";
+	});
+	
+	
 	// Page 306 페이지 번호 이벤트 처리 
 	var actionForm = $("#actionForm");
-	
+
 
 	$(".page-item a").on("click",function(e) {
-				e.preventDefault();
-				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				actionForm.submit();
+		e.preventDefault();
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
 	});
 	
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
-		actionForm.attr("action", "/board/community/get");
+		actionForm.attr("action", "/board/qna/get");
 		actionForm.submit();
 	});
 	
-	// 글쓰기 버튼 클릭이벤트 
-	$("#btn_register").on("click", function(){
-		self.location = "/board/community/register";
-	});
-
+	
+	
+	
 	
 	// Page 342 검색버튼의 이벤트처리
 	var searchForm = $("#searchForm");
@@ -185,14 +187,12 @@ $(document).ready(function(){
 		}
 		
 		searchForm.find("input[name='pageNum']").val("1");
-		searchForm.append("<input type='hidden' name='type' value='community'>");
+		searchForm.append("<input type='hidden' name='type' value='qna'>");
 		e.preventDefault();
 		searchForm.submit();
 		
 	});
-	
 
-	
 });
 
 </script>
