@@ -4,8 +4,7 @@ var replyService = (function(){
 	
 	// 댓글 등록(자동)
 	function add(reply, callback, error){
-		console.log("reply.js 등록 처리");
-		
+	
 		$.ajax({
 			type : 'post',
 			url : '/replies/new',

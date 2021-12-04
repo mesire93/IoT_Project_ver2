@@ -29,27 +29,23 @@ public class ReplyServiceImpl implements ReplyService{
 	@Transactional
 	@Override
 	public int register(ReplyVO vo) {
-		log.info("등록............" + vo);
 		boardMapper.updateReplyCnt(vo.getBno(), 1);
 		return mapper.insert(vo);
 	}
 	
 	@Override
 	public ReplyVO get(Long rno) {
-		log.info("조회............" + rno);
 		return mapper.read(rno);
 	}
 	
 	@Override
 	public int modify(ReplyVO vo) {
-		log.info("수정............" + vo);
 		return mapper.update(vo);
 	}
 	
 	@Transactional
 	@Override
 	public int remove(Long rno) {
-		log.info("삭제............" + rno);
 		ReplyVO vo = mapper.read(rno);
 		boardMapper.updateReplyCnt(vo.getBno(), -1);
 		return mapper.delete(rno);
@@ -57,7 +53,6 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	@Override
 	public List<ReplyVO> getList(Criteria cri, Long bno){
-		log.info("게시글의 댓글 목록 가져오기............" + bno);
 		return mapper.getListWithPaging(cri, bno);
 	}
 	

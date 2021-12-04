@@ -62,7 +62,6 @@
 			</div>
 
 			
-
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
 					<button type="button" class="btn btn-outline-primary btn_list">목록</button>
@@ -87,10 +86,38 @@
 			
 			<hr>
 			
-			<div class="container">
-				
+			<!-- 댓글 -->
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header with-border ">
+						<h5 class="card-title" style="margin-top:10px; margin-bottom:10px;">
+							<i class="fa fa-comments fa-fw"></i>댓글창입니다
+						</h5>
+					</div>
+					<div class="card-body">
+						<div class="row">
+						
+						<!-- 댓글 출력 -->	
+						<ul class="chat" style="list-style:none;">
+						</ul>
+
+						</div>
+						<button type="button" id="addReplyBtn" class="btn btn-outline-primary"  style="float:right;">등록</button>
+					</div>
+					
+					<div class="card-footer">
+						<ul id="replies">
+						</ul>
+					</div>
+					<div class="card-footer">
+						<nav aria-label="Contacts Page Navigation">
+							<ul class="pagination pagination-sm no-margin justify-content-center m-0">
+							</ul>
+						</nav>
+					</div>
+				</div>
 			</div>
-			
+			<!-- 댓글 -->
 			
 			
 			
@@ -103,7 +130,7 @@
 
 				<div class="panel-body">
 					<ul class="chat">
-						 <li class="left clearfix" data-rno='12'>
+						<!-- <li class="left clearfix" data-rno='12'>
 							<div>
 								<div class="header">
 									<strong class="primary-font">user00</strong> 
@@ -111,7 +138,7 @@
 								</div>
 								<p>Good Job</p>
 							</div>
-						</li> 
+						</li> -->
 					</ul>
 				</div>
 				 
@@ -121,6 +148,8 @@
 				 
 			</div>
 			<!-- 댓글목록처리 END -->
+			
+
 
 
 		</div>
@@ -134,7 +163,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
 				<h4 class="modal-title" id="myModalLabel">답변 모달</h4>
 			</div>
 			
@@ -167,7 +196,7 @@
 
 
 
-
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -201,7 +230,6 @@
 
 
 <!-- Page 415 댓글 이벤트 처리 -->
-<script type="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 	$(document).ready(function(){
 		
@@ -212,11 +240,7 @@
 			
 		function showList(page){
 			replyService.getList({bno : bnoValue, page : page || 1 }, function(replyCnt, list){
-				
-				console.log("댓글 수 : " + replyCnt);
-				console.log("목록 : " + list);
-				console.log(list);
-				
+							
 				if(page == -1){
 					pageNum = Math.ceil(replyCnt/10.0);
 					showList(pageNum);
@@ -230,12 +254,19 @@
 					}
 					
 					for (var i=0, len=list.length || 0; i<len; i++){
+					
 						str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-						str += "		<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-						str += "			<small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
-						str += "		<p>"+list[i].reply+"</p></div></li>";
+						str += "<div>";
+						str += "<div class='header'>";
+						str += "<strong class='primary-font'><i class='fa fa-comments fa-fw'></i>"+list[i].replyer+"</strong>";
+						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+						str += "</div>";
+						str += "<p>"+list[i].reply+"</p>";
+						str += "<hr>";
+						str += "</div>";
+						str += "</li>"; 
 						
-						console.log("list . reply = " + list[i].reply);
+						
 					}
 					
 					replyUL.html(str);
@@ -327,7 +358,7 @@
 		
 		// Page 440 댓글 페이징
 		var pageNum = 1;
-		var replyPageFooter = $(".panel-footer");
+		var replyPageFooter = $(".card-footer");
 		
 		function showReplyPage(replyCnt){
 			var endNum = Math.ceil(pageNum / 10.0) * 10;
