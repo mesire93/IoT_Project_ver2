@@ -16,6 +16,7 @@ public class BoardVO {
 	private String type;
 	private Date regdate;
 	private Date updatedate;
-	
+	private int viewcnt;
+	private int replycnt;
 	
 }

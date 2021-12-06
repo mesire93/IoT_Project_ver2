@@ -53,11 +53,11 @@
 		resultType="org.zerock.domain.BoardVO">
 		<![CDATA[
 			select
-   				bno, title, content, writer, type, regdate, updatedate
+   				bno, title, content, writer, type, regdate, updatedate, viewcnt, replycnt
 			from
 				(
 					select /*+INDEX_DESC(board pk_board)) */
-    					rownum rn, bno, title, content, writer, type, regdate, updatedate
+    					rownum rn, bno, title, content, writer, type, regdate, updatedate, viewcnt, replycnt
 					from board
 					where
 		]]>
@@ -85,7 +85,19 @@
 	</select>
 	
 	
+	<update id="updateViewCnt">
+		<![CDATA[
+			update board set viewcnt = viewcnt + 1 where bno = #{bno}
+		]]>
+	</update>
 	
+	
+	<!-- 댓글 수 업데이트 -->
+	<update id="updateReplyCnt">
+		<![CDATA[
+			update board set replycnt = replycnt + #{amount} where bno = #{bno}
+		]]>
+	</update>
 	
 	
 	

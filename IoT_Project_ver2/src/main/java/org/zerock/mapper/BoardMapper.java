@@ -33,6 +33,10 @@ public interface BoardMapper {
 	// Page 322 MyBatis에서 전체 데이터의 개수 처리
 	public int getTotalCount(Criteria cri);
 	
+	// 조회수 update
+	public void updateViewCnt(Long bno);
 	
+	// 댓글수 update
+	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
 	
 }

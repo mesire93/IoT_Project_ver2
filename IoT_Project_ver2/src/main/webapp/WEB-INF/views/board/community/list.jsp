@@ -26,22 +26,25 @@
 						<thead>
 							<tr>
 								<th style="width: 10%">번호</th>
-								<th style="width: 40%">제목</th>
+								<th style="width: 30%">제목</th>
 								<th style="width: 20%">작성자</th>
+								<th style="width: 10%">조회수</th>
 								<th style="width: 30%">등록일</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${list}" var="board">
 								<tr>
-									<td><c:out value="${board.bno}" /></td>
+									<td style="margin-left:15px;"><c:out value="${board.bno}" /></td>
 									<!-- Page 254 목록 페이지와 뒤로가기 문제 -->
 									<td>
-										<a class='move' href='<c:out value="${board.bno}"/>'>
+										<a class='move' href='<c:out value="${board.bno}"/>' style="text-decoraction:none;">
 										<c:out value="${board.title}" />
+										<small>[<c:out value="${board.replycnt}"/>]</small>
 										</a>
 									</td>
 									<td><c:out value="${board.writer}" /></td>
+									<td style="margin-left:15px;"><c:out value="${board.viewcnt}"/></td>
 									<td><small><fmt:formatDate type="both" value="${board.regdate }" /></small></td>
 								</tr>
 							</c:forEach>
@@ -83,7 +86,7 @@
 			</div>
 			
 
-
+			
 			<div class="row justify-content-center" style="margin-top: 20px;">
 				<div class="col-md-8 col-md-offset-3  ">
 					<form id="searchForm" action="/board/community/list" method="get">

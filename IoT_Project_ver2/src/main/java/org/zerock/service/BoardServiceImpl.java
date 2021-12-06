@@ -29,7 +29,7 @@ public class BoardServiceImpl implements BoardService{
 	// PAGE 207 조회 작업의 구현과 테스트
 	@Override
 	public BoardVO get(Long bno) {
-	
+		mapper.updateViewCnt(bno);
 		return mapper.read(bno);
 	}
 
@@ -61,5 +61,12 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getTotalCount(cri);
 	}
 
+	@Override
+	public void updateViewCnt(Long bno) {
+			
+		mapper.updateViewCnt(bno);
+	}
+
+	
 	
 }

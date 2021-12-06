@@ -64,7 +64,6 @@ var replyService = (function(){
 	
 	// 수정
 	function update(reply, callback, error){
-		console.log("RNO : " + reply.rno);
 		
 		$.ajax({
 			type : 'put',

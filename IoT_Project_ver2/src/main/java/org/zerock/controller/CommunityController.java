@@ -57,6 +57,7 @@ public class CommunityController {
 	
 	@GetMapping({"/get", "/modify"})
 	public void community_get(@RequestParam("bno") Long bno, Model model) {
+
 		model.addAttribute("board", service.get(bno));
 	}
 

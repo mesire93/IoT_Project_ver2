@@ -256,7 +256,7 @@
 		$("#addReplyBtn").on("click", function(e){
 			modal.find("input").val("");
 			modalInputReplyDate.closest("div").hide();				// 작성일 입력폼 hide
-			modal.find("button[id!='modalCloseBtn']").hide();		// 닫기버튼 제외 hide
+			modal.find("button").hide();	
 			
 			modalRegisterBtn.show();
 			
@@ -291,7 +291,7 @@
 				modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).attr("readonly", "readonly");
 				modal.data("rno", reply.rno);
 				
-				modal.find("button[id!='modalCloseBtn']").hide();
+				modal.find("button").hide();
 				modalModBtn.show();
 				modalRemoveBtn.show();
 				
