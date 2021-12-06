@@ -26,8 +26,9 @@
 						<thead>
 							<tr>
 								<th style="width: 10%">번호</th>
-								<th style="width: 40%">제목</th>
+								<th style="width: 30%">제목</th>
 								<th style="width: 20%">작성자</th>
+								<th style="width: 10%">조회수</th>
 								<th style="width: 30%">등록일</th>
 							</tr>
 						</thead>
@@ -42,6 +43,7 @@
 										</a>
 									</td>
 									<td><c:out value="${board.writer}" /></td>
+									<td><small><c:out value="${board.viewcnt}"/></small></td>
 									<td><small><fmt:formatDate type="both" value="${board.regdate }" /></small></td>
 								</tr>
 							</c:forEach>

@@ -24,7 +24,7 @@
 				<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
 			 -->
 			<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-			<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.22:1521:orcl"></property>				
+			<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.200.40:1521:orcl"></property>				
 			<property name="username" value="IOT_PROJECT"></property>
 			<property name="password" value="1234"></property>
 		</bean>

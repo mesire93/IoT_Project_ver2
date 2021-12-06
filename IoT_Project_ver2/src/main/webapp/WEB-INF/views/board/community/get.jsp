@@ -166,6 +166,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		history.replaceState({}, null, null);
+		
 		var actionForm = $("#actionForm");
 		
 		

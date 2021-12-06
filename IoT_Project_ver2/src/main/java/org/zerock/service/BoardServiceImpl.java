@@ -67,6 +67,9 @@ public class BoardServiceImpl implements BoardService{
 		mapper.updateViewCnt(bno);
 	}
 
+
+	
+
 	
 	
 }

@@ -35,16 +35,16 @@
 						<tbody>
 							<c:forEach items="${list}" var="board">
 								<tr>
-									<td style="margin-left:15px;"><c:out value="${board.bno}" /></td>
+									<td><c:out value="${board.bno}" /></td>
 									<!-- Page 254 목록 페이지와 뒤로가기 문제 -->
 									<td>
-										<a class='move' href='<c:out value="${board.bno}"/>' style="text-decoraction:none;">
+										<a class='move' style="text-decoraction:none;" href='<c:out value="${board.bno}"/>' >
 										<c:out value="${board.title}" />
 										<small>[<c:out value="${board.replycnt}"/>]</small>
 										</a>
 									</td>
 									<td><c:out value="${board.writer}" /></td>
-									<td style="margin-left:15px;"><c:out value="${board.viewcnt}"/></td>
+									<td><small><c:out value="${board.viewcnt}"/></small></td>
 									<td><small><fmt:formatDate type="both" value="${board.regdate }" /></small></td>
 								</tr>
 							</c:forEach>
@@ -123,6 +123,7 @@
 				<!-- Page 344 검색조건, 키워드 처리 -->
 				<input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type }"/>'>
 				<input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword }"/>' >
+				<input type="hidden" name="bno">
 			</form>
 			
 
@@ -154,14 +155,14 @@ $(document).ready(function(){
 	
 
 	$(".page-item a").on("click",function(e) {
-				e.preventDefault();
-				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				actionForm.submit();
+		e.preventDefault();
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
 	});
 	
 	$(".move").on("click", function(e){
 		e.preventDefault();
-		actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
+		actionForm.find("input[name='bno']").val($(this).attr("href"));
 		actionForm.attr("action", "/board/community/get");
 		actionForm.submit();
 	});

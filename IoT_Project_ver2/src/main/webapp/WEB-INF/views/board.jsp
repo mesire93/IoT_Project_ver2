@@ -10,7 +10,7 @@
 <div class="container">
 	<div class="row">
 	
-	
+	<form method="get" >
 		<div class="col-md-12">
 			<a href="notice" id="notice"
 				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
@@ -41,7 +41,7 @@
 			</a>
 		</div>
 	
-		
+	</form>	
 		
 	</div>
 </div>
@@ -55,7 +55,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	history.replaceState({}, null, null);
 
 	
 	$("#notice").on("click", function(e){
@@ -72,6 +71,8 @@ $(document).ready(function(){
 		e.preventDefault();
 		location.href="/board/qna/list?type=qna";
 	});
+	
+	
 	
 });
 

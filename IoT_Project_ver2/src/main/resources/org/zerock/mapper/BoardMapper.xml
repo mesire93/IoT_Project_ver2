@@ -94,9 +94,7 @@
 	
 	<!-- 댓글 수 업데이트 -->
 	<update id="updateReplyCnt">
-		<![CDATA[
-			update board set replycnt = replycnt + #{amount} where bno = #{bno}
-		]]>
+		update board set replycnt = replycnt + #{amount} where bno = #{bno}
 	</update>
 	
 	
