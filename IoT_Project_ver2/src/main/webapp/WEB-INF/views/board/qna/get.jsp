@@ -36,17 +36,22 @@
 			</div>
 
 			<div class="row">
-				<div class="mb-3 col">
+				<div class="col-md-5 mb-3">
 					<label class="form-label ">작성일</label> <input type="text"
 						class="form-control" name="regDate" readonly
 						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
 									value="${board.regdate }" />'>
 				</div>
-				<div class="mb-3 col">
+				<div class="col-md-5 mb-3">
 					<label class="form-label ">수정일</label> <input type="text"
 						class="form-control" name="updateDate" readonly
 						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
 									value="${board.updatedate }" />'>
+				</div>
+				<div class="col-md-2 mb-3">
+					<label class="form-label ">조회수</label> <input type="text"
+						class="form-control" name="viewcnt" readonly
+						value='<c:out value="${board.viewcnt}" />'>
 				</div>
 			</div>
 
@@ -84,6 +89,37 @@
 				<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
 				<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
 			</form>
+			
+			
+			<!-- 댓글 -->
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header with-border ">
+						<h5 class="card-title" style="margin-top:10px; margin-bottom:10px;">
+							<i class="fa fa-comments fa-fw"></i>댓글창입니다
+						</h5>
+					</div>
+					<div class="card-body">
+						<div class="row">
+						
+						<!-- 댓글 출력 -->	
+						<ul class="chat" style="list-style:none;">
+						</ul>
+
+						</div>
+						<button type="button" id="addReplyBtn" class="btn btn-outline-primary"  style="float:right;">등록</button>
+					</div>
+					
+
+					<div class="card-footer">
+						<nav aria-label="Contacts Page Navigation">
+							<ul class="pagination pagination-sm no-margin justify-content-center m-0">
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<!-- 댓글 -->
 
 
 		</div>
@@ -91,6 +127,44 @@
 </div>
 
 
+
+<!-- Page 420 새로운 댓글 처리 → 모달창 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">답변 모달</h4>
+			</div>
+			
+			<div class="modal-body">
+				<div class="form-group">
+					<label>답변</label>
+					<input class="form-control" name="reply" value="새로운 답변">
+				</div>
+				<div class="form-group">
+					<label>작성자</label>
+					<input class="form-control" name="replyer" value="replyer">
+				</div>
+				<div class="form-group">
+					<label>작성일</label>
+					<input class="form-control" name="replyDate" value="">
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" id="modalModBtn" class="btn btn-outline-primary">수정</button>
+				<button type="button" id="modalRemoveBtn" class="btn btn-outline-danger">삭제</button>
+				<button type="button" id='modalRegisterBtn' class="btn btn-outline-primary">등록</button>
+				<button type="button" id='modalCloseBtn'  class="btn btn-outline-default" data-dismiss="modal" aria-hidden="true">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -124,7 +198,6 @@
 
 
 <!-- Page 415 댓글 이벤트 처리 -->
-<script type="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 	$(document).ready(function(){
 		
@@ -135,11 +208,7 @@
 			
 		function showList(page){
 			replyService.getList({bno : bnoValue, page : page || 1 }, function(replyCnt, list){
-				
-				console.log("댓글 수 : " + replyCnt);
-				console.log("목록 : " + list);
-				console.log(list);
-				
+							
 				if(page == -1){
 					pageNum = Math.ceil(replyCnt/10.0);
 					showList(pageNum);
@@ -153,12 +222,19 @@
 					}
 					
 					for (var i=0, len=list.length || 0; i<len; i++){
+					
 						str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-						str += "		<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-						str += "			<small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
-						str += "		<p>"+list[i].reply+"</p></div></li>";
+						str += "<div>";
+						str += "<div class='header'>";
+						str += "<strong class='primary-font'><i class='fa fa-comments fa-fw'></i>"+list[i].replyer+"</strong>";
+						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+						str += "</div>";
+						str += "<p>"+list[i].reply+"</p>";
+						str += "<hr>";
+						str += "</div>";
+						str += "</li>"; 
 						
-						console.log("list . reply = " + list[i].reply);
+						
 					}
 					
 					replyUL.html(str);
@@ -182,7 +258,7 @@
 		$("#addReplyBtn").on("click", function(e){
 			modal.find("input").val("");
 			modalInputReplyDate.closest("div").hide();				// 작성일 입력폼 hide
-			modal.find("button[id!='modalCloseBtn']").hide();		// 닫기버튼 제외 hide
+			modal.find("button").hide();	
 			
 			modalRegisterBtn.show();
 			
@@ -217,7 +293,7 @@
 				modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).attr("readonly", "readonly");
 				modal.data("rno", reply.rno);
 				
-				modal.find("button[id!='modalCloseBtn']").hide();
+				modal.find("button").hide();
 				modalModBtn.show();
 				modalRemoveBtn.show();
 				
@@ -250,7 +326,7 @@
 		
 		// Page 440 댓글 페이징
 		var pageNum = 1;
-		var replyPageFooter = $(".panel-footer");
+		var replyPageFooter = $(".card-footer");
 		
 		function showReplyPage(replyCnt){
 			var endNum = Math.ceil(pageNum / 10.0) * 10;
@@ -267,7 +343,7 @@
 				next = true;
 			}
 			
-			var str ="<ul class='pagination pull-right'>";
+			var str ="<ul class='pagination pagination-sm no-margin justify-content-center m-0'>";
 			
 			if(prev){
 				str += "<li class='page-item'><a class='page-link' href='"+(startNum - 1)+"'>이전</a></li>";

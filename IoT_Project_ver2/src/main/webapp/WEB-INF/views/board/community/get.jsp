@@ -36,17 +36,22 @@
 			</div>
 
 			<div class="row">
-				<div class="mb-3 col">
+				<div class="col-md-5 mb-3">
 					<label class="form-label ">작성일</label> <input type="text"
 						class="form-control" name="regDate" readonly
 						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
 									value="${board.regdate }" />'>
 				</div>
-				<div class="mb-3 col">
+				<div class="col-md-5 mb-3">
 					<label class="form-label ">수정일</label> <input type="text"
 						class="form-control" name="updateDate" readonly
 						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
 									value="${board.updatedate }" />'>
+				</div>
+				<div class="col-md-2 mb-3">
+					<label class="form-label ">조회수</label> <input type="text"
+						class="form-control" name="viewcnt" readonly
+						value='<c:out value="${board.viewcnt}" />'>
 				</div>
 			</div>
 
@@ -168,8 +173,7 @@
 		
 		history.replaceState({}, null, null);
 		
-		var actionForm = $("#actionForm");
-		
+		var actionForm = $("#actionForm");	
 		
 		$(".btn_list").on("click", function(e){
 			actionForm.find("#bno").remove();

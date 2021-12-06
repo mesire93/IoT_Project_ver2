@@ -38,9 +38,11 @@
 									<td><c:out value="${board.bno}" /></td>
 									<!-- Page 254 목록 페이지와 뒤로가기 문제 -->
 									<td>
-										<a class='move' style="text-decoraction:none;" href='<c:out value="${board.bno}"/>' >
+										<a class='move'  style="text-decoration:none;" href='<c:out value="${board.bno}"/>' >
 										<c:out value="${board.title}" />
-										<small>[<c:out value="${board.replycnt}"/>]</small>
+										<c:if test="${board.replycnt ne 0}">
+											<small>[<c:out value="${board.replycnt}"/>]</small>
+										</c:if>
 										</a>
 									</td>
 									<td><c:out value="${board.writer}" /></td>

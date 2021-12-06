@@ -10,9 +10,9 @@
 <div class="container">
 	<div class="row">
 	
-	<form method="get" >
+	
 		<div class="col-md-12">
-			<a href="notice" id="notice"
+			<a href="notice/list?type=notice" id="notice"
 				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
 				<h4>
 					<i class="fas fa-bullhorn"></i>공지사항
@@ -22,7 +22,7 @@
 		</div>
 		
 		<div class="col-md-12">
-			<a href="community" id="community"
+			<a href="community/list?type=community" id="community"
 				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4 ">
 				<h4>
 					<i class="fas fa-comments"></i>커뮤니티
@@ -32,7 +32,7 @@
 		</div>
 		
 		<div class="col-md-12">
-			<a href="qna" id="qna"
+			<a href="qna/list?type=qna" id="qna"
 				class="navbar-brand text-black text-center d-block mx-auto py-3 mb-4">
 				<h4>
 					<i class="fas fa-question-circle"></i>질문답변
@@ -41,7 +41,7 @@
 			</a>
 		</div>
 	
-	</form>	
+		
 		
 	</div>
 </div>
@@ -55,11 +55,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	history.replaceState({}, null, null);
 
-	
+ 	
 	$("#notice").on("click", function(e){
 		e.preventDefault();
-		location.href="/board/notice/list?type=notice";
+		location.href="/board/notice/list";
 	});
 	
 	$("#community").on("click", function(e){
@@ -71,9 +72,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		location.href="/board/qna/list?type=qna";
 	});
-	
-	
-	
+
 });
 
 </script>

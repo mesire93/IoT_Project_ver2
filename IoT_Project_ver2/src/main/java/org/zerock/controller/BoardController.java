@@ -14,10 +14,10 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 
 	@GetMapping({"/", "/list"})
-	public String board() {
+	public void board() {
 		log.info("=== Board ===");
 		
-		return "/board";
+	//	return "/board";
 	}
 	
 
