@@ -13,27 +13,27 @@
 	</center>
         <thead>
             <tr>
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px;"><input type="checkbox" name="__allcheck" class="MS_input_checkbox"  style="margin: 0px; padding: 0px; font-size: 12px; line-height: 1.25; color: rgb(68, 68, 68); font-family: 'Open Sans', sans-serif, 'Nanum Gothic', nanumgothic, AppleGothic, Helvetica, sans-serif; vertical-align: middle;"></div>
                 </th>
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px;">이미지</div>
                 </th>
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px;">상품명</div>
                 </th>
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px;"></div>
                 </th>
 
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px;">적립</div>
                 </th>
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px;">가격</div>
                 </th>
                 
-                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color: rgb(250, 250, 250); font-weight: normal; font-size: 18px;">
+                <th scope="col" style="margin: 0px; padding: 7px 0px 6px; background-color:rgb(246, 231, 250); font-weight: normal; font-size: 18px;">
                     <div class="tb-center" style="padding: 0px 10px; text-align: center;">취소</div>
                 </th>
             </tr>
@@ -41,11 +41,11 @@
         
         
         
-        
+        <tbody>
         <c:choose>
         	<c:when test="${list!=null}">
 			   <c:forEach items="${list}" var="getList">
-	            <tr>
+	            <tr style="border-bottom: 1px solid rgb(227, 227, 227);">
 	            	<td scope="col" style="margin: 0px; padding: 7px 0px 6px; background-image: none; font-weight: normal; font-size: 18px;">
 	                    <div class="tb-center" style="padding: 0px 10px;"><input type="checkbox" name="__allcheck" class="MS_input_checkbox" checked="" style="margin: 0px; padding: 0px; font-size: 12px; line-height: 1.25; color: rgb(68, 68, 68); font-family: 'Open Sans', sans-serif, 'Nanum Gothic', nanumgothic, AppleGothic, Helvetica, sans-serif; vertical-align: middle;"></div>
 	                </td>
@@ -58,7 +58,7 @@
 	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${getList.b_Price}"/></td>
 	            	
 	                <td style="margin: 0px; padding: 18px 0px; font-size: 18px; border-top: 1px solid rgb(227, 227, 227); background-image: none;">
-	                    <div class="tb-center" style="padding: 0px 10px; text-align: center;"></span><span class="d-block" style="display: block; padding-bottom: 3px;"><a class="a_btn grey w55" style="line-height: 1.25; color: rgb(255, 255, 255); font-family: 나눔고딕; vertical-align: middle; width: 55px; display: inline-block; padding: 3px 0px 2px; background: rgb(117, 117, 117); border-bottom: 1px solid rgb(80, 80, 80);">삭제</a></span></div>
+	                    <div class="tb-center" style="padding: 0px 10px; text-align: center;"></span><span class="d-block" style="display: block; padding-bottom: 3px;"><a class="a_btn grey w55" style="line-height: 1.25; color: rgb(255, 255, 255); font-family: 나눔고딕; vertical-align: middle; width: 55px; display: inline-block; padding: 3px 0px 2px; background: rgb(117, 117, 117); ">삭제</a></span></div>
 	                </td>
 	            </tr>
             </c:forEach>
@@ -75,21 +75,27 @@
 
             
         </tbody>
-        <tfoot>
-        <c:forEach items="${list}" var="getList">
-            <tr>
-                <td colspan="7" style="margin: 0px; padding: 0px; border-top: 1px solid rgb(227, 227, 227); font-weight: bold; color: rgb(85, 85, 85);">
-                    <div class="tb-right" style="padding: 25px 20px 25px 0px; text-align: center; background: rgb(250, 250, 250);"><span style="font-weight: normal; font-size: 18px">총 구매금액 : </span>&nbsp;&nbsp;<strong style="color: rgb(244, 56, 55); font-size: 18px;"><c:out value="${getList.b_Price}"/>원</strong></div>
-                </td>
-            </tr>
-            </c:forEach>
-        </tfoot>
-        <tbody>
+        
+       
     </table>
+    
+    <table>
+			<c:set var = "total" value = "0" />
+			<c:forEach var="getList" items="${list}" varStatus="status">     
+				<tr>
+					
+				
+				<c:set var= "total" value="${total + getList.b_Price}"/>
+				</c:forEach>
+			<td style="font-size: 25px; color: red;">총 가격 : <c:out value="${total}"/></td>
+           </tr>
+        </table>
 </div>
-<div class="delivery" style="margin-top: 20px; text-align: center; color: rgb(68, 68, 68); font-family: &quot;Open Sans&quot;, sans-serif, &quot;Nanum Gothic&quot;, nanumgothic, AppleGothic, Helvetica, sans-serif; font-size: 18px;">50,000원 미만의 주문은 배송료를 청구합니다.</div>
-<div class="btn-order-ctrl" style="margin-top: 20px; text-align: center; font-size: 0px; line-height: 0; color: rgb(68, 68, 68); font-family: &quot;Open Sans&quot;, sans-serif, &quot;Nanum Gothic&quot;, nanumgothic, AppleGothic, Helvetica, sans-serif;"><a class="a_btn red w120" onClick="location.href='buy2.html'" style="font-size: 18px; line-height: 1.25; color: rgb(255, 255, 255); font-family: 나눔고딕; vertical-align: middle; width: 120px; display: inline-block; padding: 6px 0px 5px; background: rgb(43, 40, 40); border-bottom: 0px solid rgb(198, 73, 71); margin-right: 10px;">상품 주문하기</a></div>
-<div style="color: rgb(68, 68, 68); font-family: &quot;Open Sans&quot;, sans-serif, &quot;Nanum Gothic&quot;, nanumgothic, AppleGothic, Helvetica, sans-serif; font-size: 12px; margin-top: 10px; text-align: center;"></div>
+
+<center><button type="submit" onClick="location.href='buy2.html'" style="color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: -0.3px; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(242, 244, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; letter-spacing: -0.3px; text-align: center; box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; padding: 12px 0px; font-size: 18px; background: rgb(243, 80, 78); display: inline-block; font-weight: bold; border: 1px solid rgb(211, 50, 48); width: 200px; cursor: pointer; color: rgb(255, 255, 255) !important;">
+
+	결제하기</button></center><br>
+
 <p><br></p>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
