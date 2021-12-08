@@ -42,6 +42,32 @@
 					</div>
 
 					 <input type="hidden" name="type" value="community">
+					 
+					 <div class="col-lg-12">
+						<div class="card">
+							<div class="card-header with-border ">
+								<h5 class="card-title" style="margin-top:10px; margin-bottom:10px;">
+									<i class="fas fa-folder-open"></i>&nbsp;첨부파일
+								</h5>
+							</div>
+							
+							<div class="card-body">
+								<div class="row">
+									<div class="uploadResult" id="uploadResult">
+										<ul>
+						
+										</ul>
+									</div>
+				
+									<div class="uploadDiv">
+										<input type="file" name="uploadFile" multiple>
+									</div>
+								</div>
+								
+							</div>
+
+						</div>	
+					</div>
 
 					<div class="row" style="margin-top:10px; margin-bottom:10px;">
 						<div class="col" align="right">
@@ -89,8 +115,147 @@ $(document).ready(function(){
 	})()
 	// 부트스트랩 유효성검사 종료
 	
+});
+</script>
+
+
+
+
+<!-- 파일 업로드  -->
+<script>
+	$(document).ready(function(){		
+
+	var formObj = $("form");
+	
+	$("button[type='submit']").on("click", function(e){
+		e.preventDefault();
+		
+		var str = "";
+		
+		$(".uploadResult ul li").each(function(i, obj){
+			
+			var jobj = $(obj);
+			console.dir(jobj);
+		    console.log(jobj.data("filename"));
+			
+			str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
+			
+		});
+		console.log(str);
+		formObj.append(str).submit();
+	});
 	
 	
+	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
+	var maxSize = 5242880;
+	
+	$("input[type='file']").change(function(e){
+		
+		var formData = new FormData();
+		
+		var inputFile = $("input[name='uploadFile']");
+		
+		var files = inputFile[0].files;
+		
+		console.log(files);
+		
+		for (var i=0; i < files.length; i++){
+			
+			if(!checkFile(files[i].name, files[i].size)){
+				return false;
+			}
+			
+			formData.append("uploadFile", files[i]);
+		}
+		
+		$.ajax({
+			url : "/uploadAjaxAction",
+			processData : false,
+			contentType : false,
+			data : formData,
+			type : 'POST',
+			dataType : 'json',
+			success : function(result){
+				console.log("RESULT : " + result);
+				showUploadFile(result);
+				alert("업로드 성공");
+			}
+		});
+		
+	});
+	
+	function checkFile(fileName, fileSize){
+		
+		if(fileSize >= maxSize){
+			alert("파일사이즈 초과! 최대용량은 5MB로 설정되어있습니다.");
+			return false;
+		}
+		
+		if(reg.test(fileName)){
+			alert("해당 확장자의 파일은 업로드 할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	function showUploadFile(uploadResultArr){
+		
+		if(!uploadResultArr || uploadResultArr.length == 0){
+			return;
+		}
+		
+		var uploadResult = $(".uploadResult ul");
+		
+		var str="";
+		
+		$(uploadResultArr).each(function(i, obj){
+			
+			if(obj.image){
+				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid.substring(0, 6) + "_" + obj.fileName);
+				
+				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
+						  	"<img src='\display?fileName="+fileCallPath+"'>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-warning btn-circle'>삭제</button></p>"+
+						  	"</div></li>";
+				
+			}
+			else{
+				var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid.substring(0, 6) + "_" + obj.fileName);
+				var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
+				
+				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
+						  	"<img src='/resources/img/attach.png'></a>"+
+						  	"<p>"+obj.fileName+"</p>"+
+						  	"<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>"+
+						  	"</div></li>";
+			  	
+			}
+			
+		});
+		
+		uploadResult.append(str);
+	}
+	
+	
+	$(".uploadResult").on("click", "button", function(e){
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		var targetli = $(this).closest("li");
+		
+		$.ajax({
+			url : '/deleteFile',
+			data : {fileName : targetFile, type : type},
+			dataType : 'text',
+			type : 'POST',
+			success : function(result){
+				alert(result);
+				targetli.remove();
+			}
+		});
+	});
 	
 	
 });

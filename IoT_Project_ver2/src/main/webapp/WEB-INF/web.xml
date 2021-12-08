@@ -29,9 +29,9 @@
 		
 		<multipart-config>
 			<location>C:\\upload\\temp</location>
-			<max-file-size>20971520</max-file-size>
-			<max-request-size>41943040</max-request-size>
-			<file-size-threshold>20971520</file-size-threshold>
+			<max-file-size>20971520</max-file-size><!-- 20MB -->
+			<max-request-size>41943040</max-request-size><!-- 40MB -->
+			<file-size-threshold>20971520</file-size-threshold><!-- 20MB  threshold(메모리사용) -->
 		</multipart-config>
 	</servlet>
 		

@@ -30,10 +30,6 @@
 		
 <script type="text/javascript">
 $(document).ready(function(){
-	
-				
-	history.replaceState({}, null, null);
-	
 
 	$(".notice").on("click", function(e){
 		e.preventDefault();

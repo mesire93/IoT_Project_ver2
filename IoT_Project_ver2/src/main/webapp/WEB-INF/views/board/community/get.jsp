@@ -39,13 +39,13 @@
 				<div class="col-md-5 mb-3">
 					<label class="form-label ">작성일</label> <input type="text"
 						class="form-control" name="regDate" readonly
-						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
+						value='<fmt:formatDate pattern="yyyy년 MM월 dd일   HH시 mm분 ss초"
 									value="${board.regdate }" />'>
 				</div>
 				<div class="col-md-5 mb-3">
 					<label class="form-label ">수정일</label> <input type="text"
 						class="form-control" name="updateDate" readonly
-						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
+						value='<fmt:formatDate pattern="yyyy년 MM월 dd일   HH시 mm분 ss초"
 									value="${board.updatedate }" />'>
 				</div>
 				<div class="col-md-2 mb-3">
@@ -65,7 +65,33 @@
 				<label class="form-label">내용</label>
 				<textarea class="form-control" rows="12" name='content' readonly><c:out value='${board.content}'  /></textarea>
 			</div>
-
+			
+			<!-- 첨부파일 -->
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header with-border ">
+						<h5 class="card-title" style="margin-top:10px; margin-bottom:10px;">
+							<i class="fas fa-folder-open"></i>&nbsp;첨부파일
+						</h5>
+					</div>
+					<div class="card-body">
+							<div class="row">
+								<div class="uploadResult" id="uploadResult">
+									<ul>
+					
+									</ul>
+								</div>
+			
+							</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="bigPictureWrapper">
+				<div class="bigPicture"></div>
+			</div>
+			<!-- 첨부파일 -->
 			
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
@@ -77,7 +103,7 @@
 			
 			<!-- Page 264 조회페이지에서 <form>처리 -->
 			<form id='actionForm' action="/board/community/list" method='get'>
-				<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno }"/>'>	
+				<input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno }"/>'>
 			</form>
 			
 			<form id='modifyForm' action="/board/community/modify" method='get'>
@@ -189,7 +215,7 @@
 		$(".btn_remove").on("click", function(e){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
-				actionForm.append("<input type='hidden' name='type' value='qna'>");
+				actionForm.append("<input type='hidden' name='type' value='community'>");
 				actionForm.attr("action", "/board/community/remove").attr("method", "post").submit();
 			}
 			else return;
@@ -381,6 +407,89 @@
 			showList(pageNum);
 		});
 		
+
+	});
+</script>
+
+
+<!-- 파일 업로드  -->
+<script>
+	$(document).ready(function(){	
+	
+	
+	
+	(function(){
+		var bno = "<c:out value='${board.bno}' />";
+		
+		$.getJSON("/board/getAttachList", {bno : bno}, function(arr){
+			console.log(arr);
+			
+			var uploadResult = $(".uploadResult ul");
+			var str = "";
+			
+			$(arr).each(function(i, attach){
+				
+				if(attach.fileType){
+					var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid.substring(0, 6) + "_" + attach.fileName);
+					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
+					str += "<div>";
+					str += "<img src='/display?fileName="+fileCallPath+"'></a>";
+					str += "</div></li>";
+				}
+				else{
+					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
+					str += "<div>";
+					str += "<span>"+attach.fileName+"</span><br/>";
+					str += "<img src='/resources/img/attach.png'>";
+					str += "</div></li>";
+				}
+			});
+			
+			uploadResult.html(str);
+			
+		});
+	})();
+	
+	
+	$(".uploadResult").on("click", "li", function(e){
+		
+		console.log("VIEW IMAGE");
+		
+		var liObj = $(this);
+		
+		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+		
+		if (liObj.data("type")){
+			showImage(path.replace(new RegExp(/\\/g),"/"));
+		}
+		else{
+			self.location="/download?fileName="+path
+		}
+		
+	});
+	
+	function showImage(fileCallPath){
+		
+//		alert(fileCallPath);
+		
+		$(".bigPictureWrapper").css("display", "flex").show();
+		
+		$(".bigPicture")
+		.html("<img src='/display?fileName="+fileCallPath+"'>")
+		.animate({width : '100%', height : '100%'}, 500);
+		
+	}
+	
+	$(".bigPictureWrapper").on("click", function(e){
+		$(".bigPicture").animate({width : '0%', height : '0%'}, 500);
+		setTimeout(function(e)  {
+			$(".bigPictureWrapper").hide();
+		}, 500);
+	});
+	
+	
+	
+	
 	});
 	
 </script>

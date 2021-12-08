@@ -39,13 +39,13 @@
 				<div class="col-md-5 mb-3">
 					<label class="form-label ">작성일</label> <input type="text"
 						class="form-control" name="regDate" readonly
-						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
+						value='<fmt:formatDate pattern="yyyy년 MM월 dd일   HH시 mm분 ss초"
 									value="${board.regdate }" />'>
 				</div>
 				<div class="col-md-5 mb-3">
 					<label class="form-label ">수정일</label> <input type="text"
 						class="form-control" name="updateDate" readonly
-						value='<fmt:formatDate pattern="yyyy-MM-dd  HH시 mm분 ss초"
+						value='<fmt:formatDate pattern="yyyy년 MM월 dd일   HH시 mm분 ss초"
 									value="${board.updatedate }" />'>
 				</div>
 				<div class="col-md-2 mb-3">
@@ -176,14 +176,14 @@
 		});
 		
 		$(".btn_modify").on("click", function(e){
-			actionForm.append("<input type='hidden' name='type' value='qna'>");
+			actionForm.append("<input type='hidden' name='type' value='notice'>");
 			actionForm.attr("action", "/board/notice/modify").submit();
 		});
 		
 		$(".btn_remove").on("click", function(e){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
-				actionForm.append("<input type='hidden' name='type' value='qna'>");
+				actionForm.append("<input type='hidden' name='type' value='notice'>");
 				actionForm.attr("action", "/board/notice/remove").attr("method", "post").submit();
 			}
 			else return;
