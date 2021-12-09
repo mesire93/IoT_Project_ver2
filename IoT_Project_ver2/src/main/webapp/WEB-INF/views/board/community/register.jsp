@@ -71,7 +71,7 @@
 
 					<div class="row" style="margin-top:10px; margin-bottom:10px;">
 						<div class="col" align="right">
-							<button type="submit" class="btn btn-outline-primary" id="btn_register" >등록</button>
+							<button type="submit" class="btn btn-outline-primary btn_register" >등록</button>
 							<button type="button" class="btn btn-outline-danger btn_cancel">취소</button>
 						</div>
 					</div>
@@ -127,7 +127,7 @@ $(document).ready(function(){
 
 	var formObj = $("form");
 	
-	$("button[type='submit']").on("click", function(e){
+	$(".btn_register").on("click", function(e){
 		e.preventDefault();
 		
 		var str = "";
@@ -135,8 +135,6 @@ $(document).ready(function(){
 		$(".uploadResult ul li").each(function(i, obj){
 			
 			var jobj = $(obj);
-			console.dir(jobj);
-		    console.log(jobj.data("filename"));
 			
 			str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
 			str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
@@ -144,7 +142,7 @@ $(document).ready(function(){
 			str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 			
 		});
-		console.log(str);
+		
 		formObj.append(str).submit();
 	});
 	
@@ -217,8 +215,8 @@ $(document).ready(function(){
 				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid.substring(0, 6) + "_" + obj.fileName);
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
-						  	"<img src='\display?fileName="+fileCallPath+"'>"+
-						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-warning btn-circle'>삭제</button></p>"+
+						  	"<img src='/display?fileName="+fileCallPath+"'>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
 						  	"</div></li>";
 				
 			}
@@ -229,7 +227,7 @@ $(document).ready(function(){
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/resources/img/attach.png'></a>"+
 						  	"<p>"+obj.fileName+"</p>"+
-						  	"<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>"+
+						  	"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button>"+
 						  	"</div></li>";
 			  	
 			}

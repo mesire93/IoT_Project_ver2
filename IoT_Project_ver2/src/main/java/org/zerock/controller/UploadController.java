@@ -36,36 +36,10 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j
 public class UploadController {
 
-	@GetMapping("/uploadForm")
-	public void uploadForm() {	
-	}
+
 	
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
-	}
-	
-	@PostMapping("/uploadFormAction")
-	public void uploadFormTest(MultipartFile[] uploadFile, Model model) {
-		
-		String uploadFolder =  "C://upload";
-		
-		for(MultipartFile multipartFile : uploadFile) {
-			log.info("======================");
-			log.info("Upload File Name : " + multipartFile.getOriginalFilename());
-			log.info("upload File Size : " + multipartFile.getSize());
-			log.info("======================");
-			
-			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
-			
-			try {
-				multipartFile.transferTo(saveFile);
-			}
-			catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
-			
-		}
-		
 	}
 	
 	

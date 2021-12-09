@@ -74,6 +74,11 @@
 					</div>
 					<div class="card-body">
 						<div class="row">
+							<div class="uploadResult" id="uploadResult">
+								<ul>
+								</ul>
+							</div>
+							
 							<div class="uploadDiv">
 								<input type="file" name="uploadFile" multiple>
 							</div>
@@ -94,7 +99,7 @@
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
 					<button type="button" class="btn btn-outline-primary btn_list" data-oper="list">목록</button>
-					<input type="submit" class="btn btn-outline-primary btn_modify" value="수정">
+					<button type="submit" class="btn btn-outline-primary btn_modify" data-oper="modify">수정</button>
 					<button type="button" class="btn btn-outline-danger btn_remove" data-oper="remove">삭제</button>
 				</div>
 			</div>
@@ -112,25 +117,25 @@ $(document).ready(function(){
 	
 	var modifyForm = $("#modifyForm");
 	
-	$('button').on("click", function(e){
+	$("button").on("click", function(e){
 		
 		e.preventDefault();
 		
 		var operation = $(this).data("oper");
 		
-		if(operation === 'list'){
+		if(operation === "list"){
 			modifyForm.append("<input type='hidden' name='type' value='community'>");
 			modifyForm.attr("action", "/board/community/list").attr("method", "get");
 			modifyForm.empty().submit();
 		}
-		else if(operation === 'remove'){
+		else if(operation === "remove"){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
 				modifyForm.append("<input type='hidden' name='type' value='community'>");
 				modifyForm.attr("action", "/board/community/remove").submit();
 			}
 		}
-		else if(operation === 'modify'){
+		else if(operation === "modify"){
 			var str = "";
 			
 			$(".uploadResult ul li").each(function(i, obj){
@@ -145,9 +150,8 @@ $(document).ready(function(){
 				str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 				
 			});
-			console.log(str);
-			formObj.append(str).submit();
-			modifyForm.submit();
+
+			modifyForm.append(str).submit();
 		}
 		
 		
@@ -189,7 +193,7 @@ $(document).ready(function(){
 	(function(){
 		var bno = "<c:out value='${board.bno}' />";
 		
-		$.getJSON("/board/getAttachList", {bno : bno}, function(arr){
+		$.getJSON("/board/community/getAttachList", {bno : bno}, function(arr){
 			console.log(arr);
 			
 			var uploadResult = $(".uploadResult ul");
@@ -202,16 +206,14 @@ $(document).ready(function(){
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
 					str += "<div>";
 					str += "<img src='/display?fileName="+fileCallPath+"'></a>";
-					str += "<span>"+attach.fileName+"</span><br/>";
-					str += "<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>";
+					str += "<span>"+attach.fileName+"</span><button type='button' class='btn btn-outline-warning btn-circle'>삭제</button><br/>";
 					str += "</div></li>";
 				}
 				else{
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
 					str += "<div>";
 					str += "<img src='/resources/img/attach.png'>";
-					str += "<span>"+attach.fileName+"</span><br/>";
-					str += "<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>";
+					str += "<span>"+attach.fileName+"</span><button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>";
 					str += "</div></li>";
 				}
 			});
@@ -291,7 +293,6 @@ $(document).ready(function(){
 		}
 		
 		var uploadResult = $(".uploadResult ul");
-		
 		var str="";
 		
 		$(uploadResultArr).each(function(i, obj){
@@ -300,10 +301,9 @@ $(document).ready(function(){
 				var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid.substring(0, 6) + "_" + obj.fileName);
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
-						  	"<img src='\display?fileName="+fileCallPath+"'>"+
-						  	"<p>"+obj.fileName+"</p>"+
-						  	"<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>"+
-						  	"</div></li>";
+						  	"<img src='/display?fileName="+fileCallPath+"'>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
+						  	"</div></li><br>";
 				
 			}
 			else{
@@ -312,9 +312,8 @@ $(document).ready(function(){
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/resources/img/attach.png'></a>"+
-						  	"<p>"+obj.fileName+"</p>"+
-						  	"<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>"+
-						  	"</div></li>";
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
+						  	"</div></li><br>";
 			  	
 			}
 			
@@ -322,6 +321,8 @@ $(document).ready(function(){
 		
 		uploadResult.append(str);
 	}
+	
+	
 	
 
 });

@@ -8,9 +8,12 @@
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 
+
 <div class="row">
 
 	<%@ include file="/WEB-INF/views/include/leftSidebar.jsp"%>
+	
+
 
 	<div class="col-md-8">
 		<div class="panel-heading">
@@ -73,6 +76,7 @@
 						<h5 class="card-title" style="margin-top:10px; margin-bottom:10px;">
 							<i class="fas fa-folder-open"></i>&nbsp;첨부파일
 						</h5>
+						<small>파일은 클릭시 다운로드, 이미지는 크기가 커집니다.</small>
 					</div>
 					<div class="card-body">
 							<div class="row">
@@ -421,7 +425,7 @@
 	(function(){
 		var bno = "<c:out value='${board.bno}' />";
 		
-		$.getJSON("/board/getAttachList", {bno : bno}, function(arr){
+		$.getJSON("/board/community/getAttachList", {bno : bno}, function(arr){
 			console.log(arr);
 			
 			var uploadResult = $(".uploadResult ul");
@@ -433,18 +437,18 @@
 					var fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid.substring(0, 6) + "_" + attach.fileName);
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
 					str += "<div>";
-					str += "<img src='/display?fileName="+fileCallPath+"'></a>";
+					str += "<img src='/display?fileName="+fileCallPath+"'><br/><span>"+attach.fileName+"</span></a>";
 					str += "</div></li>";
 				}
 				else{
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
 					str += "<div>";
-					str += "<span>"+attach.fileName+"</span><br/>";
-					str += "<img src='/resources/img/attach.png'>";
+					str += "<img src='/resources/img/attach.png'><br/><span>"+attach.fileName+"</span>";
 					str += "</div></li>";
 				}
 			});
 			
+			console.log(str);
 			uploadResult.html(str);
 			
 		});
@@ -469,8 +473,6 @@
 	});
 	
 	function showImage(fileCallPath){
-		
-//		alert(fileCallPath);
 		
 		$(".bigPictureWrapper").css("display", "flex").show();
 		
