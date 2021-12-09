@@ -91,10 +91,6 @@
 					
 				</div>
 			</div>
-			
-			<div class="bigPictureWrapper">
-				<div class="bigPicture"></div>
-			</div>
 			<!-- 첨부파일 -->
 			
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
@@ -155,6 +151,11 @@
 
 		</div>
 	</div>
+</div>
+
+
+<div class="bigPictureWrapper">
+	<div class="bigPicture"></div>
 </div>
 
 

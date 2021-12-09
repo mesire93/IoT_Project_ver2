@@ -29,15 +29,15 @@
 					</div>
 					
 					<div class="mb-3">
-  						<label class="form-label" for="valid03">작성자</label>
+  						<label class="form-label" for="valid02">작성자</label>
   						<input type="text" class="form-control" name="writer" id="valid02" required>
   						<!-- 로그인 연동하면 readonly, value='<c:out value="${board.writer}"/>' -->
 						<div class="invalid-feedback">작성자를 입력하세요</div>
 					</div>
 					
 					<div class="mb-3">
-  						<label class="form-label" for="valid02">내용</label>
-  						<textarea class="form-control" rows="12" name='content' id="valid02" required></textarea>
+  						<label class="form-label" for="valid03">내용</label>
+  						<textarea class="form-control" rows="12" name='content' id="valid03" required></textarea>
 						<div class="invalid-feedback">내용을 입력하세요</div>
 					</div>
 
@@ -97,10 +97,8 @@ $(document).ready(function(){
 	(function () {
 	  'use strict'
 
-	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
 	  var forms = document.querySelectorAll('.needs-validation')
-
-	  // Loop over them and prevent submission
+	  
 	  Array.prototype.slice.call(forms)
 	    .forEach(function (form) {
 	      form.addEventListener('submit', function (event) {
