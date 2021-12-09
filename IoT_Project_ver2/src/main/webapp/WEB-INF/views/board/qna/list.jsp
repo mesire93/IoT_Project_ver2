@@ -138,6 +138,24 @@
 	<div class="row">
 		<br> <br>
 	</div>
+	
+	
+	<!-- Page 247 모달(Modal)창 보여주기 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">모달 창</h4>
+				</div>
+				<div class="modal-body">처리가 완료되었습니다.</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary btn_close" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal -->
 
 
 
@@ -198,6 +216,27 @@ $(document).ready(function(){
 		searchForm.submit();
 		
 	});
+	
+	
+	// 모달이벤트
+	var result='<c:out value="${result}"/>';
+	checkModal(result);
+
+	function checkModal(result){
+		if(result === ""){
+			return;
+		}
+		if(parseInt(result) > 0){
+			$(".modal-body").html("게시글 " + parseInt(result) + " 번이 등록되었습니다.");
+		}
+		
+		$("#myModal").modal("show");
+	}
+	
+	$(".btn_close").on("click",function(){
+		$("#myModal").modal("hide");
+	});
+	
 
 });
 

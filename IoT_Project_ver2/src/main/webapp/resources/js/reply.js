@@ -1,5 +1,3 @@
-console.log("Reply Module..............");
-
 var replyService = (function(){
 	
 	// 댓글 등록(자동)
@@ -33,7 +31,6 @@ var replyService = (function(){
 		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
 				function(data){
 					if (callback){
-						//callback(data);
 						callback(data.replyCnt, data.list);
 					}
 			}).fail(function(xhr, status, err){

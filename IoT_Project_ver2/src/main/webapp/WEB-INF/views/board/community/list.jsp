@@ -140,16 +140,30 @@
 
 		<br>
 	</div>
+	
+	
+	
+	<!-- Page 247 모달(Modal)창 보여주기 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">모달 창</h4>
+				</div>
+				<div class="modal-body">처리가 완료되었습니다.</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary btn_close" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal -->
 
 
 
 <script type="text/javascript">
 $(document).ready(function(){
-	
-
-		  
-	// Page 257 뒤로가기 처리 
-	history.replaceState({}, null, null);
 	
 		
 	// Page 306 페이지 번호 이벤트 처리 
@@ -197,8 +211,29 @@ $(document).ready(function(){
 		
 	});
 	
+	// 모달이벤트
+	var result='<c:out value="${result}"/>';
 
+	history.replaceState({}, null, null);
+	checkModal(result);
+
+	function checkModal(result){
+		console.log(history.state);
+		if(result === "" || history.state == null){
+			return;
+		}
+		if(parseInt(result) > 0){
+			$(".modal-body").html("게시글 " + parseInt(result) + " 번이 등록되었습니다.");
+		}
+		
+		$("#myModal").modal("show");
+	}
 	
+	$(".btn_close").on("click",function(){
+		$("#myModal").modal("hide");
+	});
+	
+
 });
 
 </script>
