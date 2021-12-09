@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,9 +53,14 @@
       				  	    <li><a class="dropdown-item" href="#" id="qna"><i class="fas fa-question-circle"></i>&nbsp;질문답변</a></li>
        				  	 </ul>
        				</li>
-					<li class="nav-item"><a class="nav-link active" href="#!">마이페이지</a></li>
-					<li class="nav-item"><a class="nav-link "  href="#">로그인</a></li>
-					<li class="nav-item"><a class="nav-link "  href="#">회원가입</a></li>
+					<sec:authorize access="isAnonymous()">
+   				    	<li class="nav-item"><a class="nav-link" href="/user/customLogin"><i class=""></i>login</a></li>
+			        	<li class="nav-item"><a class="nav-link" href="/user/joinForm"><i class=""></i>join</a></li>    				
+			        </sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class=""></i>Logout</a></li>
+						<li class="nav-item"><a class="nav-link active" href="#">마이페이지</a></li>
+			        </sec:authorize>
 				</ul>
 			</div>
 		</div>

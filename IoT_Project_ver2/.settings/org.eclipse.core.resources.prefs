@@ -4,3 +4,5 @@ encoding//src/main/webapp/WEB-INF/views/board/community/list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/board/community/register.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/header.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/leftSidebar.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/admin.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/all.jsp=UTF-8
