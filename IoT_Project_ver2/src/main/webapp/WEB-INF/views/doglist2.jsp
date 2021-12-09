@@ -3,7 +3,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
-
+<%@ taglib uri = "http://www.springframework.org/tags" prefix="spring"%>
 
 
 <script type="text/javascript">
@@ -83,8 +83,7 @@ $(".paginate_button a").on("click",function(e){
     <link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/resources/css/styles.css" rel="stylesheet">
-
-
+        <script src="/resources/js/jquery-3.6.0.min.js" ></script>
 </head>
  <body>
      <!-- Responsive navbar-->
@@ -117,17 +116,15 @@ $(".paginate_button a").on("click",function(e){
        
 <div class="container">
 	<div class="row">
-
-		<div class="col-lg-4 " >
+		<div class="col-lg-4">
 			<button id="regBtn" type="button" class="btn btn-primary" onclick="location.href='/dogregister'"> 강아지 분양등록하기</button>
 		</div>
-
 	</div>
 </div>
 		
 <br>
 
-<form action="/dogdetail" method="post">
+<!-- <form action="/dogdetail" method="post"> -->
 
 <div class="container">
 	<div class="row">
@@ -135,8 +132,16 @@ $(".paginate_button a").on("click",function(e){
 		<%-- <c:forEach items="${registerdno}"> 화면이 안나온다--%>
 			<div class="col-lg-4">
 				<div class="card mb-4">
-					<a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down"
-						alt="..."></a>
+						<!-- <a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down"
+							alt="..."></a> -->
+							
+						<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="width:200%;" alt="..." /></a> --%>
+						<%-- 안됨<a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="..."/></a> --%>
+							 <a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/></a>
+						<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="object-fit: scale-down" alt="..."/></a> --%>
+						<!-- 안됨<a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down" alt="..."></a> -->
+					
+					
 					<div class="card-body">
 						<div class="small text-muted">
 							등록일자 :
@@ -162,9 +167,11 @@ $(".paginate_button a").on("click",function(e){
 						
 						<!-- <div class="card-body"> 안에 위치해야 한다. -->
 						
-
-						<button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
-						<input type="hidden" value="<c:out value='${list.dno}'/>"><!--${registerdno} 값으로는 페이지 이동불가 -->
+						<button data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
+						상세보기</button>
+						<%-- <button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
+						<input type="hidden" value="<c:out value='${list.dno}'/>"> --%><!--${registerdno} 값으로는 페이지 이동불가 -->
+						<!-- <button type="submit" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button> -->
 						<button type="button" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button>
 					</div>	
 				</div>
@@ -197,9 +204,9 @@ $(".paginate_button a").on("click",function(e){
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="/resources/js/scripts.js"></script>
-	
-
-         
+		
+		
+               
 <!-- Modal 추가 -->
 <div class="modal fade" id="registerModal" tabindex="-1" data-toggle="modal" aria-hidden="true">
 	<div class="modal-dialog">
