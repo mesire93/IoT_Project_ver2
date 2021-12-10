@@ -15,19 +15,19 @@
 
 
 	<insert id="insert">
-		insert into buy3 (b_image, b_name, b_bonus, b_price, bno)
-		values (#{bImage}, #{bName}, #{bBonus}, #{bPrice}, seq_buy3.nextval)
+		insert into buy1 (b_image, b_name, b_bonus, b_price, bno)
+		values (#{b_Image}#{b_Name}, #{b_Bonus}, #{b_Price}, seq_buy1.nextval)
 	</insert>
 
 	<insert id="insertSelectKey">
 
 		<selectKey keyProperty="bno" order="BEFORE"
 			resultType="long">
-			select seq_buy3.nextval from dual
+			select seq_buy1.nextval from dual
 		</selectKey>
 
-		insert into buy3 (b_image, b_name, b_bonus, b_price, bno)
-		values (#{bImage}, #{bName}, #{bBonus}, #{bPrice}, seq_buy3.nextval)
+		insert into buy1 (b_image, b_name, b_bonus, b_price, bno)
+		values (#{b_Image}, #{b_Name}, #{b_Bonus}, #{b_Price}, seq_buy1.nextval)
 	</insert>
 
 	<select id="read" resultType="org.zerock.domain.Buy4VO">
