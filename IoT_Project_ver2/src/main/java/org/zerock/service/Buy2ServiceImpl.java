@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.Buy1VO;
 import org.zerock.domain.Buy2VO;
 import org.zerock.mapper.Buy2Mapper;
 
@@ -42,5 +43,7 @@ public class Buy2ServiceImpl implements Buy2Service{
 	public List<Buy2VO> getList() {
 		return null;
 	}
+
+	
 
 }

@@ -7,7 +7,7 @@ import org.zerock.domain.Buy1VO;
 public interface Buy1Mapper {
 
 	public List<Buy1VO> getList();
-	
+
 	public Integer insertSelectKey(Buy1VO buy1VO);
 	
 	public void insert(Buy1VO buy1VO);

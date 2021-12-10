@@ -6,7 +6,7 @@ import org.zerock.domain.Buy1VO;
 
 public interface Buy1Service {
 	
-	public void register(Buy1VO buy1VO);
+	public void register1(Buy1VO buy1VO);
 
 	public Buy1VO get(Long bno);
 
@@ -15,5 +15,6 @@ public interface Buy1Service {
 	public boolean remove(Long bno);
 
 	public List<Buy1VO> getList();
+
 
 }

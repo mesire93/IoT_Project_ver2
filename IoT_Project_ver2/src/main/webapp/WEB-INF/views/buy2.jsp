@@ -15,7 +15,7 @@
 <p>
 </p>
 <center>
-<h2 class="s_title" style="box-sizing: border-box; width: 900px; margin: 0px; padding: 55px 0px; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 0.82069em; color: rgb(34, 34, 34); font-size: 1.4em; position: relative; max-height: 42px; text-align: center; letter-spacing: -0.3px; background-color:rgb(246, 231, 250); ">주문서 작성</h2>
+<h2 class="s_title" style="box-sizing: border-box; width: 900px; margin: 0px; padding: 55px 0px; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 0.82069em; color: rgb(34, 34, 34); font-size: 1.4em; position: relative; max-height: 42px; text-align: center; letter-spacing: -0.3px; background-color:rgb(246, 231, 250); ">주문서 작성</h2><br>
 <div class="form-tbl-new" style="box-sizing: border-box; margin: 0px 0px 20px; padding: 0px; border-bottom: 1px solid rgb(208, 208, 208); display: inline-block; width: 900px; color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; letter-spacing: -0.3px; ">
 	<h4 style="box-sizing: border-box; margin: 0px; padding: 0px; font-family: inherit; line-height: 2.7; color: inherit; font-size: 22px; text-indent: 15px; border-bottom: 1px solid rgb(212, 212, 212); height: 51px; letter-spacing: -1.2px; clear: both;">주문상품 내역</h4>
 	<div class="clearfix" style="box-sizing: border-box; margin: 0px; padding: 0px;">
@@ -132,7 +132,7 @@
 		</tbody>
 		</table>
 	</div>
-	<div>
+	<div><br>
 	<table>
 	<c:set var = "total" value = "0" />
 	<c:forEach var="getList3" items="${list3}" varStatus="status">     
