@@ -41,7 +41,6 @@ public class BuyController {
 		 model.addAttribute("list4", service4.getList4());
 	}
 	
-	
 	@GetMapping("/main2")
 	public void mainGet2(Model model) {
 
@@ -54,13 +53,6 @@ public class BuyController {
 		
 		service4.register4(buy4VO);
 	}
-	@PostMapping("/main2")
-	public void mainPost2(Buy4VO buy4VO, RedirectAttributes rttr) {
-		System.out.println("post.............");
-		
-		service4.register4(buy4VO);
-	}
-
 
 	
 	

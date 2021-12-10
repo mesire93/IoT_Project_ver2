@@ -59,9 +59,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-md-0">
-					<li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-paw"></i>&nbsp;상품</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-paw"></i>&nbsp;상품</a></li>
 					<li class="nav-item"><a class="nav-link active" href="buy1"><i class="fas fa-shopping-basket"></i>&nbsp;장바구니</a></li>
 					<li class="nav-item dropdown"><a class="nav-link active  dropdown-toggle board" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-comment"></i>&nbsp;게시판</a>
+					<li class="nav-item"><a class="nav-link active" href="main">홈</a></li>
+					<li class="nav-item"><a class="nav-link active" href="#">상품</a></li>
+					<li class="nav-item"><a class="nav-link active" href="buy1">장바구니</a></li>
+					<li class="nav-item dropdown"><a class="nav-link active  dropdown-toggle board" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
 						 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
        				     	<li><a class="dropdown-item" href="#" id="notice"><i class="fas fa-bullhorn"></i>&nbsp;공지사항</a></li>
       				   	 	<li><a class="dropdown-item" href="#" id="community"><i class="fas fa-comments"></i>&nbsp;커뮤니티</a></li>

@@ -23,7 +23,7 @@ public class Buy4ServiceImpl implements Buy4Service{
 
 	@Override
 	public void register4(Buy4VO buy4vo) {
-		mapper4.insertSelectKey(buy4vo);
+		mapper4.insert(buy4vo);
 	}
 
 	@Override
