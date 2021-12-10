@@ -95,9 +95,9 @@
 			
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
-					<button type="button" class="btn btn-outline-primary btn_list">목록</button>
-					<button type="button" class="btn btn-outline-primary btn_modify">수정</button>
-					<button type="button" class="btn btn-outline-danger btn_remove">삭제</button>
+					<button type="button" class="btn btn-outline-primary btn_list"><i class="fas fa-bars"></i>목록</button>
+					<button type="button" class="btn btn-outline-primary btn_modify"><i class="fas fa-eraser"></i>수정</button>
+					<button type="button" class="btn btn-outline-danger btn_remove"><i class="fas fa-times"></i>삭제</button>
 				</div>
 			</div>
 			

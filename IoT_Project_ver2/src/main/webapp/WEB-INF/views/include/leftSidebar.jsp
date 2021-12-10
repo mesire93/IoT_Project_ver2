@@ -4,6 +4,8 @@
 <style>
 	.navbar-toggler{
 		text-decoration:none;
+		font-size:32px;
+		font-family: 'Jua', sans-serif;
 	}
 	.navbar-toggler:hover{
 		border:1px solid gray;
@@ -22,19 +24,13 @@
 	
 		<div class="col-md-2 pt-4 sidebar "  >
 			<a href="notice" class="notice  navbar-toggler text-black text-center d-block mx-auto px-2 py-3 mb-4 ">
-				<h4>
-					<i class="fas fa-bullhorn"></i>&nbsp; 공지사항
-				</h4>
+				<i class="fas fa-bullhorn"></i>&nbsp; 공지사항
 			</a> 
 			<a href="community"  class="community  navbar-toggler text-black text-center d-block mx-auto px-2 py-3 mb-4 ">
-				<h4>
-					<i class="fas fa-comments"></i>&nbsp; 커뮤니티
-				</h4>
+				<i class="fas fa-comments"></i>&nbsp; 커뮤니티
 			</a> 
 			<a href="qna" class="qna  navbar-toggler text-black text-center d-block mx-auto px-2 py-3 mb-4">
-				<h4>
-					<i class="fas fa-question-circle"></i>&nbsp; 질문답변
-				</h4>
+				<i class="fas fa-question-circle"></i>&nbsp; 질문답변
 			</a>
 		
 		</div>

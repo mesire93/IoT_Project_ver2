@@ -14,19 +14,34 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
-	></script>
 	
-<!-- Core theme CSS (includes Bootstrap)-->
+<!-- 부트스트랩 CSS, Fontawesome 아이콘, 제이쿼리, reply.js -->
 <link href="/resources/css/styles.css" rel="stylesheet" />
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"></script>
 <script type="text/javascript" src="/resources/js/reply.js"></script>
+<!-- 부트스트랩 CSS, Fontawesome 아이콘, 제이쿼리, reply.js -->
+
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- 폰트 -->
+
+<!-- 니보 슬라이더 -->
+<link rel="stylesheet" href="/resources/nivo-slider/demo/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/resources/nivo-slider/demo/themes/light/light.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/resources/nivo-slider/demo/themes/dark/dark.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/resources/nivo-slider/demo/themes/bar/bar.css" type="text/css" media="screen" />
+<!-- 
+<link rel="stylesheet" href="/resources/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/resources/nivo-slider/demo/style.css" type="text/css" media="screen" />
+ -->
+ <!-- 니보 슬라이더 -->
+
+
 </head>
 
 
@@ -35,7 +50,7 @@
 	<!-- Responsive navbar-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
 		<div class="container">
-			<a class="navbar-brand" href="#!">Start Bootstrap</a>
+			<a class="navbar-brand" href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;홈페이지이름</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -44,6 +59,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-paw"></i>&nbsp;상품</a></li>
+					<li class="nav-item"><a class="nav-link active" href="buy1"><i class="fas fa-shopping-basket"></i>&nbsp;장바구니</a></li>
+					<li class="nav-item dropdown"><a class="nav-link active  dropdown-toggle board" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-comment"></i>&nbsp;게시판</a>
 					<li class="nav-item"><a class="nav-link active" href="main">홈</a></li>
 					<li class="nav-item"><a class="nav-link active" href="#">상품</a></li>
 					<li class="nav-item"><a class="nav-link active" href="buy1">장바구니</a></li>
@@ -55,17 +73,19 @@
        				  	 </ul>
        				</li>
 					<sec:authorize access="isAnonymous()">
-   				    	<li class="nav-item"><a class="nav-link" href="/user/customLogin"><i class=""></i>login</a></li>
-			        	<li class="nav-item"><a class="nav-link" href="/user/joinForm"><i class=""></i>join</a></li>    				
+   				    	<li class="nav-item"><a class="nav-link" href="/user/customLogin"><i class="fas fa-key"></i>&nbsp;login</a></li>
+			        	<li class="nav-item"><a class="nav-link" href="/user/joinForm"><i class="fas fa-user-plus"></i>&nbsp;join</a></li>    				
 			        </sec:authorize>
 					<sec:authorize access="isAuthenticated()">
-			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class=""></i>Logout</a></li>
-						<li class="nav-item"><a class="nav-link active" href="#">마이페이지</a></li>
+			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class="fas fa-undo-alt"></i>&nbsp;Logout</a></li>
+						<li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
 			        </sec:authorize>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	
+	
 	<!-- Page header with logo and tagline-->
 	<header class="py-5 bg-light border-bottom mb-4">
 		<div class="container">
@@ -73,6 +93,18 @@
 				<h1 class="fw-bolder">커뮤니티</h1>
 				<p class="lead mb-0">공지사항 / 자유게시판 / QnA</p>
 			</div>
+		</div>
+		
+		<div class="container">
+			<div class="my-5" id="wrapper">
+     			<div class="slider-wrapper theme-default">
+         		  <div id="slider" class="nivoSlider">    
+        		       <img src="/resources/nivo-slider/demo/images/1.jpg" data-thumb="/resources/nivo-slider/demo/images/1.jpg" alt="" />
+         		  	   <img src="/resources/nivo-slider/demo/images/2.jpg" data-thumb="/resources/nivo-slider/demo/images/2.jpg" alt="" />
+        		       <img src="/resources/nivo-slider/demo/images/3.jpg" data-thumb="/resources/nivo-slider/demo/images/3.jpg" alt=""/>
+      		     </div>
+   		 	   </div>
+  		 	</div>
 		</div>
 	</header>
 	
