@@ -71,8 +71,8 @@
 
 					<div class="row" style="margin-top:10px; margin-bottom:10px;">
 						<div class="col" align="right">
-							<button type="submit" class="btn btn-outline-primary btn_register" >등록</button>
-							<button type="button" class="btn btn-outline-danger btn_cancel">취소</button>
+							<button type="button" class="btn btn-outline-primary btn_register" ><i class="fas fa-edit"></i>등록</button>
+							<button type="button" class="btn btn-outline-danger btn_cancel"><i class="fas fa-times"></i>취소</button>
 						</div>
 					</div>
 			</form>
@@ -92,27 +92,7 @@ $(document).ready(function(){
 	});
 
 	
-	
-	// 부트스트랩 유효성검사 시작
-	(function () {
-	  'use strict'
 
-	  var forms = document.querySelectorAll('.needs-validation')
-	  
-	  Array.prototype.slice.call(forms)
-	    .forEach(function (form) {
-	      form.addEventListener('submit', function (event) {
-	        if (!form.checkValidity()) {
-	          event.preventDefault()
-	          event.stopPropagation()
-	        }
-
-	        form.classList.add('was-validated')
-	      }, false)
-	    })
-	})()
-	// 부트스트랩 유효성검사 종료
-	
 });
 </script>
 
@@ -129,6 +109,19 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		var str = "";
+
+		if($("#valid01").val() == ""){
+			alert("제목을 입력하세요");
+			return;
+		}
+		if($("#valid02").val() == ""){
+			alert("작성자를 입력하세요");
+			return;
+		}
+		if($("#valid03").val() == ""){
+			alert("내용을 입력하세요");
+			return;
+		}
 		
 		$(".uploadResult ul li").each(function(i, obj){
 			
@@ -214,7 +207,7 @@ $(document).ready(function(){
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/display?fileName="+fileCallPath+"'>"+
-						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
 						  	"</div></li>";
 				
 			}
@@ -224,8 +217,7 @@ $(document).ready(function(){
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/resources/img/attach.png'></a>"+
-						  	"<p>"+obj.fileName+"</p>"+
-						  	"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
 						  	"</div></li>";
 			  	
 			}

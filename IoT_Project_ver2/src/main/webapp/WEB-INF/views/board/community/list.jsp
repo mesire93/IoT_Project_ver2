@@ -58,7 +58,7 @@
 
 			<div class="row" style="margin: 10px;">
 				<div class="col" align="right">
-					<button type="button" class="btn btn-outline-primary " id="btn_register">글쓰기</button>
+					<button type="button" class="btn btn-outline-primary " id="btn_register"><i class="fas fa-edit"></i>글쓰기</button>
 				<!-- 	
 					<button type="button" class="btn btn-outline-info ">수정</button>
 					<button type="button" class="btn btn-outline-danger ">삭제</button>
