@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,12 +52,13 @@ public class CommunityController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void community_register() {
 		log.info("=== 커뮤니티 등록 ===");
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String community_register(BoardVO board, RedirectAttributes rttr) {
 		log.info("=== 커뮤니티 등록 ===");
