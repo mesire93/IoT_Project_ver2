@@ -6,7 +6,7 @@
 <mapper namespace="org.zerock.mapper.DogInfoMapper">
 	<select id="getList" resultType="org.zerock.domain.DogInfoDTO">
 	<![CDATA[
-	select * from doginfo where dno>0
+	select * from doginfo where dno>0 order by dno desc
 	]]>		
 	</select>
 	

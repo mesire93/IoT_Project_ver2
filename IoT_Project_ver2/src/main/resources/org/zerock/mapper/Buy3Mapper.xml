@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.Buy3Mapper">
+
+<resultMap type="org.zerock.domain.Buy3VO" id="buy3Map">
+		<id property="bno" column="bno"/>
+		<result property="bImage" column="b_image"/>
+		<result property="bName" column="b_name"/>
+		<result property="bBonus" column="b_bonus"/>
+		<result property="bPrice" column="b_price"/>
+		<collection property="Buy3List" resultMap="buy3Map"/>
+</resultMap>
+
+
+<select id="getList3" resultType="org.zerock.domain.Buy3VO">
+	<![CDATA[
+		select * from buy1 where bno > 0 
+	]]>	
+</select>
+
+
+	<insert id="insert">
+		insert into buy1 (b_image, b_name, b_bonus, b_price, bno)
+		values (#{bImage}, #{bName}, #{bBonus}, #{bPrice}, seq_buy1.nextval)
+	</insert>
+
+	<insert id="insertSelectKey">
+
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			select seq_buy1.nextval from dual
+		</selectKey>
+
+		insert into buy1 (b_image, b_name, b_bonus, b_price, bno)
+		values (#{bImage}, #{bName}, #{bBonus}, #{bPrice}, seq_buy1.nextval)
+	</insert>
+
+	<select id="read" resultType="org.zerock.domain.Buy3VO">
+		select * from buy1 where bno = #{bno}
+	</select>
+
+
+	<delete id="delete">
+		delete from buy1 where bno = #{bno}
+	</delete>
+
+
+	<update id="update">
+		update buy1
+		set
+		 b_image=#{bImage},
+		 b_name=#{bName},
+		 b_bonus=#{bBonus},
+		 b_price=#{bPrice}
+		where bno =	#{bno}
+	</update>
+
+</mapper>

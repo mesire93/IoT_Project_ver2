@@ -35,9 +35,9 @@ public class DogInfoMapperTests {
 		dog.setHealth("종합백신");
 		dog.setName("이월이");
 		dog.setKind("몰티즈");
-		dog.setName("오월이");
 		dog.setSex("남(수컷)");
-		
+		dog.setName("몰티즈.png");
+		dog.setFeature("활동적임");
 		
 		mapper.insert(dog);
 		log.info(dog);
@@ -54,8 +54,9 @@ public class DogInfoMapperTests {
 		dog.setHealth("종합백신");
 		dog.setName("육월이");
 		dog.setKind("시바 이누");
-		dog.setName("칠월이");
 		dog.setSex("여(암컷)");
+		dog.setName("몰티즈.png");
+		dog.setFeature("활동적임");
 		
 		mapper.insertSelectKey(dog);
 		log.info(dog);

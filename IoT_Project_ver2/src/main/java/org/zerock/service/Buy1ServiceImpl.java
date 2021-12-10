@@ -21,7 +21,7 @@ public class Buy1ServiceImpl implements Buy1Service{
 	private Buy1Mapper mapper;
 
 	@Override
-	public void register(Buy1VO buy1vo) {
+	public void register1(Buy1VO buy1vo) {
 		mapper.insertSelectKey(buy1vo);
 	}
 
@@ -42,9 +42,14 @@ public class Buy1ServiceImpl implements Buy1Service{
 		 return mapper.getList();
 		 }
 
-	
-	 
-	 
+	 @Override
+		public boolean remove(Long bno) {
+
+			log.info("remove...." + bno);
+
+			return mapper.delete(bno) == 1;
+		}
+
 	 
 	 
 	 
@@ -59,11 +64,6 @@ public class Buy1ServiceImpl implements Buy1Service{
 		return false;
 	}
 
-	@Override
-	public boolean remove(Long bno) {
-		return false;
-	}
-	
 	
 
 }

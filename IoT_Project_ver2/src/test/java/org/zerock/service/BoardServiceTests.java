@@ -1,14 +1,11 @@
 package org.zerock.service;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.zerock.domain.BoardVO;
-import org.zerock.domain.Criteria;
+import org.zerock.domain.DogInfoDTO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -17,71 +14,62 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class BoardServiceTests {
-
-	@Setter(onMethod_ = {@Autowired})
-	private BoardService service;
 	
-//	@Test
-//	public void testExist() {
-//		log.info(service);
-//		assertNotNull(service);
-//	}
+	@Setter(onMethod_ =@Autowired)
+	public DogInfoService service;
 	
-	// PAGE 205 등록 작업의 구현과 테스트
+	@Test
+	public void testExist() {
+		
+		log.info(service);
+	}
+	
 	@Test
 	public void testRegister() {
 		
-		BoardVO board = new BoardVO();
+		DogInfoDTO dog = new DogInfoDTO();
+		dog.setAge("8개월");
+		dog.setSimple("활동적임");
+		dog.setWeight(5.0);
+		dog.setHealth("종합백신");
+		dog.setName("육월이");
+		dog.setKind("시바이누");
+		dog.setSex("여(암컷)");
+		dog.setName("시바 이누.png");
+		dog.setFeature("활동적임");
 		
-		board.setTitle("새로 작성하는 글");
-		board.setContent("새로 작성하는 내용");
-		board.setWriter("newbie");
-		
-		service.register(board);
-		
-		log.info("생성된 게시물의 번호  : " + board.getBno());
+		service.register(dog);
+		log.info("분양등록번호"+dog.getDno());
 	}
 	
-	// PAGE 206 목록(리스트) 작업의 구현과 테스트
-//	@Test
-//	public void testGetList() {
-//		service.getList().forEach(board -> log.info(board));
-//	}
-
 	
-	// PAGE 207 조회 작업의 구현과 테스트
-//	@Test
-//	public void testGet() {
-//		log.info(service.get(10L));
-//	}
-	
-	// PAGE 209 삭제/수정 구현과 테스트
-//	@Test
-//	public void testDelete() {
-//		// 게시물 번호의 존재 여부를 확인하고 테스트할 것
-//		log.info("REMOVE RESULT : " + service.remove(11L));
-//	}
-//	
-//	@Test
-//	public void testUpdate() {
-//		
-//		BoardVO board = service.get(4L);
-//		
-//		if(board == null) {
-//			return;
-//		}
-//		
-//		board.setTitle("제목 수정합니다.");
-//		log.info("MODIFY RESULT : " + service.modify(board));	
-//	}
-
-/*
 	@Test
 	public void testGetList() {
-		service.getList(new Criteria(2, 10)).forEach(board -> log.info(board));
+		service.getList().forEach(dog -> log.info(dog));
+		
 	}
-*/
 	
+	@Test
+	public void testGet() {
+		log.info(service.get(51L));
+		
+	}
 	
+	@Test
+	public void testDelete() {
+		
+		log.info("ServiceTests클래스의 testDelete() 메소드"+ service.remove(51L));
+	}
+	
+	@Test
+	public void testUpdate() {
+		
+		DogInfoDTO dog = service.get(60L);
+		
+		if(dog ==null) return;
+		
+		dog.setSimple("수정갈색털을가짐");
+		log.info("ServiceTests클래스의 testUpdate() 메소드"+service.modify(dog));
+	}
 	
 }

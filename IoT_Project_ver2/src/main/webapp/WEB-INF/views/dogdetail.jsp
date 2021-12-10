@@ -3,7 +3,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>
-
+<%@ taglib uri = "http://www.springframework.org/tags" prefix="spring" %>
 
 <html lang="en">
 <head>
@@ -68,8 +68,8 @@
 		<div class="col-lg-8">
 			<!-- Featured blog post-->
 			<div class="card mb-4">
-				<a href="#!"><img class="card-img-top"
-					src="resources/img/dog/골든리트리버.png" alt="..."></a>
+				<a href="#"><img class="card-img-top"
+					src="<spring:url value='/image/${detail.fileName}'/>" alt="${detail.name } 이미지파일"/></a>
 				<div class="card-body">
 				<%-- <div class="card-header"><!-- 강아지 특징 -->${dog.name } 특징</div> --%>
 				<div class="card-header"><!-- 강아지 특징 --><c:out value="${detail.name }"/> 특징</div>
@@ -150,7 +150,8 @@
 <!-- Footer-->
 <footer class="py-5 bg-dark">
 	<div class="container">
-		<p class="m-0 text-center text-white">Copyright © Your Website 2021</p>
+		<p class="m-0 text-center text-white">Copyright © Your Website
+			2021</p>
 	</div>
 </footer>
 <!-- Bootstrap core JS-->

@@ -12,4 +12,6 @@ public class Buy2VO {
 	private String bAdress;
 	private String bYo;			//
 	private Long bno;
+	private String bNum;
+	private String bAddr;
 }
