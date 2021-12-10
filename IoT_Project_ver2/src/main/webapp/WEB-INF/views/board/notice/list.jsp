@@ -16,7 +16,7 @@
 		<div class="col-md-10">
 			<header class="panel-heading">
 
-				<h2 class="panel-title">
+				<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
 					<i class="fas fa-bullhorn"></i>공지사항
 				</h2>
 			</header>
@@ -24,7 +24,7 @@
 				<div class="table-responsive">
 					<table class="table mb-none table-hover table-striped" >
 						<thead>
-							<tr>
+							<tr style="border-top:2px solid black;">
 								<th style="width: 10%">번호</th>
 								<th style="width: 30%">제목</th>
 								<th style="width: 20%">작성자</th>
