@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.domain.AuthVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.mapper.MemberMapper;
 
@@ -23,7 +24,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	@Transactional
-	public void joinMember(MemberVO member) {
+	public void joinMember(MemberVO member,AuthVO auth) {
 		log.info("joinMember"+member);
 	
 		try {
@@ -36,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		mapper.insertMember(member);
-		mapper.insertMemberAuth(member);
+		mapper.insertMemberAuth(auth);
 	}
 
 	

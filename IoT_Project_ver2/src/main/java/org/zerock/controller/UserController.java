@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.AuthVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.service.MemberService;
 
@@ -31,23 +32,23 @@ public class UserController {
 	}
 	
 	@GetMapping("/join")
-	public String join(MemberVO member) {
+	public String join(MemberVO member,AuthVO vo) {
 		
 		log.info("goto join"+member);
-		service.joinMember(member);
+		service.joinMember(member,vo);
 		log.info("success join");
 		
 		return"/home";
 	}
 	
 	@PostMapping("/join")
-	public String join1(MemberVO member) {
+	public String join1(MemberVO member,AuthVO vo, RedirectAttributes rttr) {
 		
 		log.info("goto join"+member);
-		service.joinMember(member);
+		service.joinMember(member, vo);
 		log.info("success join");
 		
-		return"/home";
+		return "redirect:/";
 	}
 
 	@GetMapping("/all")

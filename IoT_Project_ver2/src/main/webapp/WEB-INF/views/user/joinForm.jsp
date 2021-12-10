@@ -200,9 +200,9 @@ window.addEventListener('load', () => {
 			if (form.checkValidity() === true) {
 				console.log("2차진입");
 				e.preventDefault();
-				/* var operForm = $("#joinForm");
+				var operForm = $("#joinForm");
 				
-				operForm.attr("action","/join").submit();  */
+				operForm.attr("action","/user/join").submit();
 //				$("button[data-oper='gohome']").on("click",function(e){
 //				operForm.attr("action","/join").submit();
 //				});
@@ -216,9 +216,9 @@ window.addEventListener('load', () => {
 
 
 	
-$("#operForm").on("click", function(e){
+/* $("#operForm").on("click", function(e){
 	operForm.attr("action","/user/join").submit();
-});
+}); */
 	
   </script>
 </body>
