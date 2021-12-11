@@ -78,6 +78,11 @@ public class BoardServiceImpl implements BoardService{
 		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
+	
+	@Override
+	public List<BoardVO> getList(){
+		return mapper.getList();
+	}
 
 	// Page 299 
 	@Override
