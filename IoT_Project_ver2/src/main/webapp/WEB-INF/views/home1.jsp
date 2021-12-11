@@ -11,7 +11,7 @@
 
 	<div class="map_wrap col-md-6 ml-5 mb-3">
 		<h2 class="panel-title" style="font-family:'Jua'; ">본사 위치입니다</h2>
-		<div id="map" style="width:95%;height:90%;"></div>
+		<div id="map" style="width:95%;height:600px;"></div>
 	</div>
 
 	<div class="col-md-6">
@@ -21,8 +21,8 @@
 			</header>
 			
 			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table table-hover mb-none">
+				<div class="table-responsive" style="height:600px;">
+					<table class="table table-hover mb-none" >
 						<thead>
 							<tr>
 								<th width=20>번호</th>

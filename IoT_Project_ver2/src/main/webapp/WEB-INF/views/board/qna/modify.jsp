@@ -121,9 +121,10 @@ $(document).ready(function(){
 		var operation = $(this).data("oper");
 		
 		if(operation === "list"){
+			modifyForm.empty()
 			modifyForm.append("<input type='hidden' name='type' value='qna'>");
 			modifyForm.attr("action", "/board/qna/list").attr("method", "get");
-			modifyForm.empty().submit();
+			modifyForm.submit();
 		}
 		else if(operation === "remove"){
 			var del = confirm("정말 삭제하시겠습니까?")

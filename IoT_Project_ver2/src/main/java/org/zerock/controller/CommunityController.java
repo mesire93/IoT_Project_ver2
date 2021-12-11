@@ -52,6 +52,7 @@ public class CommunityController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	
 	}
+	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void community_register() {
@@ -64,7 +65,7 @@ public class CommunityController {
 		log.info("=== 커뮤니티 등록 ===");
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/community/list";
+		return "redirect:/board/community/list?type=community";
 	}
 	
 	

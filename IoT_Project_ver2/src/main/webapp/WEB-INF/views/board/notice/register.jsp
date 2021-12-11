@@ -21,7 +21,9 @@
 			</div>
 			
 			<div class="panel-body">
-				<form action="/board/notice/register" method="post" class="needs-validation" novalidate>	
+				<form action="/board/notice/register" method="post" class="needs-validation" novalidate>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
+					
 					<div class="mb-3">
   						<label class="form-label" for="valid01">제목</label>
   						<input type="text" class="form-control" name="title" id="valid01" required>
@@ -30,7 +32,7 @@
 					
 					<div class="mb-3">
   						<label class="form-label" for="valid03">작성자</label>
-  						<input type="text" class="form-control" name="writer" id="valid02" required>
+  						<input type="text" class="form-control" name="writer" id="valid02" required value='<sec:authentication property="principal.username"/>' readonly="readonly">
   						<!-- 로그인 연동하면 readonly, value='<c:out value="${board.writer}"/>' -->
 						<div class="invalid-feedback">작성자를 입력하세요</div>
 					</div>
@@ -166,6 +168,9 @@ $(document).ready(function(){
 	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
 	var maxSize = 5242880;
 	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrk.token}";
+	
 	$("input[type='file']").change(function(e){
 		
 		var formData = new FormData();
@@ -189,6 +194,9 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
 			data : formData,
 			type : 'POST',
 			dataType : 'json',
@@ -261,6 +269,9 @@ $(document).ready(function(){
 		$.ajax({
 			url : '/deleteFile',
 			data : {fileName : targetFile, type : type},
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
 			dataType : 'text',
 			type : 'POST',
 			success : function(result){

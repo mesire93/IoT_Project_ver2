@@ -41,9 +41,9 @@
                     <h3 class="panel-title">로그아웃 페이지</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" method='post' action="/customLogout">
+                    <form role="form" method='post' action="/user/customLogout">
                         <fieldset>                            
-                            <a href="/" class="btn btn-lg btn-success btn-block">로그아웃</a>
+                            <a href="home1" class="btn btn-lg btn-success btn-block">로그아웃</a>
                         </fieldset>
                         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>                    	   
                 	</form>
@@ -64,19 +64,27 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/resources/join/sb-admin-2.js"></script>
-    
+
+
+
 <script>
-$(".btn-success").on("click",function(e){
-	e.preventDefault();
-	$("form").submit();
-	<c:if test="${param.logout != null }">
-		$(document).ready(function(){
-			alert("로그아웃하였습니다.");
-			window.location = '/'
+		
+	$(".btn-success").on("click", function(e){
+			
+		e.preventDefault();
+		$("form").submit();
+			
 	});
-	</c:if>
-});
+	
 </script>
+
+<c:if test="${param.logout != null}"> 
+ <script>   							
+	$(document).ready(function(){
+		alert("로그아웃하였습니다.");
+	});			 
+</script>
+ </c:if>
 
 </body>
 </html>

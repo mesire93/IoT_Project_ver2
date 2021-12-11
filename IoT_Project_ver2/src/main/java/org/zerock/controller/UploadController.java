@@ -37,7 +37,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadController {
 
 
-	@PreAuthorize("isAuthenticated()")
+	
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
 	}

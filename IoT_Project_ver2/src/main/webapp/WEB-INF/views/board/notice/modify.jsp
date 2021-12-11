@@ -22,6 +22,8 @@
 		<div class="panel-body">
 
 		<form id="modifyForm" action="/board/notice/modify" method="post" class="needs-validation"  novalidate>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
+		
 			<div class="row">
 				<div class="col-md-10 mb-3">
 					<label class="form-label" for="valid01">제목</label>
@@ -96,8 +98,15 @@
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
 					<button type="button" class="btn btn-outline-primary btn_list" data-oper="list"><i class="fas fa-bars"></i>목록</button>
+					
+					<sec:authentication property="principal" var="pinfo" />
+					<sec:authorize access="isAuthenticated()">
+					<c:if test="${ pinfo.username eq board.writer }" >
 					<button type="submit" class="btn btn-outline-primary btn_modify" data-oper="modify"><i class="fas fa-eraser"></i>수정</button>
 					<button type="button" class="btn btn-outline-danger btn_remove" data-oper="remove"><i class="fas fa-times"></i>삭제</button>
+					</c:if>
+					</sec:authorize>
+				
 				</div>
 			</div>
 		</form>
@@ -121,9 +130,10 @@ $(document).ready(function(){
 			var operation = $(this).data("oper");
 			
 			if(operation === "list"){
+				modifyForm.empty()
 				modifyForm.append("<input type='hidden' name='type' value='notice'>");
 				modifyForm.attr("action", "/board/notice/list").attr("method", "get");
-				modifyForm.empty().submit();
+				modifyForm.submit();
 			}
 			else if(operation === "remove"){
 				var del = confirm("정말 삭제하시겠습니까?")
@@ -251,6 +261,9 @@ $(document).ready(function(){
 	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
 	var maxSize = 5242880;
 	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrk.token}";
+	
 	$("input[type='file']").change(function(e){
 		
 		var formData = new FormData();
@@ -274,6 +287,9 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
 			data : formData,
 			type : 'POST',
 			dataType : 'json',

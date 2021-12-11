@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,17 +51,19 @@ public class NoticeController {
 	
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void notice_register() {
 		log.info("=== 공지사항 등록 ===");
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String notice_register(BoardVO board, RedirectAttributes rttr) {
 		log.info("=== 공지사항 등록 ===");
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/notice/list";
+		return "redirect:/board/notice/list?type=notice";
 	}
 	
 	@GetMapping({"/get", "/modify"})
@@ -69,8 +72,9 @@ public class NoticeController {
 	}
 
 	
+	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
-	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("=== 게시글 수정 ===");
 		// 수정 여부 (boolean 값)
@@ -85,10 +89,14 @@ public class NoticeController {
 
 	
 	// Page 220 삭제 처리와 테스트
+	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("=== 게시글 삭제 ===");
+		
+		List<BoardAttachVO> attachList = service.getAttachList(bno);
+		
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}

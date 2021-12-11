@@ -16,7 +16,7 @@
 
 	<div class="col-md-8">
 		<div class="panel-heading">
-			<h2 class="panel-title">
+			<h2 class="panel-title"  style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
 				<i class="fas fa-comments"></i>커뮤니티 - 게시글 조회
 			</h2>
 		</div>
@@ -90,16 +90,20 @@
 					
 				</div>
 			</div>
+			
+			<div class="bigPictureWrapper">
+				<div class="bigPicture"></div>
+			</div>
 			<!-- 첨부파일 -->
 			
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 			<sec:authentication property="principal" var="pinfo"/>
 				<div class="col" align="right">
-					<button type="button" class="btn btn-outline-primary btn_list">목록</button>
+					<button type="button" class="btn btn-outline-primary btn_list"><i class="fas fa-bars"></i>목록</button>
 					<sec:authorize access="isAuthenticated()">
 						<c:if test="${pinfo.username eq board.writer}">
-							<button type="button" class="btn btn-outline-primary btn_modify">수정</button>
-							<button type="button" class="btn btn-outline-danger btn_remove">삭제</button>
+							<button type="button" class="btn btn-outline-primary btn_modify"><i class="fas fa-eraser"></i>수정</button>
+							<button type="button" class="btn btn-outline-danger btn_remove"><i class="fas fa-times"></i>삭제</button>
 						</c:if>
 					</sec:authorize>
 				</div>
@@ -182,7 +186,7 @@
 				</div>
 				<div class="form-group">
 					<label>작성자</label>
-					<input class="form-control" name="replyer" value="board.writer" readonly="readonly">
+					<input class="form-control" name="replyer" value='<c:out value="${board.writer}" />'  readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label>작성일</label>
@@ -303,9 +307,11 @@
 		var modalRegisterBtn = $("#modalRegisterBtn");
 		
 		var replyer = null;
+		
 		<sec:authorize access="isAuthenticated()">
 			replyer = '<sec:authentication property = "principal.username"/>';
 		</sec:authorize>
+		
 		var csrfHeaderName = "${_csrf.headerName}";
 		var csrfTokenValue = "${_csrf.token}";
 		

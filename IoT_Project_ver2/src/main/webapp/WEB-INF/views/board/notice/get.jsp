@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <%@ include file="/WEB-INF/views/include/header2.jsp"%>
 
@@ -98,8 +97,16 @@
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
 					<button type="button" class="btn btn-outline-primary btn_list"><i class="fas fa-bars"></i>목록</button>
+					
+					<!-- Page 716 -->
+					<sec:authentication property="principal" var="pinfo" />
+					<sec:authorize access="isAuthenticated()">
+					<c:if test="${ pinfo.username eq board.writer }" >
 					<button type="button" class="btn btn-outline-primary btn_modify"><i class="fas fa-eraser"></i>수정</button>
 					<button type="button" class="btn btn-outline-danger btn_remove"><i class="fas fa-times"></i>삭제</button>
+					</c:if>
+					</sec:authorize>
+					
 				</div>
 			</div>
 			
@@ -117,6 +124,7 @@
 				<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
 			</form>
 			
+			<hr>
 			
 			<!-- 댓글 -->
 			<div class="col-lg-12">
@@ -134,7 +142,11 @@
 						</ul>
 
 						</div>
+						
+						<sec:authorize access="isAuthenticated()" >	
 						<button type="button" id="addReplyBtn" class="btn btn-outline-primary"  style="float:right;">등록</button>
+						</sec:authorize>
+					
 					</div>
 					
 
@@ -169,7 +181,7 @@
 				</div>
 				<div class="form-group">
 					<label>작성자</label>
-					<input class="form-control" name="replyer" value="replyer">
+					<input class="form-control" name="replyer" value="replyer" readonly>
 				</div>
 				<div class="form-group">
 					<label>작성일</label>
@@ -279,15 +291,31 @@
 		var modalRemoveBtn = $("#modalRemoveBtn");
 		var modalRegisterBtn = $("#modalRegisterBtn");
 		
+		var csrfHeaderName = "${_csrf.headerName}";
+		var csrfTokenValue = "${_csrk.token}";
+		
+		var replyer = null;
+		
+		<sec:authorize access="isAuthenticated()">
+		
+		replyer = '<sec:authentication property = "principal.username" />';
+		
+		</sec:authorize>
+		
 		// 댓글 작성 버튼 클릭
 		$("#addReplyBtn").on("click", function(e){
 			modal.find("input").val("");
+			modal.find("input[name='replyer']").val(replyer);
 			modalInputReplyDate.closest("div").hide();				// 작성일 입력폼 hide
-			modal.find("button").hide();	
+			modal.find("button[id != 'modalCloseBtn']").hide();	
 			
 			modalRegisterBtn.show();
 			
 			$(".modal").modal("show");
+		});
+		
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 		});
 		
 		// 등록 버튼 클릭
@@ -330,7 +358,23 @@
 		
 		// Page 426 댓글의 수정/삭제 이벤트 처리
 		modalModBtn.on("click", function(e){
+			
+			var originalReplyer = modalInputReplyer.val();
+			
 			var reply = {rno : modal.data("rno"), reply : modalInputReply.val(), replyer : modalInputReplyer.val()};
+			
+			if(!replyer){
+				alert("로그인 후 수정이 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
+			if(replyer != originalReplyer){
+				alert("자신이 작성한 댓글만 수정이 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
 			replyService.update(reply, function(result){
 				alert("수정 " + result);
 				modal.modal("hide");
@@ -340,6 +384,21 @@
 		
 		modalRemoveBtn.on("click", function(e){
 			var rno = modal.data("rno");
+			
+			if(!replyer){
+				alert("로그인 후 삭제가 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
+			var originalReplyer = modalInputReplyer.val();
+			
+			if(replyer != originalReplyer){
+				alert("자신이 작성한 댓글만 삭제가 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
 			replyService.remove(rno, function(result){
 				alert("삭제 " + result);
 				modal.modal("hide");
