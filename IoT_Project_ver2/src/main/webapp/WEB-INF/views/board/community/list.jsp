@@ -16,15 +16,15 @@
 		<div class="col-md-10">
 			<header class="panel-heading">
 
-				<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
+				<h2 class="panel-title">
 					<i class="fas fa-comments"></i>커뮤니티
 				</h2>
 			</header>
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table mb-none table-hover table-striped" >
-						<thead >
-							<tr style="border-top:2px solid black;">
+						<thead>
+							<tr>
 								<th style="width: 10%">번호</th>
 								<th style="width: 30%">제목</th>
 								<th style="width: 20%">작성자</th>
@@ -58,7 +58,7 @@
 
 			<div class="row" style="margin: 10px;">
 				<div class="col" align="right">
-					<button type="button" class="btn btn-outline-primary " id="btn_register"><i class="fas fa-edit"></i>글쓰기</button>
+					<button type="button" class="btn btn-outline-primary " id="btn_register">글쓰기</button>
 				<!-- 	
 					<button type="button" class="btn btn-outline-info ">수정</button>
 					<button type="button" class="btn btn-outline-danger ">삭제</button>

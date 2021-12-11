@@ -46,6 +46,8 @@ var replyService = (function(){
 		$.ajax({
 			type : 'delete',
 			url : '/replies/' + rno,
+			data: JSON.stringify({rno:rno, replyer:replyer}),
+			contentType: "application/json; charset=utf-8",
 			success : function(deleteResult, status, xhr){
 				if (callback){
 					callback(deleteResult);
@@ -116,7 +118,7 @@ var replyService = (function(){
 			return [ yy, ' 년 ' , (mm > 9 ? ' ' : '0') + mm, ' 월 ' , (dd > 9 ? ' ' : '0') + dd, ' 일 ' ].join(' ');
 		}
 		
-	};
+	}
 		
 	return {
 		add : add,

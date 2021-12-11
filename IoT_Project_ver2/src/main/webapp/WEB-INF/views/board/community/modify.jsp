@@ -14,7 +14,7 @@
 
 	<div class="col-md-8">
 		<div class="panel-heading">
-			<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
+			<h2 class="panel-title">
 				<i class="fas fa-comments"></i>커뮤니티 - 게시글 수정
 			</h2>
 		</div>
@@ -22,6 +22,8 @@
 		<div class="panel-body">
 
 		<form id="modifyForm" action="/board/community/modify" method="post" class="needs-validation"  novalidate>
+		<sec:authentication property="principal" var="pinfo"/>
+		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 			<div class="row">
 				<div class="col-md-10 mb-3">
 					<label class="form-label" for="valid01">제목</label>
@@ -98,9 +100,13 @@
 
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
-					<button type="button" class="btn btn-outline-primary btn_list" data-oper="list"><i class="fas fa-bars"></i>목록</button>
-					<button type="button" class="btn btn-outline-primary btn_modify" data-oper="modify"><i class="fas fa-eraser"></i>수정</button>
-					<button type="button" class="btn btn-outline-danger btn_remove" data-oper="remove"><i class="fas fa-times"></i>삭제</button>
+					<button type="button" class="btn btn-outline-primary btn_list" data-oper="list">목록</button>
+					<sec:authorize access="isAuthenticated()">
+						<c:if test="${pinfo.username eq board.writer }">
+							<button type="submit" class="btn btn-outline-primary btn_modify" data-oper="modify">수정</button>
+							<button type="button" class="btn btn-outline-danger btn_remove" data-oper="remove">삭제</button>
+						</c:if>
+					</sec:authorize>
 				</div>
 			</div>
 		</form>
@@ -137,19 +143,6 @@ $(document).ready(function(){
 		}
 		else if(operation === "modify"){
 			var str = "";
-			
-			if($("#valid01").val() == ""){
-				alert("제목을 입력하세요");
-				return;
-			}
-			if($("#valid02").val() == ""){
-				alert("작성자를 입력하세요");
-				return;
-			}
-			if($("#valid03").val() == ""){
-				alert("내용을 입력하세요");
-				return;
-			}
 			
 			$(".uploadResult ul li").each(function(i, obj){
 				
@@ -219,14 +212,14 @@ $(document).ready(function(){
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
 					str += "<div>";
 					str += "<img src='/display?fileName="+fileCallPath+"'></a>";
-					str += "<p>"+attach.fileName+"<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button></p><br/>";
+					str += "<span>"+attach.fileName+"</span><button type='button' class='btn btn-outline-warning btn-circle'>삭제</button><br/>";
 					str += "</div></li>";
 				}
 				else{
 					str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-fileName='"+attach.fileName+"' data-type='"+attach.fileType+"'>"
 					str += "<div>";
 					str += "<img src='/resources/img/attach.png'>";
-					str += "<p>"+attach.fileName+"<button type='button' class='btn btn-outline-warning btn-circle'>삭제</button></p><br/>";
+					str += "<span>"+attach.fileName+"</span><button type='button' class='btn btn-outline-warning btn-circle'>삭제</button>";
 					str += "</div></li>";
 				}
 			});
@@ -275,6 +268,9 @@ $(document).ready(function(){
 			contentType : false,
 			data : formData,
 			type : 'POST',
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
 			dataType : 'json',
 			success : function(result){
 				console.log("RESULT : " + result);

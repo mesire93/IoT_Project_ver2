@@ -15,13 +15,14 @@
 
 		<div class="col-md-8">
 			<div class="panel-heading">
-				<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
+				<h2 class="panel-title">
 					<i class="fas fa-comments"></i>커뮤니티 - 게시글 등록
 				</h2>
 			</div>
 			
 			<div class="panel-body">
-				<form action="/board/community/register" method="post" class="needs-validation" novalidate>	
+				<form action="/board/community/register" method="post" class="needs-validation" novalidate>
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 					<div class="mb-3">
   						<label class="form-label" for="valid01">제목</label>
   						<input type="text" class="form-control" name="title" id="valid01" required>
@@ -30,9 +31,9 @@
 					
 					<div class="mb-3">
   						<label class="form-label" for="valid02">작성자</label>
-  						<input type="text" class="form-control" name="writer" id="valid02" required>
-  						<!-- 로그인 연동하면 readonly, value='<c:out value="${board.writer}"/>' -->
-						<div class="invalid-feedback">작성자를 입력하세요</div>
+  						<input type="text" class="form-control" name="writer" 
+  						value='<sec:authentication property="principal.username"/>'
+  						id="valid02" readonly="readonly">
 					</div>
 					
 					<div class="mb-3">
@@ -71,8 +72,8 @@
 
 					<div class="row" style="margin-top:10px; margin-bottom:10px;">
 						<div class="col" align="right">
-							<button type="button" class="btn btn-outline-primary btn_register" ><i class="fas fa-edit"></i>등록</button>
-							<button type="button" class="btn btn-outline-danger btn_cancel"><i class="fas fa-times"></i>취소</button>
+							<button type="submit" class="btn btn-outline-primary btn_register" >등록</button>
+							<button type="button" class="btn btn-outline-danger btn_cancel">취소</button>
 						</div>
 					</div>
 			</form>
@@ -92,7 +93,27 @@ $(document).ready(function(){
 	});
 
 	
+	
+	// 부트스트랩 유효성검사 시작
+	(function () {
+	  'use strict'
 
+	  var forms = document.querySelectorAll('.needs-validation')
+	  
+	  Array.prototype.slice.call(forms)
+	    .forEach(function (form) {
+	      form.addEventListener('submit', function (event) {
+	        if (!form.checkValidity()) {
+	          event.preventDefault()
+	          event.stopPropagation()
+	        }
+
+	        form.classList.add('was-validated')
+	      }, false)
+	    })
+	})()
+	// 부트스트랩 유효성검사 종료
+	
 });
 </script>
 
@@ -109,19 +130,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		var str = "";
-
-		if($("#valid01").val() == ""){
-			alert("제목을 입력하세요");
-			return;
-		}
-		if($("#valid02").val() == ""){
-			alert("작성자를 입력하세요");
-			return;
-		}
-		if($("#valid03").val() == ""){
-			alert("내용을 입력하세요");
-			return;
-		}
 		
 		$(".uploadResult ul li").each(function(i, obj){
 			
@@ -137,6 +145,8 @@ $(document).ready(function(){
 		formObj.append(str).submit();
 	});
 	
+	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
 	
 	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
 	var maxSize = 5242880;
@@ -164,6 +174,9 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			}
 			data : formData,
 			type : 'POST',
 			dataType : 'json',
@@ -172,7 +185,7 @@ $(document).ready(function(){
 				showUploadFile(result);
 				alert("업로드 성공");
 			}
-		});
+		}); //$.ajax
 		
 	});
 	
@@ -207,7 +220,7 @@ $(document).ready(function(){
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/display?fileName="+fileCallPath+"'>"+
-						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
 						  	"</div></li>";
 				
 			}
@@ -217,7 +230,8 @@ $(document).ready(function(){
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/resources/img/attach.png'></a>"+
-						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
+						  	"<p>"+obj.fileName+"</p>"+
+						  	"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button>"+
 						  	"</div></li>";
 			  	
 			}
@@ -236,6 +250,9 @@ $(document).ready(function(){
 		$.ajax({
 			url : '/deleteFile',
 			data : {fileName : targetFile, type : type},
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
 			dataType : 'text',
 			type : 'POST',
 			success : function(result){

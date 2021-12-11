@@ -67,15 +67,16 @@ public class CommunityController {
 		return "redirect:/board/community/list";
 	}
 	
+	
 	@GetMapping({"/get", "/modify"})
 	public void community_get(@RequestParam("bno") Long bno, Model model) {
 		
 		model.addAttribute("board", service.get(bno));
 	}
 
-	
+	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
-	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		
 		log.info("=== 게시글 수정 ===");
 		// 수정 여부 (boolean 값)
@@ -90,6 +91,7 @@ public class CommunityController {
 
 	
 	// Page 220 삭제 처리와 테스트
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		
