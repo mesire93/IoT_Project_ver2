@@ -30,6 +30,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- 폰트 -->
 
+<!-- 카카오 맵 API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9436ed92258399035e8417ecec3fe3a5"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9436ed92258399035e8417ecec3fe3a5&libraries=services,clusterer,drawing"></script>
+<!-- 카카오 맵 API -->
+
 <!-- 니보 슬라이더 -->
 <link href="/resources/nivo-slider/demo/themes/default/default.css" type="text/css" media="screen"  rel="stylesheet"/>
 <link href="/resources/nivo-slider/nivo-slider.css" type="text/css" media="screen"  rel="stylesheet"/>
@@ -103,6 +108,8 @@
   		 	</div>
 		</div>
 	</header>
+	
+	
 	
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>

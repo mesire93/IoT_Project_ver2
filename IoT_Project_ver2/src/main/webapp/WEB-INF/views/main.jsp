@@ -120,7 +120,7 @@ $(document).ready(function(){
            <div id="slider" class="nivoSlider">
                
                <img src="resources/nivo-slider/demo/images/1.jpg" data-thumb="resources/nivo-slider/demo/images/1.jpg" alt="" />
-               <img src="resources/nivo-slider/demo/images/2.jpg" data-thumb="resources/nivo-slider/demo/images/2.jpg" alt="" /></a>
+               <img src="resources/nivo-slider/demo/images/2.jpg" data-thumb="resources/nivo-slider/demo/images/2.jpg" alt="" />
                <img src="resources/nivo-slider/demo/images/3.jpg" data-thumb="resources/nivo-slider/demo/images/3.jpg" alt=""/>
                
            </div>
@@ -151,34 +151,6 @@ $(document).ready(function(){
 <!-- ================================================================== -->
 
 
-                    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     
 
 
 
@@ -189,4 +161,31 @@ $(document).ready(function(){
 
 
 
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>

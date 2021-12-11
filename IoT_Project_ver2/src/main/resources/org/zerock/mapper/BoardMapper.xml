@@ -6,7 +6,7 @@
 
 	<select id="getList" resultType="org.zerock.domain.BoardVO">
 		<![CDATA[
-			select * from board where bno > 0
+			select * from board where type = 'notice' order by bno desc
 		]]>
 	</select>
 
