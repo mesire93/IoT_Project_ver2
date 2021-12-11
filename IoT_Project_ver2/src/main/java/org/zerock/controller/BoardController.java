@@ -23,11 +23,12 @@ public class BoardController {
 		
 	//	return "/board";
 	}
-	
+
+	/*
 	@GetMapping("/home1")
 	public void noticeSend(Model model) {
 		model.addAttribute("list", service.getList());
 	}
-	
+	*/
 
 }

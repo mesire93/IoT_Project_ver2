@@ -24,9 +24,11 @@ public class MainController {
 	private Buy3Service service3;
 	private Buy4Service service4;
 	
-	@GetMapping("/")
+	@GetMapping("/home1")
 	public void main(Model model) {
 		model.addAttribute("list", boardService.getList());
+		
+	
 	}
 	
 }
