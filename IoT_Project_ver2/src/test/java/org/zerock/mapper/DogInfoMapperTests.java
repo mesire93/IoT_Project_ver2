@@ -38,7 +38,7 @@ public class DogInfoMapperTests {
 		dog.setSex("남(수컷)");
 		dog.setName("몰티즈.png");
 		dog.setFeature("활동적임");
-		
+		dog.setPrice("500000");
 		mapper.insert(dog);
 		log.info(dog);
 	}
@@ -57,7 +57,7 @@ public class DogInfoMapperTests {
 		dog.setSex("여(암컷)");
 		dog.setName("몰티즈.png");
 		dog.setFeature("활동적임");
-		
+		dog.setPrice("800000");
 		mapper.insertSelectKey(dog);
 		log.info(dog);
 	

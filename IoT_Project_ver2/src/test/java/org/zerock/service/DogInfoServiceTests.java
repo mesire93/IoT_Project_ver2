@@ -31,6 +31,14 @@ public class DogInfoServiceTests {
 		dog.setAge("8개월");
 		dog.setSimple("활동적임");
 		dog.setWeight(5.0);
+		dog.setHealth("종합백신");
+		dog.setName("구월이");
+		dog.setKind("골든리트리버");
+		dog.setSex("남(수컷)");
+		dog.setName("골든리트리버.png");
+		dog.setFeature("주인을 잘따름");
+		dog.setPrice("500000");
+		
 		
 		service.register(dog);
 		log.info("분양등록번호"+dog.getDno());

@@ -20,7 +20,7 @@ public class DogInfoDTO {
 	private String kind;
 	private String feature;
 	private String sex;
-
+	private String price;
 //	public DogInfoDTO(Long dno, Date regdate, String age, String simple, Double weight, String fileName, String health,
 //			String name, String kind, String feature, String sex) {
 //		super();

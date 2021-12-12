@@ -11,8 +11,8 @@
 	</select>
 	
 	<insert id="insert">
-	insert into doginfo (dno, age, simple, weight, fileName, health, name, kind, feature, sex)
-	values (dog_seq.nextval, #{age}, #{simple},#{weight}, #{fileName},#{health}, #{name}, #{kind}, #{feature}, #{sex} )
+	insert into doginfo (dno, age, simple, weight, fileName, health, name, kind, feature, sex, price)
+	values (dog_seq.nextval, #{age}, #{simple},#{weight}, #{fileName},#{health}, #{name}, #{kind}, #{feature}, #{sex}, #{price} )
 	</insert>
 	
 	<insert id="insertSelectKey">
@@ -22,8 +22,8 @@
 		</selectKey>
 	
 	<!-- *before 밑에꺼실 실행전에  bno 먼저 알아낸다. Long타입으로  bno 되어있다. -->
-		insert into doginfo (dno,age, simple, weight, fileName, health, name, kind, feature, sex)
-		values (#{dno}, #{age},#{simple},#{weight}, #{fileName}, #{health}, #{name}, #{kind}, #{feature}, #{sex} )
+		insert into doginfo (dno,age, simple, weight, fileName, health, name, kind, feature, sex, price)
+		values (#{dno}, #{age},#{simple},#{weight}, #{fileName}, #{health}, #{name}, #{kind}, #{feature}, #{sex}, #{price} )
 	</insert>
 	
 	<select id="read" resultType="org.zerock.domain.DogInfoDTO">
@@ -36,7 +36,7 @@
 	
 	<update id="update">
 		update doginfo set age=#{age}, simple=#{simple},
-		weight=#{weight}, fileName= #{fileName}, health=#{health}, name=#{name}, kind=#{kind}, feature=#{feature}, sex=#{sex}  where dno=#{dno}
+		weight=#{weight}, fileName= #{fileName}, health=#{health}, name=#{name}, kind=#{kind}, feature=#{feature}, sex=#{sex}, price=#{price} where dno=#{dno}
 	</update>
 	
 		

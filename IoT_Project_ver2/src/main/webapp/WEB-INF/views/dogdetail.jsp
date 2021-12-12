@@ -4,6 +4,10 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri = "http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%@ include file="/WEB-INF/views/include/header2.jsp" %>
+<!-- 
 
 <html lang="en">
 <head>
@@ -13,14 +17,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>애견분양 Mall</title>
-<!-- Favicon-->
+Favicon
 <link rel="icon" type="image/x-icon"
 	href="/resources/assets/favicon.ico">
-<!-- Core theme CSS (includes Bootstrap)-->
+Core theme CSS (includes Bootstrap)
 <link href="/resources/css/styles.css" rel="stylesheet">
 </head>
 <body>
-	<!-- Responsive navbar-->
+	Responsive navbar
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
 		<a class="navbar-brand" href="#!">LOGO</a>
@@ -43,7 +47,7 @@
 </nav>
 
 
-<!-- Page header with logo and tagline-->
+Page header with logo and tagline
 <header class="py-5 bg-light border-bottom mb-4">
 	<div class="container">
 		<div class="text-center my-5">
@@ -52,7 +56,7 @@
 		</div>
 	</div>
 </header>
-
+ -->
 <!-- 삭제처리를 위해 form 태그는 POST방식이용  -->
 <form action="/dogremove" method="post"> 
 <!-- 삭제처리를 위해 Controller 에서 Service.remove()처리를 위해 dno 값을 hidden으로 넘긴다. -->
@@ -104,7 +108,8 @@
 			<div class="card mb-4">
 				<div class="card-header"><!-- 강아지 품종 --><c:out value="${detail.name }"/> 품종</div>
 				<%-- <div class="card-header"><!-- 강아지 품종 --> ${dog.name } 품종</div> --%>
-                <div class="card-body"><!-- 골든리트리버 --><c:out value="${detail.kind }"/></div>
+                <%--  <div class="card-body"><c:out value="${detail.kind }"/></div> --%>
+                <div class="card-body"><c:out value="${fn:split(list.kind,',')[0]}"/></a>
 			</div>
 			
 			<div class="card mb-4">
@@ -124,6 +129,13 @@
 				<%-- <div class="card-header"><!-- 강아지 건강상태  --> ${dog.name } 건강상태</div> --%>
                 <div class="card-body"><!-- 광견병 종합백신 --><c:out value="${detail.age }"/></div>
 			</div>
+			
+			<div class="card mb-4">
+				<div class="card-header"><c:out value="${detail.name }"/> 분양가격</div>
+				
+                <div class="card-body"><c:out value="${detail.price } 원"/></div>
+                <%-- <div class="card-body"><fmt:formatNumber value="${detail.price }" pattern="#,###,###"/>">원</div> --%>
+			</div>
 		</div>
 	</div>
 </div>
@@ -138,29 +150,34 @@
 			
 			
 			
-			<button type="button" class="btn btn-success" onclick="location.href='/doglist2'">목록으로</button>
+			<button type="button" class="btn btn-success" onclick="location.href='/doglist'">목록으로</button>
 			<!-- button의 onclick 속성은 redirect  개념으로 Controller에서 @GetMapping으로 처리 -->
 		</div>
 	</div>
 </div>
 </form>
-</form>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
-<!-- Footer-->
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<!-- 
+
 <footer class="py-5 bg-dark">
 	<div class="container">
-		<p class="m-0 text-center text-white">Copyright © Your Website
-			2021</p>
+		<p class="m-0 text-center text-white">Copyright © Your Website 2021</p>
 	</div>
-</footer>
-<!-- Bootstrap core JS-->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
+</footer> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+Core theme JS
 <script src="/resources/js/scripts.js"></script>
 
-
-
-</body>
-</html>
+-->

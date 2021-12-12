@@ -4,69 +4,92 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-	
-	
+	<%@ include file="/WEB-INF/views/include/header2.jsp" %>
+<!-- 	
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#regBtn").on("click", function(){
 		self.location="/doglist";
 	});
 	
-});
+}); 
+</script> -->
+	
+<script type="text/javascript">
+
+function Submit(){
+	
+	if( form.simple.length > 65){
+		alert('한줄 특징은 65글자 이하로 입력해주세요.');
+		form.simple.focus();
+		return false;
+	}
+	
+	
+	// 파일 업로드 확장자 체크
+    if( $("#uploadfileName").val() != "" ){
+         var ext = $("#uploadfileName").val().split('.').pop().toLowerCase();
+ 	  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+ 	     alert('등록 할수 없는 파일명입니다.');
+ 	     $("#uploadfileName").val(""); // input file 파일명을 다시 지워준다.
+ 	     return;
+	  } //안쪽 if문
+    }// 바깥쪽 if문
+
+	
+	
+	/* function fileName(str){
+		n = str.replace(/,/g,"");
+		var _pattern1 = /^\d*[.]\d{1}$/; 
+		return n;
+	} */
+	
+	//품명DB 들어갈때 숫자 콤마제거-1
+	/* if( form.kind.value != "" ) {
+		var str = $("#kind").val();   
+	    return str.replace(/[^\d]+/g, '');
+	} */
+	//품명DB 들어갈때 문자열 콤마제거-2
+	 if( form.kind.value != "" ) {
+	 	var kind = $("#kind").val();
+		return kind.slice(0,-1);
+	 }
+		 	
+	//체중weight 소수점 첫째자리수까지만 DB insert
+	if( form.name.value != "" ) {
+    	var tmps = $("#weight").val().replace(/[^\.|^0(0)+|^0-9\.]/g, '');
+   		/* 소수점은 하나만 입력되도록*/
+        var arr = tmps.split(".");
+        if(arr.length > 2) {
+            tmps = arr[0] + '.' + arr[1];
+        } //안쪽 if문
+ 	   $("#weight").val(tmps);
+	}//바깥쪽 if문
+	
+document.getElementById("form").submit();
+}
+
+/* var cnt=1;
+function file(){
+	$("#file").append("<br>"+"<input type='file' name='file"+cnt+"'/>");
+	cnt++;
+	
+}
+ */
+
 </script>
 	
-	
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>애견분양 Mall</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon"
-	href="/resources/assets/favicon.ico">
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="/resources/css/styles.css" rel="stylesheet">
-</head>
-<body>
-	<!-- Responsive navbar-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container">
-			<a class="navbar-brand" href="#!">LOGO</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Blog</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-
-	<!-- Page header with logo and tagline-->
-	<header class="py-5 bg-light border-bottom mb-4">
-		<div class="container">
-			<div class="text-center my-5">
-				<h1 class="fw-bolder">강아지 분양 등록</h1>
-				<p class="lead mb-0"></p>
-			</div>
-		</div>
-	</header>
       
 <form action="/dogregister" method="post" enctype="multipart/form-data">
 
+<br>
+<br>
 
+<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
+					<i class="fas fa-bullhorn"></i>&nbsp;&nbsp; 강아지 분양등록양식을 입력해주세요
+				</h2>
+<br>
+<br>
 
 <div class="container">
 	<div class="row">
@@ -224,19 +247,41 @@ $(document).ready(function(){
 <br>
 <br>
 
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="card-header">강아지 분양가격을 입력하세요 (숫자만 입력해주세요) 단위:원</div>
+			<input type="text" name="price" class="form-control" placeholder="분양가격을 입력해주세요 (단위:원)" required> 
+		</div>
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
 
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8">
-			<button type="submit" class="btn btn-warning">위 내용으로 분양 강아지를 등록합니다</button>
-			<button type="reset" class="btn btn-info">다시작성</button>
+			<button type="submit" class="btn btn-warning" onclick="return Submit()">위 내용으로 분양 강아지를 등록합니다</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="reset" class="btn btn-outline-primary">다시작성</button>
 			<!-- <button type="button" id="regBtn" class="btn btn-success">목록으로</button> -->
-			<button type="button" id="regBtn" class="btn btn-success" onclick="location.href='/doglist2'">목록으로</button>
+			<button type="button" id="regBtn" class="btn btn-outline-success" onclick="location.href='/doglist'">목록으로</button>
 		</div>
 	</div>
 </div>
 </form>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>

@@ -4,8 +4,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ taglib uri = "http://www.springframework.org/tags" prefix="spring"%>
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ include file="/WEB-INF/views/include/header2.jsp" %>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -25,23 +25,27 @@ $(document).ready(function(){
 		 
 		if(parseInt(result) > 0 ){
 			$(".modal-body").html("강아지 분양등록이 이루어졌습니다.");
-		}		
 			$("#registerModal").modal("show"); 
+		}		
+			
 	}
 	
 	//doglist 아래 상세보기 버튼 클릭시 자바스크립트로 이동
 	$("#detailBtn").on("click", function(){
-		self.location="/dogdetail";
+		location.herf="/dogdetail";
 	});
 	
+	
+	var doglist =$("#doglist");
 	//doglist 아래 장바구니 버튼 클릭시 자바스크립트로 이동
-	$("#bagBtn").on("click", function(){
-		self.location="/";
+	$("#cartBtn").on("click", function(e){
+		//location.href="/doglist"; 이동되면 안된다.
+		doglist.attr("action", "/dogcart").submit();
 	});
 	
 	//doglist 위의 등록하기 버튼 클릭시 자바스크립트로 이동처리
 	$("#regBtn").on("click", function(){
-		self.location="/dogregister";
+		location.href="/dogregister";
 	});
 	
 /* var actionForm =$("#actionForm");
@@ -69,9 +73,13 @@ $(".paginate_button a").on("click",function(e){
 	}); */
 	
 });
+
+
+
+
 </script>
 
-
+<!-- 
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -79,14 +87,14 @@ $(".paginate_button a").on("click",function(e){
     <meta name="description" content="">
     <meta name="author" content="">
     <title>애견분양 Mall</title>
-    <!-- Favicon-->
+    Favicon
     <link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico">
-    <!-- Core theme CSS (includes Bootstrap)-->
+    Core theme CSS (includes Bootstrap)
     <link href="/resources/css/styles.css" rel="stylesheet">
         <script src="/resources/js/jquery-3.6.0.min.js" ></script>
 </head>
  <body>
-     <!-- Responsive navbar-->
+     Responsive navbar
        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
            <div class="container">
                <a class="navbar-brand" href="#!">LOGO</a>
@@ -110,7 +118,7 @@ $(".paginate_button a").on("click",function(e){
                    <p class="lead mb-0">환영합니다</p>
                </div>
            </div>
-       </header>
+       </header> -->
        
        
        
@@ -124,7 +132,8 @@ $(".paginate_button a").on("click",function(e){
 		
 <br>
 
-<!-- <form action="/dogdetail" method="post"> -->
+<!--$.ajax 장바구니담기 버튼 클릭시 이동 -->
+<form action="/buy1" method="post" id="doglist">
 
 <div class="container">
 	<div class="row">
@@ -150,11 +159,23 @@ $(".paginate_button a").on("click",function(e){
 						<div>
 							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 						</div>
-						<h2 class="card-title h4">
+<%-- 						<h2 class="card-title h4">
 							품종 :
 							<a href='/dogdetail?dno=<c:out value="${list.dno}"/>'>
 							<c:out value="${list.kind}" /></a>
+						</h2> --%>
+						
+						
+						<h2 class="card-title h4">
+								품종 :
+								<a href='/dogdetail?dno=<c:out value="${list.dno}"/>'>
+								<%-- <c:out value="${list.kind.substring(0, list.kind.length-1)}" /> --%>
+								<c:out value="${fn:split(list.kind,',')[0]}"/></a>
+								<%-- <c:out value="${list.kind.slice(0, -1)}" /></a> --%>
+
 						</h2>
+						
+						
 						<p class="card-text">
 							나이 :
 							<c:out value="${list.age}" />
@@ -162,17 +183,20 @@ $(".paginate_button a").on("click",function(e){
 							<c:out value="${list.sex}" />
 							<br> 특징:
 							<c:out value="${list.simple}" />
-
+							<br> 분양가:
+							<c:out value="${list.price}" />
+<%-- <div class="card-body"><fmt:formatNumber value="${list.price }" pattern="#,###,###"/>">원</div> --%>
 						</p>
 						
 						<!-- <div class="card-body"> 안에 위치해야 한다. -->
 						
-						<button data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
+						<!-- <p style="text-align:center;"> -->
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
 						상세보기</button>
 						<%-- <button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
 						<input type="hidden" value="<c:out value='${list.dno}'/>"> --%><!--${registerdno} 값으로는 페이지 이동불가 -->
 						<!-- <button type="submit" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button> -->
-						<button type="button" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button>
+						<button type="button" id="cartBtn" class="btn btn-outline-danger">장바구니담기</button>
 					</div>	
 				</div>
 			</div>		
@@ -192,68 +216,33 @@ $(".paginate_button a").on("click",function(e){
 </div>
 </form> 
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">알림창</h4>
+            </div>
+            <div class="modal-body">
+				강아지 분양등록이 이루어졌습니다
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+ 	 </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<!-- Footer-->
-<footer class="py-5 bg-dark">
-	<div class="container">
-		<p class="m-0 text-center text-white">Copyright © Your Website 2021</p>
-	</div>
-</footer>
-<!-- Bootstrap core JS-->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="/resources/js/scripts.js"></script>
-		
-		
-               
-<!-- Modal 추가 -->
-<div class="modal fade" id="registerModal" tabindex="-1" data-toggle="modal" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">알림창</h4>
-			</div>
-			<div class="modal-body">
-				<p>강아지 분양등록이 이루어졌습니다.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
-<!-- 
-<div class="modal fade" id="myModal" tabindex="-1" 
-aria-labelledby="myModalLabel" aria-hidden="true" data-toggle="modal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-			</div>
-			<div class="modal-body">분양등록이 이루어졌습니다.</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>			
-		</div>
-	/.modal-content
-	</div>
-	/.modal-dialog
-</div> -->
-<!-- /.modal --> 
- 
-
-
-</body>
-</html>
-
-
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>

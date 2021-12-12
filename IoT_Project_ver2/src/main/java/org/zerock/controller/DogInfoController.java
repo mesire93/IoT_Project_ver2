@@ -3,14 +3,21 @@ package org.zerock.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.Buy1VO;
 import org.zerock.domain.DogInfoDTO;
+import org.zerock.service.Buy1Service;
 import org.zerock.service.DogInfoService;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +29,7 @@ import lombok.extern.log4j.Log4j;
 public class DogInfoController {
 	
 	private DogInfoService service;
-
+	private Buy1Service buyservice;
 
 	@GetMapping("/dogregister")
 	public void dogregisterget() {
@@ -30,6 +37,10 @@ public class DogInfoController {
 		log.info("GetMapping dogregister 등록화면");
 
 	}
+	
+	
+
+	
 //	
 //	@GetMapping("/list")
 //	public void list(Model model) {
@@ -52,7 +63,7 @@ public class DogInfoController {
 			rttr.addFlashAttribute("remove", "처리가 완료되었습니다.");
 		}
 
-		return "redirect:/doglist2"; // void 리턴타입 지정시 없어도 무방. 같은 URL에서 POST ->GET 이동이므로.
+		return "redirect:/doglist"; // void 리턴타입 지정시 없어도 무방. 같은 URL에서 POST ->GET 이동이므로.
 	}
 
 	@GetMapping("/dogdetail") // list에서 상세보기 버튼 클릭시 여기로 이동한다. <a>태그로 url dno 가지고 이동.
@@ -127,14 +138,28 @@ public class DogInfoController {
 		 */
 		
 		// rttr.addFlashAttribute("registerdno",dogInfoDTO.getDno());
-		return "redirect:/doglist2";
+		return "redirect:/doglist";
 	}
 
-	@GetMapping("/doglist2") // URI 입력시 분양리스트 화면만 보여준다.
+	@GetMapping("/doglist") // URI 입력시 분양리스트 화면만 보여준다.
 	public void doglistget(Model model) {
 
-		log.info("GetMapping doglist2 목록화면GET");
+		log.info("GetMapping doglist 목록화면GET");
 		log.info(service.getList());
 		model.addAttribute("registerdno", service.getList()); // 화면에는 register 이용해서 DB 내용가지고 온다.
 	}
+	
+	
+//	@PostMapping(value="/doglist2", consumes ="application/json", produces= {MediaType.TEXT_PLAIN_VALUE}) 
+//	// 분양목록에서 상세보기 버튼시 ajax 이용해서 post 전송
+//	public ResponseEntity<String> doglistpost(@RequestBody Buy1VO buy1VO ){
+//		buyservice.register1(buy1VO);
+//		log.info("GetMapping doglist2 목록화면GET");
+//
+//		//return insertCount ==1
+//		//? new ReponseEntity<> ("success", HttpStatus.OK)
+//		//: new ReponseEitity<> ("HttpStatus.INTERNAL_SERVER_ERROR");
+//		//return  new ResponseEntity<>("success", HttpStatus.OK); 
+//	}
+	
 }
