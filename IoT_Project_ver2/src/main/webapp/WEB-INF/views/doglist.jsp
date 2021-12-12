@@ -31,31 +31,35 @@ $(document).ready(function(){
 	}
 	
 	//doglist 아래 상세보기 버튼 클릭시 자바스크립트로 이동
-	$("#detailBtn").on("click", function(){
+	//상세보기 버튼은 dno 값을 URL에 넘겨줘야하기에 자바스크립트 처리보다는 버튼 onclick 속성이용.
+	/* $("#detailBtn").on("click", function(){
 		location.herf="/dogdetail";
-	});
+	}); */
 	
 	
-	var doglist =$("#doglist");
+	/* var doglist =$("#doglist");
 	//doglist 아래 장바구니 버튼 클릭시 자바스크립트로 이동
+	//해당 폼 post 방식으로 전송하니깐 해당자바스크립트는 굳이 사용하지 않는다.
 	$("#cartBtn").on("click", function(e){
 		//location.href="/doglist"; 이동되면 안된다.
-		doglist.attr("action", "/dogcart").submit();
-	});
+		cart.attr("action", "/dogcart");
+		cart.attr("method", "post").submit();
+	}); */
 	
 	//doglist 위의 등록하기 버튼 클릭시 자바스크립트로 이동처리
-	$("#regBtn").on("click", function(){
-		location.href="/dogregister";
-	});
+	//post로 가야하기에 location.href는 get방식이라 post로 이동하지 않고 getmapping 되기에 에러발생할듯.
+	/* $("#regBtn").on("click", function(){
+		location.href="/cart";
+	}); */
 	
-/* var actionForm =$("#actionForm");
-$(".paginate_button a").on("click",function(e){
-	e.preventDefault(); //보호해제
-	console.log('click');//개발자도구에서 보이는  console 자바스크립트 블록안이라서
-	actionForm.find("input[name='pageNum']")
-	.val($(this).attr("href"));
-//val=value , a가 this 객체가 된다.
-}); */
+	/* var actionForm =$("#actionForm");
+	$(".paginate_button a").on("click",function(e){
+		e.preventDefault(); //보호해제
+		console.log('click');//개발자도구에서 보이는  console 자바스크립트 블록안이라서
+		actionForm.find("input[name='pageNum']")
+		.val($(this).attr("href"));
+	//val=value , a가 this 객체가 된다.
+	}); */
 	
 	/* $(".paginate_button a").on("click",function(e){
 		e.preventDefault();
@@ -74,149 +78,117 @@ $(".paginate_button a").on("click",function(e){
 	
 });
 
-
-
-
 </script>
 
-<!-- 
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>애견분양 Mall</title>
-    Favicon
-    <link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico">
-    Core theme CSS (includes Bootstrap)
-    <link href="/resources/css/styles.css" rel="stylesheet">
-        <script src="/resources/js/jquery-3.6.0.min.js" ></script>
-</head>
- <body>
-     Responsive navbar
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-           <div class="container">
-               <a class="navbar-brand" href="#!">LOGO</a>
-               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                       <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                       <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                       <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                       <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                   </ul>
-               </div>
-           </div>
-       </nav>
-   
+<br> 
+<br>
+<br>
+<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
+	<i class="fas fa-bullhorn"></i>&nbsp;&nbsp; 분양 강아지 알림
+</h2> 
 
-       <header class="py-5 bg-light border-bottom mb-4">
-           <div class="container">
-               <div class="text-center my-5">
-                   <h1 class="fw-bolder">애견분양Mall</h1>
-                   <p class="lead mb-0">환영합니다</p>
-               </div>
-           </div>
-       </header> -->
-       
-       
-       
+  
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4">
-			<button id="regBtn" type="button" class="btn btn-primary" onclick="location.href='/dogregister'"> 강아지 분양등록하기</button>
+			<button id="regBtn" type="button" class="btn btn-danger btn-lg" onclick="location.href='/dogregister'">분양 강아지 등록</button>
 		</div>
 	</div>
 </div>
 		
 <br>
-
+<br>
 <!--$.ajax 장바구니담기 버튼 클릭시 이동 -->
-<form action="/buy1" method="post" id="doglist">
+<form action="/cart" method="post">
 
-<div class="container">
-	<div class="row">
-		 <c:forEach items="${registerdno}" var="list">
-		<%-- <c:forEach items="${registerdno}"> 화면이 안나온다--%>
-			<div class="col-lg-4">
-				<div class="card mb-4">
-						<!-- <a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down"
-							alt="..."></a> -->
-							
-						<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="width:200%;" alt="..." /></a> --%>
-						<%-- 안됨<a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="..."/></a> --%>
-							 <a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/></a>
-						<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="object-fit: scale-down" alt="..."/></a> --%>
-						<!-- 안됨<a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down" alt="..."></a> -->
-					
-					
-					<div class="card-body">
-						<div class="small text-muted">
-							등록일자 :
-							<fmt:formatDate pattern="yyy-MM-dd" value="${list.regdate}" />
-						</div>
-						<div>
-							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-						</div>
-<%-- 						<h2 class="card-title h4">
-							품종 :
-							<a href='/dogdetail?dno=<c:out value="${list.dno}"/>'>
-							<c:out value="${list.kind}" /></a>
-						</h2> --%>
+	<%-- 필요없을듯 <input type="hidden" name="dno" value="${registerdno.dno}"> --%>
+	<div class="container">
+		<div class="row">
+			 <c:forEach items="${registerdno}" var="list">
+			<%-- <c:forEach items="${registerdno}"> 화면이 안나온다--%>
+				<div class="col-lg-4">
+					<div class="card mb-4">
+							<!-- <a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down"
+								alt="..."></a> -->
+								
+							<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="width:200%;" alt="..." /></a> --%>
+							<%-- 안됨<a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="..."/></a> --%>
+								 <a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/></a>
+							<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="object-fit: scale-down" alt="..."/></a> --%>
+							<!-- 안됨<a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down" alt="..."></a> -->
 						
 						
-						<h2 class="card-title h4">
+						<div class="card-body">
+							<div class="small text-muted">
+								등록일자 :
+								<fmt:formatDate pattern="yyy-MM-dd" value="${list.regdate}" />
+							</div>
+							<div>
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</div>
+	<%-- 						<h2 class="card-title h4">
 								품종 :
 								<a href='/dogdetail?dno=<c:out value="${list.dno}"/>'>
-								<%-- <c:out value="${list.kind.substring(0, list.kind.length-1)}" /> --%>
-								<c:out value="${fn:split(list.kind,',')[0]}"/></a>
-								<%-- <c:out value="${list.kind.slice(0, -1)}" /></a> --%>
-
-						</h2>
-						
-						
-						<p class="card-text">
-							나이 :
-							<c:out value="${list.age}" />
-							<br> 성별 :
-							<c:out value="${list.sex}" />
-							<br> 특징:
-							<c:out value="${list.simple}" />
-							<br> 분양가:
-							<c:out value="${list.price}" />
-<%-- <div class="card-body"><fmt:formatNumber value="${list.price }" pattern="#,###,###"/>">원</div> --%>
-						</p>
-						
-						<!-- <div class="card-body"> 안에 위치해야 한다. -->
-						
-						<!-- <p style="text-align:center;"> -->
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
-						상세보기</button>
-						<%-- <button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
-						<input type="hidden" value="<c:out value='${list.dno}'/>"> --%><!--${registerdno} 값으로는 페이지 이동불가 -->
-						<!-- <button type="submit" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button> -->
-						<button type="button" id="cartBtn" class="btn btn-outline-danger">장바구니담기</button>
-					</div>	
-				</div>
-			</div>		
-
-			
-				<%-- <button type="button" id="detailBtn"
-				class="btn btn-outline-warning"><a href='/dogdetail?dno=<c:out value="${register.dno}"/>'
-				target='_blank'>상세보기</a></button> --%>
+								<c:out value="${list.kind}" /></a>
+							</h2> --%>
+							
+							
+							<h2 class="card-title h4">
+									품종 :
+									<a href='/dogdetail?dno=<c:out value="${list.dno}"/>'>
+									<%-- <c:out value="${list.kind.substring(0, list.kind.length-1)}" /> --%>
+									<c:out value="${fn:split(list.kind,',')[0]}"/></a>
+									<%-- <c:out value="${list.kind.slice(0, -1)}" /></a> --%>
+	
+							</h2>
+							
+							
+							<p class="card-text">
+								나이 :
+								<c:out value="${list.age}" />
+								<br> 성별 :
+								<c:out value="${list.sex}" />
+								<br> 특징:
+								<c:out value="${list.simple}" />
+								<br> 분양가:
+								
+								<%-- 아래 코드로 변경 <c:out value="${list.price}" /> --%>
+								<fmt:formatNumber value="${list.price }" pattern="#,###,###"/>원
+							</p>
+							
+							<!-- <div class="card-body"> 안에 위치해야 한다. -->
+							
+							
+							<div style="text-align:center;">
+								<button data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
+								상세보기</button>
+								<%-- <button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
+								<input type="hidden" value="<c:out value='${list.dno}'/>"> --%><!--${registerdno} 값으로는 페이지 이동불가 -->
+								<!-- <button type="submit" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button> -->
+								<button type="submit" id="cartBtn" class="btn btn-outline-danger">장바구니담기</button>
+							</div>
+						</div>	
+					</div>
+				</div>		
+	
 				
-				<%-- <form action="/dogdetail" method="get">
-				<input type="hidden" value="{c:out value='${detail.dno}'/>">
-				<button type="button" id="bagBtn" class="btn btn-outline-warning">상세보기</button>
-				</form> 이 방법 안됨 레이아웃 비틀어짐--%>
-				
-		</c:forEach>
+					<%-- <button type="button" id="detailBtn"
+					class="btn btn-outline-warning"><a href='/dogdetail?dno=<c:out value="${register.dno}"/>'
+					target='_blank'>상세보기</a></button> --%>
+					
+					<%-- <form action="/dogdetail" method="get">
+					<input type="hidden" value="{c:out value='${detail.dno}'/>">
+					<button type="button" id="bagBtn" class="btn btn-outline-warning">상세보기</button>
+					</form> 이 방법 안됨 레이아웃 비틀어짐--%>
+					
+			</c:forEach>
+		</div>
 	</div>
-</div>
 </form> 
 
-<!-- Modal -->
+
+
+<!-- 모달창 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

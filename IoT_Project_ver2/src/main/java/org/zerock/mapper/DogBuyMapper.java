@@ -11,22 +11,11 @@ public interface DogBuyMapper {
 	public List<DogInfoDTO> dog1List();
 	public List<DogBuyVO> dog2List();
 
+	////2021.12.12 수정
 	public Integer doginsert(DogBuyVO dogBuyVO);
 	public Integer doginsert2(DogBuy2VO dog2BuyVO);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	public void insert(DogBuyVO dog1List);
 
 	public DogBuyVO read(Long bno);

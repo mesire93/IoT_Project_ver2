@@ -7,8 +7,8 @@ import org.zerock.domain.DogBuyVO;
 import org.zerock.domain.DogInfoDTO;
 
 public interface DogBuyService {
-	
-	public void dogregister(DogBuyVO Dog1BuyVO);
+	//2021.12.12 수정
+	public void dogregister(DogBuyVO DogBuyVO);
 	public void dogregister2(DogBuy2VO dog2BuyVO);
 
 	public List<DogInfoDTO> dog1List();

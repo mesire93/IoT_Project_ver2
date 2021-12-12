@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.DogBuyVO;
 import org.zerock.domain.DogInfoDTO;
+import org.zerock.service.DogBuyService;
 import org.zerock.service.DogInfoService;
 
 import lombok.AllArgsConstructor;
@@ -24,16 +26,16 @@ public class DogInfoController {
 	
 	private DogInfoService service;
 
-
+	private DogBuyService buyservice;
+		
+	
+	
 	@GetMapping("/dogregister")
 	public void dogregisterget() {
 
 		log.info("GetMapping dogregister 등록화면");
 
 	}
-	
-	
-
 	
 //	
 //	@GetMapping("/list")
@@ -142,6 +144,22 @@ public class DogInfoController {
 		log.info(service.getList());
 		model.addAttribute("registerdno", service.getList()); // 화면에는 register 이용해서 DB 내용가지고 온다.
 	}
+	
+	//2021.12.12 수정
+	@PostMapping("/cart") // URI 입력시 분양리스트 화면만 보여준다.
+	//public void dogcartpost(@RequestParam("dno") Long dno, Model model) {
+	public String cartpost(DogBuyVO dogBuyVO) {
+	 	buyservice.dogregister(dogBuyVO);
+		// service.get(dno);
+		
+		log.info("doglist 페이지에서 장바구니 등록 ");	
+
+		//model.addAttribute("dog2List", buyservice.dogregister(dogBuyVO));
+		return "redirect:/dogcart";
+		// return "redirect:/dogdetail"; void 리턴타입 지정시 없어도 무방. 같은 URL에서 POST ->GET
+		// 이동이므로.
+	}
+	
 	
 	
 //	@PostMapping(value="/doglist2", consumes ="application/json", produces= {MediaType.TEXT_PLAIN_VALUE}) 
