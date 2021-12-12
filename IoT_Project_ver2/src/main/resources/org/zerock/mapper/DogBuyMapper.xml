@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.DogBuyMapper">
+
+
+<select id="dog1List" resultType="org.zerock.domain.DogInfoDTO">
+	<![CDATA[
+		select * from doginfo where dno>0 order by dno desc
+	]]>	
+</select>
+
+<!-- =========== 내꺼 ========= -->
+<select id="dog2List" resultType="org.zerock.domain.DogBuyVO">
+	<![CDATA[
+		select * from DOGCART where dno > 0 
+	]]>	
+</select>
+
+<!-- ========================================= -->
+
+<insert id="doginsert">
+
+	<selectKey keyProperty="dno" order="BEFORE"
+		resultType="long">
+		select SEQ_DOGCART.nextval from dual
+	</selectKey>
+
+			insert into DOGCART (dno, name, filename, price)
+		values (#{dno}, #{name}, #{filename}, #{price})
+</insert>
+
+<insert id="doginsert2">
+
+	<selectKey keyProperty="bno" order="BEFORE"
+		resultType="long">
+		select seq_DOGORDER.nextval from dual
+	</selectKey>
+
+	insert into DOGORDER (b_name, b_phone, b_phone2, b_adress, b_yo, bno, b_num, b_addr)
+		values (#{bName}, #{bPhone}, #{bPhone2}, #{bAdress}, #{bYo}, seq_DOGORDER.nextval, #{bNum}, #{bAddr})
+</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<select id="read" resultType="org.zerock.domain.DogBuyVO">
+		select * from buy3 where bno = #{bno}
+	</select>
+
+
+	<delete id="delete">
+		delete from buy1 where bno = #{bno}
+	</delete>
+
+
+	<update id="update">
+		update buy1
+		set
+		 b_image=#{bImage},
+		 b_name=#{bName},
+		 b_bonus=#{bBonus},
+		 b_price=#{bPrice}
+		where bno =	#{bno}
+	</update>
+
+</mapper>

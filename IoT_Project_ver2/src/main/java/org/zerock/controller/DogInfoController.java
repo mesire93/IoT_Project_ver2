@@ -4,20 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.Buy1VO;
 import org.zerock.domain.DogInfoDTO;
-import org.zerock.service.Buy1Service;
 import org.zerock.service.DogInfoService;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 public class DogInfoController {
 	
 	private DogInfoService service;
-	private Buy1Service buyservice;
+
 
 	@GetMapping("/dogregister")
 	public void dogregisterget() {

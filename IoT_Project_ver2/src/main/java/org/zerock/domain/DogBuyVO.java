@@ -4,8 +4,13 @@ import lombok.Data;
 
 
 @Data
-public class Buy2VO {
+public class DogBuyVO {
 
+	private String name;
+	private String filename;//이미지
+	private String price;		//
+	private Long dno;
+	
 	private String bName;		//
 	private String bPhone;		//
 	private String bPhone2;
