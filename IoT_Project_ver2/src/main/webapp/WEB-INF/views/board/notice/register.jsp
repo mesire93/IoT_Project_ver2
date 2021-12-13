@@ -95,33 +95,7 @@ $(document).ready(function(){
 		self.location = "/board/notice/list?type=notice";
 	});
 
-	
-	
-	// 부트스트랩 유효성검사 시작
-	(function () {
-	  'use strict'
 
-	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-	  var forms = document.querySelectorAll('.needs-validation')
-
-	  // Loop over them and prevent submission
-	  Array.prototype.slice.call(forms)
-	    .forEach(function (form) {
-	      form.addEventListener('submit', function (event) {
-	        if (!form.checkValidity()) {
-	          event.preventDefault()
-	          event.stopPropagation()
-	        }
-
-	        form.classList.add('was-validated')
-	      }, false)
-	    })
-	})()
-	// 부트스트랩 유효성검사 종료
-	
-	
-	
-	
 	
 });
 </script>
@@ -168,8 +142,8 @@ $(document).ready(function(){
 	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
 	var maxSize = 5242880;
 	
-	var csrfHeaderName = "${_csrf.headerName}";
-	var csrfTokenValue = "${_csrk.token}";
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	
 	$("input[type='file']").change(function(e){
 		
@@ -195,7 +169,7 @@ $(document).ready(function(){
 			processData : false,
 			contentType : false,
 			beforeSend : function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				xhr.setRequestHeader(header, token);
 			},
 			data : formData,
 			type : 'POST',
@@ -270,7 +244,7 @@ $(document).ready(function(){
 			url : '/deleteFile',
 			data : {fileName : targetFile, type : type},
 			beforeSend : function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				xhr.setRequestHeader(header, token);
 			},
 			dataType : 'text',
 			type : 'POST',

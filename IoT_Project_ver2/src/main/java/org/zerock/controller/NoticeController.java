@@ -89,7 +89,7 @@ public class NoticeController {
 
 	
 	// Page 220 삭제 처리와 테스트
-	@PreAuthorize("principal.username == #board.writer")
+	//@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) {
 		
@@ -98,6 +98,7 @@ public class NoticeController {
 		List<BoardAttachVO> attachList = service.getAttachList(bno);
 		
 		if(service.remove(bno)) {
+			deleteFiles(attachList);
 			rttr.addFlashAttribute("result", "success");
 		}
 		

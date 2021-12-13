@@ -212,6 +212,7 @@
 		$(".btn_remove").on("click", function(e){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
+				actionForm.append("<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token }' />");x
 				actionForm.append("<input type='hidden' name='type' value='qna'>");
 				actionForm.attr("action", "/board/qna/remove").attr("method", "post").submit();
 			}
@@ -254,7 +255,7 @@
 						str += "<div>";
 						str += "<div class='header'>";
 						str += "<strong class='primary-font'><i class='fa fa-comments fa-fw'></i>"+list[i].replyer+"</strong>";
-						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].updateDate)+"</small>";
 						str += "</div>";
 						str += "<p>"+list[i].reply+"</p>";
 						str += "<hr>";

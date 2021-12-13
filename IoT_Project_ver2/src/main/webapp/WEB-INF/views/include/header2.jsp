@@ -9,7 +9,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title></title>
+ <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+ <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/> 
+<title>프로젝트 : 쇼핑몰</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 

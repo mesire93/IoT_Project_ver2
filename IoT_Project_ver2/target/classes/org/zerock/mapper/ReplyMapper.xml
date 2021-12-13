@@ -17,10 +17,18 @@
 		select * from reply where rno = #{rno}
 	</select>
 	
+	<select id="read2" resultType="org.zerock.domain.ReplyVO">
+		select * from reply where bno = #{bno}
+	</select>
+	
 	
 	<!-- Page 386 CRUD 작업 - 삭제 -->
 	<delete id="delete">
 		delete from reply where rno = #{rno}
+	</delete>
+	
+	<delete id="delete2">
+		delete from reply where bno = #{bno}
 	</delete>
 	
 	<!-- Page 386 CRUD 작업 - 수정 -->

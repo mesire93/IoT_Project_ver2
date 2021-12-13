@@ -4,141 +4,13 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
 
-
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Blog Home - Start Bootstrap Template</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"
-	></script>
-	
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="/resources/css/styles.css" rel="stylesheet" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-<script type="text/javascript" src="/resources/js/reply.js"></script>
-
-    <link rel="stylesheet" href="resources/nivo-slider/demo/themes/default/default.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="resources/nivo-slider/demo/themes/light/light.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="resources/nivo-slider/demo/themes/dark/dark.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="resources/nivo-slider/demo/themes/bar/bar.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="resources/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="resources/nivo-slider/demo/style.css" type="text/css" media="screen" />
-<link href="resources/css/main_dog2.css" rel="stylesheet" />
-<script type="text/javascript" src="resources/nivo-slider/demo/scripts/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="resources/nivo-slider/jquery.nivo.slider.js"></script>
-<script type="text/javascript">
-$(window).load(function() {
-    $('#slider').nivoSlider();
-});
-</script>
-
-
-<script type="text/javascript" src="/resources/js/reply.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#board").on("click", function(){
-		self.location = "/board/";
-	});
-	
-	$("#notice").on("click", function(e){
-		e.preventDefault();
-		location.href="/board/notice/list?type=notice";
-	});
-	
-	$("#community").on("click", function(e){
-		e.preventDefault();
-		location.href="/board/community/list?type=community";
-	});
-	
-	$("#qna").on("click", function(e){
-		e.preventDefault();
-		location.href="/board/qna/list?type=qna";
-	});
-	
-});
-</script>
-
-<!-- ================================================================== -->
-
-</head>
-
-
-
-<body>
-<!-- Responsive navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
-	<div class="container">
-		<a class="navbar-brand" href="#!">Start Bootstrap</a>
-		<button class="navbar-toggler" type="button"
-			data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ms-auto mb-2 mb-md-0">
-					<li class="nav-item"><a class="nav-link active" href="testmain">홈</a></li>
-				<li class="nav-item"><a class="nav-link active" href="#">상품</a></li>
-				<li class="nav-item"><a class="nav-link active" href="dogcart">장바구니</a></li>
-				<li class="nav-item dropdown"><a class="nav-link active  dropdown-toggle board" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">게시판</a>
-					 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-      				     	<li><a class="dropdown-item" href="#" id="notice"><i class="fas fa-bullhorn"></i>&nbsp;공지사항</a></li>
-     				   	 	<li><a class="dropdown-item" href="#" id="community"><i class="fas fa-comments"></i>&nbsp;커뮤니티</a></li>
-     				  	    <li><a class="dropdown-item" href="#" id="qna"><i class="fas fa-question-circle"></i>&nbsp;질문답변</a></li>
-      				  	 </ul>
-      				</li>
-				<li class="nav-item"><a class="nav-link active" href="#!">마이페이지</a></li>
-				<li class="nav-item"><a class="nav-link "  href="#">로그인</a></li>
-				<li class="nav-item"><a class="nav-link "  href="#">회원가입</a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
-
-<br><br>
-<!--니보 슬라이더 이미지 618 * 246 -->
-<header class="py-5 bg-light border-bottom mb-4">
-	<div class="container">
-		<div id="wrapper">
-       	
-     	<div class="slider-wrapper theme-default">
-           <div id="slider" class="nivoSlider">
-               
-               <img src="resources/nivo-slider/demo/images/1.jpg" data-thumb="resources/nivo-slider/demo/images/1.jpg" alt="" />
-               <img src="resources/nivo-slider/demo/images/2.jpg" data-thumb="resources/nivo-slider/demo/images/2.jpg" alt="" /></a>
-               <img src="resources/nivo-slider/demo/images/3.jpg" data-thumb="resources/nivo-slider/demo/images/3.jpg" alt=""/>
-               
-           </div>
-           
-       </div>
-
-   		</div>
-		
-	</div>
-</header>
-
-
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 
 
 <!-- ================================================================== -->
 <div style="margin:0 auto; text-align: center;">
-	<div><h2 style="padding: 30px;">상품 목록</h2></div>
+	<div><h2 style="padding: 30px; font-family:'Jua';">상품 목록</h2></div>
 	<div style="width: 1300px; display: inline-block; border: 1px solid red;">
 	
 	<c:forEach items="${dog1List}" var="dog1List">
@@ -156,6 +28,59 @@ $(document).ready(function(){
 <!-- ================================================================== -->
 
 
+
+<!-- 지도, 공지사항 -->
+<div class="row mx-5 my-5">
+
+	<div class="map_wrap col-md-6 ml-5 mb-3">
+		<h2 class="panel-title" style="font-family:'Jua'; ">본사 위치입니다</h2>
+		<div id="map" style="width:95%;height:600px;"></div>
+	</div>
+
+	<div class="col-md-6">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title" style="font-family:'Jua'; ">공지사항</h2>
+			</header>
+			
+			<div class="panel-body">
+				<div class="table-responsive" style="height:600px;">
+					<table class="table table-hover mb-none" >
+						<thead>
+							<tr>
+								<th width=20>번호</th>
+								<th width=60>제목</th>
+								<th width=20>조회수</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						<c:forEach items="${list}" var="board">
+							<tr>
+								<td><c:out value="${board.bno }"/></td>
+								<td><a class='move'  style="text-decoration:none;" href='<c:out value="${board.bno}"/>' >
+										<c:out value="${board.title}" /></a></td>
+								<td><c:out value="${board.viewcnt}"/></td>
+							</tr>
+						</c:forEach>
+						
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+	
+</div>
+<!-- 지도, 공지사항 -->
+
+
+<form id='actionForm' action="/board/notice/list" method='get'>
+	<input type="hidden" name="bno">
+</form>
+
+
+
                
     
     
@@ -166,6 +91,68 @@ $(document).ready(function(){
 			main.submit();
 		 
 	});
+	
+	
+	
+	
+	var actionForm = $("#actionForm");
+		
+		$(".move").on("click", function(e){
+			e.preventDefault();
+			actionForm.find("input[name='bno']").val($(this).attr("href"));
+			actionForm.attr("action", "/board/notice/get");
+			actionForm.submit();
+		});
+	
+		var container = document.getElementById('map');
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+				center: new kakao.maps.LatLng(35.207447, 129.070227), //지도의 중심좌표.
+				level: 3 //지도의 레벨(확대, 축소 정도)
+			};
+	
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+	
+		// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+		// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+		
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng(35.207447, 129.070227); 
+	
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition,
+		    clickable:true
+		});
+	
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+		var iwContent = '<div style="padding:5px; height:30px;">5층으로 오세요</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	
+		// 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+	
+		// 마커에 클릭이벤트를 등록합니다
+		kakao.maps.event.addListener(marker, 'click', function() {
+		      // 마커 위에 인포윈도우를 표시합니다
+		      infowindow.open(map, marker); 
+		});
+	
+	
 });
 
 /* 

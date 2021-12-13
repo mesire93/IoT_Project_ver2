@@ -27,4 +27,8 @@ public interface ReplyMapper {
 	// Page 432 댓글의 숫자 파악
 	public int getCountByBno(Long bno);
 	
+	public ReplyVO read2(Long bno);
+	
+	public int delete2(Long bno);
+	
 }

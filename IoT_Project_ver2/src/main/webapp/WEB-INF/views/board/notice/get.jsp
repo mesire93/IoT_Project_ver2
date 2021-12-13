@@ -177,7 +177,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label>답변</label>
-					<input class="form-control" name="reply" value="새로운 답변">
+					<input class="form-control" name="reply" value="새로운 답변" >
 				</div>
 				<div class="form-group">
 					<label>작성자</label>
@@ -222,6 +222,7 @@
 		$(".btn_remove").on("click", function(e){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
+				actionForm.append("<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token }' />");
 				actionForm.append("<input type='hidden' name='type' value='notice'>");
 				actionForm.attr("action", "/board/notice/remove").attr("method", "post").submit();
 			}
@@ -237,6 +238,13 @@
 <!-- Page 415 댓글 이벤트 처리 -->
 <script>
 	$(document).ready(function(){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(header, token);
+		});
 		
 		var bnoValue = '<c:out value="${board.bno}"/>';
 		var replyUL = $(".chat");
@@ -264,7 +272,7 @@
 						str += "<div>";
 						str += "<div class='header'>";
 						str += "<strong class='primary-font'><i class='fa fa-comments fa-fw'></i>"+list[i].replyer+"</strong>";
-						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].updateDate)+"</small>";
 						str += "</div>";
 						str += "<p>"+list[i].reply+"</p>";
 						str += "<hr>";
@@ -307,16 +315,14 @@
 			modal.find("input").val("");
 			modal.find("input[name='replyer']").val(replyer);
 			modalInputReplyDate.closest("div").hide();				// 작성일 입력폼 hide
-			modal.find("button[id != 'modalCloseBtn']").hide();	
+			modal.find("button").hide();	
 			
 			modalRegisterBtn.show();
 			
 			$(".modal").modal("show");
 		});
 		
-		$(document).ajaxSend(function(e, xhr, options){
-			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		});
+		
 		
 		// 등록 버튼 클릭
 		modalRegisterBtn.on("click", function(e){
@@ -399,7 +405,7 @@
 				return;
 			}
 			
-			replyService.remove(rno, function(result){
+			replyService.remove(rno, originalReplyer, function(result){
 				alert("삭제 " + result);
 				modal.modal("hide");
 				showList(pageNum);

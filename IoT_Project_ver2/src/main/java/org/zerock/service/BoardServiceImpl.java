@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.BoardAttachVO;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.ReplyVO;
 import org.zerock.mapper.BoardAttachMapper;
 import org.zerock.mapper.BoardMapper;
+import org.zerock.mapper.ReplyMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -24,6 +26,9 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReplyMapper replyMapper;
 	
 	
 	// PAGE 204 등록 작업의 구현과 테스트
@@ -56,17 +61,14 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public boolean modify(BoardVO board) {
 	
-		log.info("진입1");
 		attachMapper.deleteAll(board.getBno());
 		boolean modifyResult = mapper.update(board) == 1;
-		log.info("진입2");
 		
 		if(modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0 ) {
 			board.getAttachList().forEach(attach -> {
 				attach.setBno(board.getBno());
 				attachMapper.insert(attach);
 			});
-			log.info("진입3");
 		}
 		return modifyResult;
 	}
@@ -74,8 +76,10 @@ public class BoardServiceImpl implements BoardService{
 	@Transactional
 	@Override
 	public boolean remove(Long bno) {
-		
+
+		replyMapper.delete2(bno);
 		attachMapper.deleteAll(bno);
+		
 		return mapper.delete(bno) == 1;
 	}
 	

@@ -279,7 +279,7 @@
 						str += "<div>";
 						str += "<div class='header'>";
 						str += "<strong class='primary-font'><i class='fa fa-comments fa-fw'></i>"+list[i].replyer+"</strong>";
-						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+						str += "<small class='text-muted' style='float:right;'>"+replyService.displayTime(list[i].updateDate)+"</small>";
 						str += "</div>";
 						str += "<p>"+list[i].reply+"</p>";
 						str += "<hr>";

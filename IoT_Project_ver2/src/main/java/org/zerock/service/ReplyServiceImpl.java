@@ -54,6 +54,15 @@ public class ReplyServiceImpl implements ReplyService{
 		return mapper.delete(rno);
 	}
 	
+	@Transactional
+	@Override
+	public int remove2(Long rno) {
+		log.info("삭제............" + rno);
+		ReplyVO vo = mapper.read(rno);
+		boardMapper.updateReplyCnt(vo.getBno(), -1);
+		return mapper.delete2(rno);
+	}
+	
 	@Override
 	public List<ReplyVO> getList(Criteria cri, Long bno){
 		log.info("게시글의 댓글 목록 가져오기............" + bno);

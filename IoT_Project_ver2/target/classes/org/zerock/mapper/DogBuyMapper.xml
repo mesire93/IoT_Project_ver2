@@ -20,7 +20,7 @@
 
 <!-- ========================================= -->
 
-<insert id="doginsert">
+<!-- 아래 조인 sql문으로 사용 위해 주석처리<insert id="doginsert">
 
 	<selectKey keyProperty="dno" order="BEFORE"
 		resultType="long">
@@ -29,6 +29,21 @@
 
 			insert into DOGCART (dno, name, filename, price)
 		values (#{dno}, #{name}, #{filename}, #{price})
+</insert>
+ -->
+ 
+ <!-- 2021.12.12 수정 위의 주석처리 후 만듬-->
+<!-- 장바구니 담기 처리는(DBinsert)DogInfo테이블 조인해서 DogCart의 모든 칼럼이 들어간다.  -->
+<insert id="doginsert">
+
+<!-- 생략해도될듯, 이미 dno은 있다. <selectKey keyProperty="dno" order="BEFORE"
+		resultType="long">
+		select SEQ_DOGCART.nextval from dual
+	</selectKey> -->
+
+		insert into dogcart c, dogInfo i (c.dno, c.name, c.filename, c.price)
+		values (#{dno}, #{name}, #{filename}, #{price}) where c.dno=i.dno, c.name=i.name, c.filename=i.fileName. c.price=i.price
+<!-- ${} 는 DogBuyVO의 프로퍼티, 앞은 dogcart 테이블의 컬럼명. -->
 </insert>
 
 <insert id="doginsert2">
@@ -41,21 +56,6 @@
 	insert into DOGORDER (b_name, b_phone, b_phone2, b_adress, b_yo, bno, b_num, b_addr)
 		values (#{bName}, #{bPhone}, #{bPhone2}, #{bAdress}, #{bYo}, seq_DOGORDER.nextval, #{bNum}, #{bAddr})
 </insert>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<select id="read" resultType="org.zerock.domain.DogBuyVO">

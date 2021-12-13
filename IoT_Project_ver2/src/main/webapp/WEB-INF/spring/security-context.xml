@@ -11,9 +11,11 @@
 <!-- 	<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"/> -->
 	
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/user/join" access="permitAll"/>
-		<security:intercept-url pattern="/user/member" access="hasRole('ROLE_MEMBER')"/>
 		<security:intercept-url pattern="/user/admin" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/user/member" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/user/join" access="permitAll"/>
+		
+		
 		
 		<security:access-denied-handler ref="customAccessDenied"/>
 		

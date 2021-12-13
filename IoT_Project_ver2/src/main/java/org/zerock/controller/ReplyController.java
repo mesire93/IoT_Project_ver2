@@ -39,7 +39,7 @@ public class ReplyController {
 	}
 
 	
-	@PreAuthorize("isAnonymous()")
+	//@PreAuthorize("isAnonymous()")
 	@GetMapping(value = "/{rno}", 
 			produces = { MediaType.APPLICATION_XML_VALUE, 
 					     MediaType.APPLICATION_JSON_UTF8_VALUE })
