@@ -28,7 +28,11 @@
 	</selectKey>
 
 			insert into DOGCART (dno, name, filename, price)
+<<<<<<< HEAD
+		values (#{dno}, #{name, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{price, jdbcType=VARCHAR})
+=======
 		values (#{dno}, #{name}, #{filename}, #{price})
+>>>>>>> refs/remotes/origin/main
 </insert>
 
 <insert id="doginsert2">

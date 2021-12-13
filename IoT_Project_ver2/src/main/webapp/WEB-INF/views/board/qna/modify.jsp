@@ -161,7 +161,7 @@ $(document).ready(function(){
 				str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 				
 			});
-
+			modifyForm.append("<input type='hidden' name='type' value='qna'>");
 			modifyForm.append(str).submit();
 		}
 		

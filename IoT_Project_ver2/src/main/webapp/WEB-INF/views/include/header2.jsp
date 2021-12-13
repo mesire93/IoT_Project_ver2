@@ -62,6 +62,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-md-0">
+
 					<li class="nav-item"><a class="nav-link active" id="doglist" href="#"><i class="fas fa-paw"></i>&nbsp;상품</a></li>
 					<li class="nav-item"><a class="nav-link active" id="dogcart" href="#"><i class="fas fa-shopping-basket"></i>&nbsp;장바구니</a></li>
 					<li class="nav-item dropdown"><a class="nav-link active  dropdown-toggle board" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-comment"></i>&nbsp;게시판</a>

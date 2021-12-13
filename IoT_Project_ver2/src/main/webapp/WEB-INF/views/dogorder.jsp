@@ -73,6 +73,7 @@
 </div>
 
 <form name="frmOrderForm" action="/dogorder" id="frmOrderForm" method="post" style="box-sizing: border-box; margin: 0px; padding: 0px; color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; letter-spacing: -0.3px; ">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
 	<div class="form-tbl-new" style="box-sizing: border-box; margin: 0px 0px 20px; padding: 0px;  background: rgb(255, 255, 255); display: inline-block; width: 900px;">
 
 	</div>

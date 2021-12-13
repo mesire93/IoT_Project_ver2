@@ -40,13 +40,11 @@ public class BuyController {
 		 dogBuyService.dogregister2(dog2BuyVO); return "redirect:/dogmain"; 
 	}
 
-	 
-	@GetMapping("/dogmain")
-	public void mainGet(Model model) {
-
-		 model.addAttribute("dog1List", dogBuyService.dog1List());
-	}
-	
+	/*
+	 * @GetMapping("/dogmain") public void mainGet(Model model) {
+	 * 
+	 * model.addAttribute("dog1List", dogBuyService.dog1List()); }
+	 */
 	
 	
 		/*

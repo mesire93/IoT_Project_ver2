@@ -28,7 +28,7 @@
 	</selectKey>
 
 			insert into DOGCART (dno, name, filename, price)
-		values (#{dno}, #{name}, #{filename}, #{price})
+		values (#{dno}, #{name, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{price, jdbcType=VARCHAR})
 </insert>
 
 <insert id="doginsert2">

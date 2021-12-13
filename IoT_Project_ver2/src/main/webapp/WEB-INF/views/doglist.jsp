@@ -100,13 +100,17 @@ $(document).ready(function(){
 <br>
 <!--$.ajax 장바구니담기 버튼 클릭시 이동 -->
 <form action="/cart" method="post">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-			
+
+<!-- 스프링 시큐리티 csrf 토큰  -->
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
+<!-- 스프링 시큐리티 csrf 토큰 -->
 			
 	<%-- 필요없을듯 <input type="hidden" name="dno" value="${registerdno.dno}"> --%>
+
 	<div class="container">
 		<div class="row">
 			 <c:forEach items="${registerdno}" var="list">
+			 <input type="hidden" name="dno" value="${list.dno}">
 			<%-- <c:forEach items="${registerdno}"> 화면이 안나온다--%>
 				<div class="col-lg-4">
 					<div class="card mb-4">

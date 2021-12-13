@@ -81,7 +81,12 @@ function file(){
 	
       
 <form action="/dogregister" method="post" enctype="multipart/form-data">
-<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+
+<!-- 스프링 시큐리티 csrf 토큰  -->
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
+<!-- 스프링 시큐리티 csrf 토큰 -->
+
+
 <br>
 <br>
 

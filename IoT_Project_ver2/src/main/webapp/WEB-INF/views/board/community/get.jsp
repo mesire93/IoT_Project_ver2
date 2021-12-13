@@ -230,7 +230,7 @@
 		});
 		
 		$(".btn_modify").on("click", function(e){
-			actionForm.append("<input type='hidden' name='type' value='qna'>");
+			actionForm.append("<input type='hidden' name='type' value='community'>");
 			actionForm.attr("action", "/board/community/modify").submit();
 		});
 		

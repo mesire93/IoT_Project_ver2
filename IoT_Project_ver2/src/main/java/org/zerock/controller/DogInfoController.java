@@ -30,6 +30,8 @@ public class DogInfoController {
 	private DogBuyService buyservice;
 		
 	
+
+	//스프링 시큐리티 비로그인유저 로그인창으로
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/dogregister")
 	public void dogregisterget() {
@@ -87,7 +89,9 @@ public class DogInfoController {
 		// 이동이므로.
 		return "redirect:/dogdetail";
 	}
-
+	
+	
+	
 	@PostMapping("/dogregister")
 	// public String dogregisterpost(DogInfoDTO dogInfoDTO, RedirectAttributes rttr)
 	// {
@@ -108,7 +112,7 @@ public class DogInfoController {
 		UUID uuid = UUID.randomUUID(); // UUID 구하기 fileName = uuid + "." + ext;
 	
 		String savefileName = uuid+originfileName;
-		File saveFile = new File(path, savefileName);
+		File saveFile = new File(path, originfileName);
 	
 		if(saveFile.exists() == false ) {
 			saveFile.mkdirs();
@@ -146,8 +150,10 @@ public class DogInfoController {
 		model.addAttribute("registerdno", service.getList()); // 화면에는 register 이용해서 DB 내용가지고 온다.
 	}
 	
-	//2021.12.12 수정
+	//스프링 시큐리티 비로그인유저 로그인창으로
 	@PreAuthorize("isAuthenticated()")
+	//2021.12.12 수정
+
 	@PostMapping("/cart") // URI 입력시 분양리스트 화면만 보여준다.
 	//public void dogcartpost(@RequestParam("dno") Long dno, Model model) {
 	public String cartpost(DogBuyVO dogBuyVO) {
