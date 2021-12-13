@@ -100,7 +100,9 @@ $(document).ready(function(){
 <br>
 <!--$.ajax 장바구니담기 버튼 클릭시 이동 -->
 <form action="/cart" method="post">
-
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+			
+			
 	<%-- 필요없을듯 <input type="hidden" name="dno" value="${registerdno.dno}"> --%>
 	<div class="container">
 		<div class="row">

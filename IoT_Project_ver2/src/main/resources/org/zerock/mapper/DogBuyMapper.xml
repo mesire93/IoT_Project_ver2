@@ -19,7 +19,7 @@
 </select>
 
 <!-- ========================================= -->
-
+<!-- 
 <insert id="doginsert">
 
 	<selectKey keyProperty="dno" order="BEFORE"
@@ -41,22 +41,12 @@
 	insert into DOGORDER (b_name, b_phone, b_phone2, b_adress, b_yo, bno, b_num, b_addr)
 		values (#{bName}, #{bPhone}, #{bPhone2}, #{bAdress}, #{bYo}, seq_DOGORDER.nextval, #{bNum}, #{bAddr})
 </insert>
+ -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 상세페이지에서 장바구니 담기 버튼 클릭시 sql  -->
+	<insert id="doginsert">
+		insert into dogcart (dno, name, filename, price) select dno, name, filename, price from doginfo
+	</insert>
 
 	<select id="read" resultType="org.zerock.domain.DogBuyVO">
 		select * from buy3 where bno = #{bno}

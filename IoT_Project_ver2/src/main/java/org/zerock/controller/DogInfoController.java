@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class DogInfoController {
 	private DogBuyService buyservice;
 		
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/dogregister")
 	public void dogregisterget() {
 
@@ -146,13 +147,14 @@ public class DogInfoController {
 	}
 	
 	//2021.12.12 수정
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/cart") // URI 입력시 분양리스트 화면만 보여준다.
 	//public void dogcartpost(@RequestParam("dno") Long dno, Model model) {
 	public String cartpost(DogBuyVO dogBuyVO) {
 	 	buyservice.dogregister(dogBuyVO);
 		// service.get(dno);
 		
-		log.info("doglist 페이지에서 장바구니 등록 ");	
+		log.info("doglist 상품목록페이지에서 장바구니 등록 ");	
 
 		//model.addAttribute("dog2List", buyservice.dogregister(dogBuyVO));
 		return "redirect:/dogcart";

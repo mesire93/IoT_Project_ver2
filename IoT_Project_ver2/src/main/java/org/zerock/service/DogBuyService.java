@@ -8,7 +8,10 @@ import org.zerock.domain.DogInfoDTO;
 
 public interface DogBuyService {
 	
-	public void dogregister(DogBuyVO Dog1BuyVO);
+	
+	//상세보기에서 장바구니 담기때 사용
+	public void dogregister(DogBuyVO dogBuyVO);
+	
 	public void dogregister2(DogBuy2VO dog2BuyVO);
 
 	public List<DogInfoDTO> dog1List();

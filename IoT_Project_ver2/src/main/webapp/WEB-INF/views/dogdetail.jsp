@@ -10,6 +10,8 @@
 
 <!-- 삭제처리를 위해 form 태그는 POST방식이용  -->
 <form action="/dogremove" method="post"> 
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+
 <!-- 삭제처리를 위해 Controller 에서 Service.remove()처리를 위해 dno 값을 hidden으로 넘긴다. -->
 <%-- <input type="hidden" id="dno" name="dno" value="{c:out value='${detail.dno}'/>"> JSTL <c:out> 태그사용시 hidden 값으로 넘어가진않는다 --%>
 <input type="hidden" id="dno" name="dno" value="${detail.dno}">
