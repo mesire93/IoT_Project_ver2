@@ -49,7 +49,10 @@
 	            	<td></td>
 	            	<td id="b_Image" name="b_Image" background-image: none;><img src="/resources/img/dog/<c:out value="${dog2List.filename}"/>" width="100px" height="80px"/></td>
 	            	<td id="b_Name" name="b_Name" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${dog2List.name}"/></td>
-	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${dog2List.price}"/> 원</td>
+	            	
+	            	<c:set var="bonus" value="${dog2List.price/100 }" />
+	                <fmt:parseNumber var="i" type="number" value="${bonus}" />
+	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${i}"/> 원</td>
 	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${dog2List.price}"/> 원</td>
 	                
 	            </tr>
@@ -133,6 +136,8 @@
 		</tbody>
 		</table>
 	</div>
+
+	
 	<div><br>
 	<table>
 	<c:set var = "total" value = "0" />

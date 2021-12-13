@@ -7,8 +7,8 @@ import org.zerock.domain.DogBuyVO;
 import org.zerock.domain.DogInfoDTO;
 
 public interface DogBuyService {
-	//2021.12.12 수정
-	public void dogregister(DogBuyVO DogBuyVO);
+	
+	public void dogregister(DogBuyVO Dog1BuyVO);
 	public void dogregister2(DogBuy2VO dog2BuyVO);
 
 	public List<DogInfoDTO> dog1List();
@@ -20,6 +20,6 @@ public interface DogBuyService {
 
 	public boolean modify(DogBuyVO dog1List);
 
-	public boolean remove(Long bno);
+	public boolean remove(Long dno);
 
 }

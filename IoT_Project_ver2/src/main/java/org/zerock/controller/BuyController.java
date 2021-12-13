@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.DogBuy2VO;
 import org.zerock.service.DogBuyService;
@@ -36,16 +37,16 @@ public class BuyController {
 	public String dogorder(DogBuy2VO dog2BuyVO, RedirectAttributes rttr) { 
 		 System.out.println("post.............");
 	 
-		 dogBuyService.dogregister2(dog2BuyVO); return "redirect:/testmain"; 
+		 dogBuyService.dogregister2(dog2BuyVO); return "redirect:/dogmain"; 
 	}
+
 	 
-/*	
 	@GetMapping("/dogmain")
 	public void mainGet(Model model) {
 
 		 model.addAttribute("dog1List", dogBuyService.dog1List());
 	}
-*/
+	
 	
 	
 		/*
@@ -56,11 +57,13 @@ public class BuyController {
 		 * 
 		 * }
 		 */
-	/*
-	 * 
-	 * @GetMapping("delete") public String delete(@RequestParam("dno") Long dno) {
-	 * service1.remove(bno); return "redirect: /buy1"; }
-	 */
+	 
+	 @GetMapping("delete") 
+	 public String delete(@RequestParam("dno") Long dno, RedirectAttributes rttr) {
+		 dogBuyService.remove(dno); 
+		 return "redirect: /dogcart"; 
+	 }
+	 
 
 	 
 }
