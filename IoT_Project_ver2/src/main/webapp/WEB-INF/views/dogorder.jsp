@@ -5,19 +5,19 @@
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
 
 
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%@ include file="/WEB-INF/views/include/header2.jsp"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 
 
 
-<p>
-</p>
 <center>
-<h2 class="s_title" style="box-sizing: border-box; width: 900px; margin: 0px; padding: 55px 0px; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 0.82069em; color: rgb(34, 34, 34); font-size: 1.4em; position: relative; max-height: 42px; text-align: center; letter-spacing: -0.3px; background-color:rgb(246, 231, 250); ">주문서 작성</h2><br>
+
+<h1 class="tit-cart" style="margin: 40px 0px 0px;  padding: 30px 0px; text-align: center; font-size: 30px; line-height: 1.25; color: rgb(31, 31, 31); font-family:'Jua'; font-size:3.0em; background-image: url(&quot;bul01.gif&quot;); background-position: 0px 1px; background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial;"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;주문서 작성</h1>
+
 <div class="form-tbl-new" style="box-sizing: border-box; margin: 0px 0px 20px; padding: 0px; border-bottom: 1px solid rgb(208, 208, 208); display: inline-block; width: 900px; color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; letter-spacing: -0.3px; ">
-	<h4 style="box-sizing: border-box; margin: 0px; padding: 0px; font-family: inherit; line-height: 2.7; color: inherit; font-size: 22px; text-indent: 15px; border-bottom: 1px solid rgb(212, 212, 212); height: 51px; letter-spacing: -1.2px; clear: both;">주문상품 내역</h4>
+	<h4 style="box-sizing: border-box; margin: 0px; padding: 10px; font-family: inherit; line-height: 0.7; color: inherit; font-size: 22px; text-indent: 15px; border-bottom: 1px solid rgb(212, 212, 212); height: 51px; letter-spacing: -1.2px; clear: both;">주문상품 내역</h4>
 	<div class="clearfix" style="box-sizing: border-box; margin: 0px; padding: 0px;">
 		<table width="900px" height="100px" >
 		<tbody>
@@ -51,9 +51,9 @@
 	            	<td id="b_Name" name="b_Name" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${dog2List.name}"/></td>
 	            	
 	            	<c:set var="bonus" value="${dog2List.price/100 }" />
-	                <fmt:parseNumber var="i" type="number" value="${bonus}" />
+	                <fmt:formatNumber var="i" type="number" value="${bonus}" pattern="#,###,###" />
 	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${i}"/> 원</td>
-	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${dog2List.price}"/> 원</td>
+	            	<td id="b_Price" name="b_Price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"> <fmt:formatNumber  type="number" value="${dog2List.price}" pattern="#,###,###" /> 원</td>
 	                
 	            </tr>
            		</c:forEach>
@@ -139,18 +139,18 @@
 	</div>
 
 	
-	<div><br>
+	<div>
 	<table>
 	<c:set var = "total" value = "0" />
 	<c:forEach var="dog2List" items="${dog2List}" varStatus="status">     
 		<tr>
 			<c:set var= "total" value="${total + dog2List.price}"/></c:forEach>
-			<td style="font-size: 25px; width:900px; text-align:center; color: red; border-bottom: 1px solid rgb(212, 212, 212);">총 가격 : <c:out value="${total}"/> 원</td>
+			<td style="font-size: 30px; width:900px; text-align:center; color: red; padding: 20px;" border-bottom: 1px solid rgb(212, 212, 212);">총 가격 : <fmt:formatNumber  type="number" value="${total}" pattern="#,###,###" /> 원</td>
         </tr>
     </table>
 	</div>
 	<div class="form-tbl-new" style="box-sizing: border-box; margin: 0px 0px 20px; padding: 0px; border-bottom: 1px solid rgb(208, 208, 208); background: rgb(255, 255, 255); display: inline-block; width: 900px;">
-		<h4 style="box-sizing: border-box; margin: 0px; padding: 0px; font-family: inherit; line-height: 2.6; color: inherit; font-size: 20px; text-indent: 15px; border-bottom: 1px solid rgb(212, 212, 212); height: 51px; letter-spacing: -1.2px; clear: both;">결제 방법</h4>
+		<h4 style="box-sizing: border-box; margin: 0px; padding: 0px; font-family: inherit; line-height: 2.6; color: inherit; font-size: 20px; text-indent: 15px; border-bottom: 1px solid rgb(212, 212, 212); border-top: 1px solid rgb(212, 212, 212); height: 51px; letter-spacing: -1.2px; clear: both;">결제 방법</h4>
 		<div class="payment-heading clearfix" style="box-sizing: border-box; text-align:center; margin: 0px; padding: 5px; border: 0px; background: none;">
 			
 			

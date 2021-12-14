@@ -32,12 +32,21 @@ public class BuyController {
 	 model.addAttribute("dog2List", dogBuyService.dog2List());
 	
 	 }
+	@GetMapping("/dogorder_ok")
+	 public void dogorder_ok(Model model) {
+
+	 model.addAttribute("dog3List", dogBuyService.dog3List());
+	 model.addAttribute("dog2List", dogBuyService.dog2List());
+	 
+	 }
+
+
 	
 	@PostMapping("/dogorder") 
 	public String dogorder(DogBuy2VO dog2BuyVO, RedirectAttributes rttr) { 
 		 System.out.println("post.............");
 	 
-		 dogBuyService.dogregister2(dog2BuyVO); return "redirect:/dogmain"; 
+		 dogBuyService.dogregister2(dog2BuyVO); return "redirect:/dogorder_ok"; 
 	}
 
 	/*
