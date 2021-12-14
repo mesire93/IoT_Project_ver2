@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -151,21 +153,29 @@ public class DogInfoController {
 	//2021.12.12 수정
 	@PostMapping("/cart") // URI 입력시 분양리스트 화면만 보여준다.
 	//public void dogcartpost(@RequestParam("dno") Long dno, Model model) {
-	public String cartpost(DogBuyVO dogBuyVO, Model model) {
-		model.addAttribute("registerdno", service.getList());
-	 	buyservice.dogregister(dogBuyVO);
+	public String cartpost(DogBuyVO dogBuyVO, @RequestParam("dno") Long dno) {
+	 	buyservice.cartregister(dno);
 		// service.get(dno);
 		
 		log.info("doglist 상품목록페이지에서 장바구니 등록 ");	
-
+		System.out.println("cart로 post방식으로 dno 넘어옴");
 		//model.addAttribute("dog2List", buyservice.dogregister(dogBuyVO));
 		return "redirect:/dogcart";
 		// return "redirect:/dogdetail"; void 리턴타입 지정시 없어도 무방. 같은 URL에서 POST ->GET
 		// 이동이므로.
 	}
 	
-	
-	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/cart") // URI 입력시 분양리스트 화면만 보여준다.
+	public String carget(DogBuyVO dogBuyVO, @RequestParam("dno") Long dno, Model model, HttpServletResponse response) throws IOException {
+		System.out.println("cart로 get방식으로 dno 넘어옴");
+		
+		
+		System.out.println("dno : " + dno);
+		buyservice.cartregister(dno);
+		log.info("dogdetail 상품목록페이지에서 장바구니 등록 ");	 
+		return "redirect:/dogcart";
+	}	
 //	@PostMapping(value="/doglist2", consumes ="application/json", produces= {MediaType.TEXT_PLAIN_VALUE}) 
 //	// 분양목록에서 상세보기 버튼시 ajax 이용해서 post 전송
 //	public ResponseEntity<String> doglistpost(@RequestBody Buy1VO buy1VO ){

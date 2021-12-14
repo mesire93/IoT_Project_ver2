@@ -22,6 +22,12 @@ public class DogBuyServiceImpl implements DogBuyService{
 	@Setter(onMethod_ = @Autowired)
 	private DogBuyMapper dogBuymapper;
 
+	
+	@Override //상세보기에서 장바구니 담기때 사용
+	public void cartregister(Long dno) {
+		dogBuymapper.cartinsert2(dno);
+	}
+	
 	@Override //상세보기에서 장바구니 담기때 사용
 	public void dogregister(DogBuyVO dogBuyVO) {
 		dogBuymapper.doginsert(dogBuyVO);

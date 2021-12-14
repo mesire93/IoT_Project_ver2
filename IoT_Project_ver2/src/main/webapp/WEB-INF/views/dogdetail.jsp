@@ -8,9 +8,27 @@
 
 <%@ include file="/WEB-INF/views/include/header2.jsp" %>
 
+
+
+<script>
+function cartcheck(){
+	
+	var form =$("#detailform");
+	//var dno =document.getElementByName("dno").value
+	$("#cartBtn").on("click", function(e){
+		form.find("#dno");
+		form.attr("action", "/cart");
+		form.attr("method", "post").submit();
+		
+	}); //$("#cartBtn") 끝
+};
+
+</script>
+
+
 <!-- 삭제처리를 위해 form 태그는 POST방식이용  -->
 <form action="/dogremove" method="post"> 
-			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 
 <!-- 삭제처리를 위해 Controller 에서 Service.remove()처리를 위해 dno 값을 hidden으로 넘긴다. -->
 <%-- <input type="hidden" id="dno" name="dno" value="{c:out value='${detail.dno}'/>"> JSTL <c:out> 태그사용시 hidden 값으로 넘어가진않는다 --%>
@@ -52,6 +70,14 @@
 
 				<button type="button" class="btn btn-outline-primary" onclick="location.href='/doglist'">목록으로</button>
 				<!-- button의 onclick 속성은 redirect  개념으로 Controller에서 @GetMapping으로 처리 -->
+				
+				<!--  아래 코드 한번에 다들어간다. -->
+				 <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart?dno=<c:out value="${detail.dno }"/>'">장바구니담기</button>
+				
+				 <!-- <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart'">장바구니담기</button>  -->
+				
+				<!-- button의 onclick 속성은 redirect  개념으로 Controller에서 @GetMapping으로 처리 -->
+				
 			</div>
 		</div><!-- <div class="col-lg-8"> 끝 -->
 			

@@ -54,6 +54,16 @@
 		insert into dogcart (dno, name, filename, price) select dno, name, filename, price from doginfo where dno=#{dno}
 	</insert>
 
+
+<!-- 방법2 상세페이지에서 장바구니 담기 버튼 클릭시 sql  -->
+	<insert id="cartinsert2">
+		insert all
+		when dno = #{dno} then into dogcart (dno, name, filename, price) select dno, name, filename, price from doginfo
+	</insert>
+
+
+
+
 	<select id="read" resultType="org.zerock.domain.DogBuyVO">
 		select * from buy3 where bno = #{bno}
 	</select>
