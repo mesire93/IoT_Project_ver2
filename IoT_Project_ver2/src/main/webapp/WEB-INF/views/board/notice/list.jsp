@@ -109,8 +109,7 @@
 
 						<input class="form-control" name="keyword" value="${pageRequestDTO.keyword}" style="margin: 0px 12px 0px 0px;" placeholder="검색">
 						<div class="input-group-append" id="button-addon4">
-							<button type="button" class="btn btn-outline-secondary btn-search"><i class="fa fa-search"></i>검색</button>
-							
+							<button type="button" class="btn btn-outline-secondary btn-search"><i class="fa fa-search"></i>검색</button>					
 						</div>
 					</div>
 				</form>
@@ -162,15 +161,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	
 	// Page 257 뒤로가기 처리 
 	history.replaceState({}, null, null);
 	
-		
 	// Page 306 페이지 번호 이벤트 처리 
 	var actionForm = $("#actionForm");
 	
-
 	$(".page-item a").on("click",function(e) {
 				e.preventDefault();
 				actionForm.find("input[name='pageNum']").val($(this).attr("href"));

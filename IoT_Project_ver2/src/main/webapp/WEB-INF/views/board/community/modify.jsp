@@ -64,7 +64,7 @@
 				<div class="invalid-feedback">내용을 입력하세요</div>
 			</div>
 			
-			
+			<input type="hidden" name="type" value="community">
 			
 			<!-- 첨부파일 -->
 			<div class="col-lg-12">
@@ -158,7 +158,6 @@ $(document).ready(function(){
 				str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 				
 			});
-			modifyForm.append("<input type='hidden' name='type' value='community'>");
 			modifyForm.append(str).submit();
 		}
 		

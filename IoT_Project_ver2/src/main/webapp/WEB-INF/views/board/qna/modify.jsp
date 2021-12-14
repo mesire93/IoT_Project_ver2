@@ -22,6 +22,8 @@
 		<div class="panel-body">
 
 		<form id="modifyForm" action="/board/qna/modify" method="post" class="needs-validation"  novalidate>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
+			
 			<div class="row">
 				<div class="col-md-10 mb-3">
 					<label class="form-label" for="valid01">제목</label>
@@ -61,6 +63,8 @@
 				<textarea class="form-control" rows="12" name='content'  id="valid02" required><c:out value="${board.content}" /></textarea>
 				<div class="invalid-feedback">내용을 입력하세요</div>
 			</div>
+			
+			<input type="hidden" name="type" value="qna">
 
 			<!-- 첨부파일 -->
 			<div class="col-lg-12">
@@ -96,8 +100,15 @@
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
 					<button type="button" class="btn btn-outline-primary btn_list" data-oper="list">목록</button>
+					
+					<sec:authentication property="principal" var="pinfo" />
+					<sec:authorize access="isAuthenticated()">
+					<c:if test="${ pinfo.username eq board.writer }" >
 					<button type="submit" class="btn btn-outline-primary btn_modify" data-oper="modify"><i class="fas fa-eraser"></i>수정</button>
 					<button type="button" class="btn btn-outline-danger btn_remove" data-oper="remove"><i class="fas fa-times"></i>삭제</button>
+					</c:if>
+					</sec:authorize>
+				
 				</div>
 			</div>
 		</form>
@@ -137,15 +148,18 @@ $(document).ready(function(){
 			var str = "";
 			
 			if($("#valid01").val() == ""){
-				alert("제목을 입력하세요");
-				return;
+			alert("제목을 입력하세요");
+			$("#valid01").focus();
+			return;
 			}
 			if($("#valid02").val() == ""){
 				alert("작성자를 입력하세요");
+				$("#valid02").focus();
 				return;
 			}
 			if($("#valid03").val() == ""){
 				alert("내용을 입력하세요");
+				$("#valid03").focus();
 				return;
 			}
 			
@@ -161,43 +175,13 @@ $(document).ready(function(){
 				str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 				
 			});
-			modifyForm.append("<input type='hidden' name='type' value='qna'>");
 			modifyForm.append(str).submit();
 		}
 		
 		
 	});
 	
-	
-	
-	
-	
-	// 부트스트랩 유효성검사 시작
-	(function () {
-	  'use strict'
 
-	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-	  var forms = document.querySelectorAll('.needs-validation')
-
-	  // Loop over them and prevent submission
-	  Array.prototype.slice.call(forms)
-	    .forEach(function (form) {
-	      form.addEventListener('submit', function (event) {
-	        if (!form.checkValidity()) {
-	          event.preventDefault()
-	          event.stopPropagation()
-	        }
-
-	        form.classList.add('was-validated')
-	      }, false)
-	    })
-	})()
-	// 부트스트랩 유효성검사 종료
-
-	
-	
-	
-	
 
 });
 </script>
@@ -253,8 +237,11 @@ $(document).ready(function(){
 	
 	
 	
-	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
+	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz|dll|apk)");
 	var maxSize = 5242880;
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	
 	$("input[type='file']").change(function(e){
 		
@@ -279,6 +266,9 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
 			data : formData,
 			type : 'POST',
 			dataType : 'json',

@@ -5,7 +5,7 @@
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
 
 
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%@ include file="/WEB-INF/views/include/header2.jsp"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 

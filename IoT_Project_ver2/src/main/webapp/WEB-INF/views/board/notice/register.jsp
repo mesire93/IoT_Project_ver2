@@ -89,8 +89,6 @@
 $(document).ready(function(){
 	
 	
-	
-	
 	$(".btn_cancel").on("click", function(){
 		self.location = "/board/notice/list?type=notice";
 	});
@@ -113,14 +111,17 @@ $(document).ready(function(){
 		
 		if($("#valid01").val() == ""){
 			alert("제목을 입력하세요");
+			$("#valid01").focus();
 			return;
 		}
 		if($("#valid02").val() == ""){
 			alert("작성자를 입력하세요");
+			$("#valid02").focus();
 			return;
 		}
 		if($("#valid03").val() == ""){
 			alert("내용을 입력하세요");
+			$("#valid03").focus();
 			return;
 		}
 		
@@ -134,12 +135,11 @@ $(document).ready(function(){
 			str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 			
 		});
-		formObj.append("<input type='hidden' name='type' value='notice'>");
 		formObj.append(str).submit();
 	});
 	
 	
-	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
+	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz|dll|apk)");
 	var maxSize = 5242880;
 	
 	var token = $("meta[name='_csrf']").attr("content");

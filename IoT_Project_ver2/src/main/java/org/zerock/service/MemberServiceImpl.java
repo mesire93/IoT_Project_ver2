@@ -1,10 +1,13 @@
 package org.zerock.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.AuthVO;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.mapper.MemberMapper;
 
@@ -39,6 +42,22 @@ public class MemberServiceImpl implements MemberService{
 		mapper.insertMember(member);
 		mapper.insertMemberAuth(auth);
 	}
+
+	/*
+	@Override
+	public List<MemberVO> getList() {
+		
+		return mapper.getList();
+	}
+
+	@Override
+	public MemberVO read2(String userName) {
+		
+		return mapper.read2(userName);
+	}
+*/
+	
+	
 
 	
 }

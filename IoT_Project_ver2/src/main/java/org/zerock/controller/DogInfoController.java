@@ -96,10 +96,8 @@ public class DogInfoController {
 	// public String dogregisterpost(DogInfoDTO dogInfoDTO, RedirectAttributes rttr)
 	// {
 	public String dogregisterpost(DogInfoDTO dogInfoDTO, @RequestParam ("uploadfileName") MultipartFile uploadfileName) throws IOException {	
-		log.info("PostMapping dogregister 분양등록 POST 방식 Controlle로 들어옴");	
+		log.info("PostMapping dogregister 분양등록 POST 방식 Controller로 들어옴");	
 		String path = "C:\\upload\\";
-		
-		
 		
 		System.out.println("uploadfileName" + uploadfileName);
 		
@@ -113,18 +111,16 @@ public class DogInfoController {
 	
 		String savefileName = uuid+originfileName;
 		File saveFile = new File(path, originfileName);
-	
-		if(saveFile.exists() == false ) {
-			saveFile.mkdirs();
-		}
-		
-		uploadfileName.transferTo(saveFile); //업로드한 파일을 특정한 파일로 저장하고 싶을때
+		File saveFile2 = new File(path, savefileName);
+
+		uploadfileName.transferTo(saveFile);
+		uploadfileName.transferTo(saveFile2); //업로드한 파일을 특정한 파일로 저장하고 싶을때
 		//MultipartFile 객체를 transferTo 해줘야 오류나지 않는다.
 	
-		System.out.println(saveFile);
+		System.out.println(saveFile2);
 
 		
-		dogInfoDTO.setFileName(savefileName);
+		dogInfoDTO.setFileName(originfileName);
 		//FileName 에는 String타입이 와야하는데 File타입인 saveFile 들어오면 에러발생, DTO에서 타입을 String으로 지정.
 		service.register(dogInfoDTO);
 		
@@ -153,10 +149,10 @@ public class DogInfoController {
 	//스프링 시큐리티 비로그인유저 로그인창으로
 	@PreAuthorize("isAuthenticated()")
 	//2021.12.12 수정
-
 	@PostMapping("/cart") // URI 입력시 분양리스트 화면만 보여준다.
 	//public void dogcartpost(@RequestParam("dno") Long dno, Model model) {
-	public String cartpost(DogBuyVO dogBuyVO) {
+	public String cartpost(DogBuyVO dogBuyVO, Model model) {
+		model.addAttribute("registerdno", service.getList());
 	 	buyservice.dogregister(dogBuyVO);
 		// service.get(dno);
 		

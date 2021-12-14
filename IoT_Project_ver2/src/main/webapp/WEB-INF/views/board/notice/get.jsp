@@ -92,7 +92,6 @@
 				<div class="bigPicture"></div>
 			</div>
 			<!-- 첨부파일 -->
-			
 
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
 				<div class="col" align="right">
@@ -106,7 +105,6 @@
 					<button type="button" class="btn btn-outline-danger btn_remove"><i class="fas fa-times"></i>삭제</button>
 					</c:if>
 					</sec:authorize>
-					
 				</div>
 			</div>
 			
@@ -299,9 +297,6 @@
 		var modalRemoveBtn = $("#modalRemoveBtn");
 		var modalRegisterBtn = $("#modalRegisterBtn");
 		
-		var csrfHeaderName = "${_csrf.headerName}";
-		var csrfTokenValue = "${_csrk.token}";
-		
 		var replyer = null;
 		
 		<sec:authorize access="isAuthenticated()">
@@ -321,8 +316,6 @@
 			
 			$(".modal").modal("show");
 		});
-		
-		
 		
 		// 등록 버튼 클릭
 		modalRegisterBtn.on("click", function(e){

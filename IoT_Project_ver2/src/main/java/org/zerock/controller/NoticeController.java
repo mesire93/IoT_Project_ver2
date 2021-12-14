@@ -106,15 +106,13 @@ public class NoticeController {
 		return "redirect:/board/notice/list" + cri.getListLink();
 		
 	}
-	
-	
+		
 	@GetMapping(value="/getAttachList", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
 		log.info("GET ATTACH LIST : " + bno);
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
 	}
-	
 	
 	// Page 581 파일 삭제 처리
 	private void deleteFiles(List<BoardAttachVO> attachList) {
@@ -142,7 +140,6 @@ public class NoticeController {
 		});
 		
 	}
-	
 	
 
 }

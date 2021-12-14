@@ -21,7 +21,7 @@ public interface BoardMapper {
 	
 	public void insertSelectKey(BoardVO board);
 	
-	// PAGE 193 real(select) 처리
+	// PAGE 193 read(select) 처리
 	public BoardVO read(Long bno);
 	
 	// Page 194 delete 처리

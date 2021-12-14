@@ -89,7 +89,7 @@
 			        </sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class="fas fa-undo-alt"></i>&nbsp;Logout</a></li>
-						<li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/myPage/myInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
 			        </sec:authorize>
 				</ul>
 			</div>

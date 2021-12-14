@@ -63,6 +63,8 @@
 				<textarea class="form-control" rows="12" name='content'  id="valid02" required><c:out value="${board.content}" /></textarea>
 				<div class="invalid-feedback">내용을 입력하세요</div>
 			</div>
+			
+			<input type="hidden" name="type" value="notice">
 
 			<!-- 첨부파일 -->
 			<div class="col-lg-12">
@@ -147,14 +149,17 @@ $(document).ready(function(){
 				
 				if($("#valid01").val() == ""){
 					alert("제목을 입력하세요");
+					$("#valid01").focus();
 					return;
 				}
 				if($("#valid02").val() == ""){
 					alert("작성자를 입력하세요");
+					$("#valid02").focus();
 					return;
 				}
 				if($("#valid03").val() == ""){
 					alert("내용을 입력하세요");
+					$("#valid03").focus();
 					return;
 				}
 				
@@ -170,7 +175,6 @@ $(document).ready(function(){
 					str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 					
 				});
-				modifyForm.append("<input type='hidden' name='type' value='notice'>");
 				modifyForm.append(str).submit();
 			}
 			
@@ -232,7 +236,7 @@ $(document).ready(function(){
 	
 	
 	
-	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
+	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz|dll|apk)");
 	var maxSize = 5242880;
 	
 	var token = $("meta[name='_csrf']").attr("content");

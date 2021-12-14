@@ -48,6 +48,15 @@
 		select userid from membervo where userid=#{userId}
 	</select>
 	
+<!-- 	
+	<select id="getList"  resultType="org.zerock.domain.MemberVO">
+		select userid, userpw, username, useremail, usergender, num1, num2, num3, useraddress1, useraddress2 from membervo where userid = #{userId}
+	</select>
 	
+	<select id="read2" resultMap="memberMap">
+		select * from membervo where username = #{userName}
+	</select>
+	 -->
+
 </mapper>
 

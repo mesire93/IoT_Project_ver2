@@ -22,6 +22,8 @@
 			
 			<div class="panel-body">
 				<form action="/board/qna/register" method="post" class="needs-validation" novalidate>	
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
+					
 					<div class="mb-3">
   						<label class="form-label" for="valid01">제목</label>
   						<input type="text" class="form-control" name="title" id="valid01" required>
@@ -30,7 +32,7 @@
 					
 					<div class="mb-3">
   						<label class="form-label" for="valid03">작성자</label>
-  						<input type="text" class="form-control" name="writer" id="valid02" required>
+  						<input type="text" class="form-control" name="writer" id="valid02" required value='<sec:authentication property="principal.username"/>' readonly="readonly">
   						<!-- 로그인 연동하면 readonly, value='<c:out value="${board.writer}"/>' -->
 						<div class="invalid-feedback">작성자를 입력하세요</div>
 					</div>
@@ -91,37 +93,10 @@ $(document).ready(function(){
 		self.location = "/board/qna/list?type=qna";
 	});
 
-	
-	
-	// 부트스트랩 유효성검사 시작
-	(function () {
-	  'use strict'
 
-	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-	  var forms = document.querySelectorAll('.needs-validation')
-
-	  // Loop over them and prevent submission
-	  Array.prototype.slice.call(forms)
-	    .forEach(function (form) {
-	      form.addEventListener('submit', function (event) {
-	        if (!form.checkValidity()) {
-	          event.preventDefault()
-	          event.stopPropagation()
-	        }
-
-	        form.classList.add('was-validated')
-	      }, false)
-	    })
-	})()
-	// 부트스트랩 유효성검사 종료
-	
-	
-	
-	
 	
 });
 </script>
-
 
 <!-- 파일 업로드  -->
 <script>
@@ -160,13 +135,15 @@ $(document).ready(function(){
 			str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 			
 		});
-		formObj.append("<input type='hidden' name='type' value='qna'>");
 		formObj.append(str).submit();
 	});
 	
 	
 	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz|dll|apk)");
 	var maxSize = 5242880;
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	
 	$("input[type='file']").change(function(e){
 		
@@ -191,6 +168,9 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
 			data : formData,
 			type : 'POST',
 			dataType : 'json',
@@ -263,6 +243,9 @@ $(document).ready(function(){
 		$.ajax({
 			url : '/deleteFile',
 			data : {fileName : targetFile, type : type},
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
 			dataType : 'text',
 			type : 'POST',
 			success : function(result){

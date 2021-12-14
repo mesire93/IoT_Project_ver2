@@ -45,7 +45,7 @@
 
 <!-- 상세페이지에서 장바구니 담기 버튼 클릭시 sql  -->
 	<insert id="doginsert">
-		insert into dogcart (dno, name, filename, price) select dno, name, filename, price from doginfo
+		insert into dogcart (dno, name, filename, price) select dno, name, filename, price from doginfo where dno=#{dno}
 	</insert>
 
 	<select id="read" resultType="org.zerock.domain.DogBuyVO">

@@ -141,7 +141,6 @@ $(document).ready(function(){
 			str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+jobj.data("type")+"'>";
 			
 		});
-		formObj.append("<input type='hidden' name='type' value='community'>");
 		formObj.append(str).submit();
 	});
 	
