@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.DogBuy2VO;
+import org.zerock.domain.DogBuy3VO;
 import org.zerock.domain.DogBuyVO;
 import org.zerock.domain.DogInfoDTO;
 import org.zerock.mapper.DogBuyMapper;
@@ -45,7 +46,11 @@ public class DogBuyServiceImpl implements DogBuyService{
 	public List<DogBuyVO> dog2List() {
 		return dogBuymapper.dog2List();
 	}
-
+	@Override
+	public List<DogBuy3VO> dog3List() {
+		return dogBuymapper.dog3List();
+	}
+	
 	
 	
 	
@@ -72,6 +77,8 @@ public class DogBuyServiceImpl implements DogBuyService{
 		dogBuymapper.delete(dno);
 		return dogBuymapper.delete(dno) == 1;
 	}
+
+
 	
 
 	

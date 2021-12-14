@@ -3,6 +3,7 @@ package org.zerock.service;
 import java.util.List;
 
 import org.zerock.domain.DogBuy2VO;
+import org.zerock.domain.DogBuy3VO;
 import org.zerock.domain.DogBuyVO;
 import org.zerock.domain.DogInfoDTO;
 
@@ -16,6 +17,7 @@ public interface DogBuyService {
 
 	public List<DogInfoDTO> dog1List();
 	public List<DogBuyVO> dog2List();
+	public List<DogBuy3VO> dog3List();
 
 
 	

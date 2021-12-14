@@ -18,9 +18,15 @@
 	]]>	
 </select>
 
+<select id="dog3List" resultType="org.zerock.domain.DogBuy3VO">
+	<![CDATA[
+		select * from dogorder where bno > 0 
+	]]>	
+</select>
+
 <!-- ========================================= -->
-<!-- 
-<insert id="doginsert">
+
+<!-- <insert id="doginsert">
 
 	<selectKey keyProperty="dno" order="BEFORE"
 		resultType="long">
@@ -30,7 +36,7 @@
 			insert into DOGCART (dno, name, filename, price)
 		values (#{dno}, #{name, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{price, jdbcType=VARCHAR})
 </insert>
-
+ -->
 <insert id="doginsert2">
 
 	<selectKey keyProperty="bno" order="BEFORE"
@@ -41,7 +47,7 @@
 	insert into DOGORDER (b_name, b_phone, b_phone2, b_adress, b_yo, bno, b_num, b_addr)
 		values (#{bName}, #{bPhone}, #{bPhone2}, #{bAdress}, #{bYo}, seq_DOGORDER.nextval, #{bNum}, #{bAddr})
 </insert>
- -->
+
 
 <!-- 상세페이지에서 장바구니 담기 버튼 클릭시 sql  -->
 	<insert id="doginsert">

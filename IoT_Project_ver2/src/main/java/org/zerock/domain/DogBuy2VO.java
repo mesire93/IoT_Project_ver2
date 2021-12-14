@@ -19,4 +19,6 @@ public class DogBuy2VO {
 	private Long bno;
 	private String bNum;
 	private String bAddr;
+
+	
 }
