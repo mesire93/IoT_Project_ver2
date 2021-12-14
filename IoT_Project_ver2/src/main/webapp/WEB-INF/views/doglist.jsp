@@ -19,13 +19,13 @@ $(document).ready(function(){
 	
 	function checkModal(result){
 		
-		if(result==='' || history.state) return;
+		if(result==='') return;
 		//if(parseInt(result) >0 ) $("#registerModal").modal();
 		 
 		 
 		if(parseInt(result) > 0 ){
 			$(".modal-body").html("강아지 분양등록이 이루어졌습니다.");
-			$("#registerModal").modal("show"); 
+			$("#myModal").modal("show"); 
 		}		
 			
 	}
@@ -166,7 +166,7 @@ $(document).ready(function(){
 							
 							
 							<div style="text-align:center;">
-								<button data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
+								<button type="button" data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
 								상세보기</button>
 								<%-- <button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
 								<input type="hidden" value="<c:out value='${list.dno}'/>"> --%><!--${registerdno} 값으로는 페이지 이동불가 -->

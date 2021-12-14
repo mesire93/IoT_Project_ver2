@@ -4,13 +4,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
 
-<<<<<<< HEAD
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-=======
-
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
->>>>>>> refs/remotes/origin/main
 
 
 <!-- ================================================================== -->
