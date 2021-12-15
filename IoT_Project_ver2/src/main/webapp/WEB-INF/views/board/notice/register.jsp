@@ -33,7 +33,7 @@
 					<div class="mb-3">
   						<label class="form-label" for="valid03">작성자</label>
   						<input type="text" class="form-control" name="writer" id="valid02" required value='<sec:authentication property="principal.username"/>' readonly="readonly">
-  						<!-- 로그인 연동하면 readonly, value='<c:out value="${board.writer}"/>' -->
+  						
 						<div class="invalid-feedback">작성자를 입력하세요</div>
 					</div>
 					

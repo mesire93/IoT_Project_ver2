@@ -3,16 +3,18 @@ package org.zerock.domain;
 import java.util.Date;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class MemberVO {
 
-/*	아이디	userId
+/*	아이디		userId
 	비밀번호	userPw
 	이름		userName	
-	연락처	num1,num2,num3
-	이메일	userEmail
+	연락처		num1,num2,num3
+	이메일		userEmail
 	성별		userGender
 	주소		userAddress1,userAddress2
 	권한		authList====auth,userId=====
@@ -31,11 +33,13 @@ public class MemberVO {
 	private String userEmail;
 	private String userGender;
 	private String userAddress1,userAddress2;
+	private Long mno;
 	
 	List<AuthVO> authList;
 	
 	private boolean enabled;
 	private Date regDate;
 	private Date updateDate;
+	
 	
 }

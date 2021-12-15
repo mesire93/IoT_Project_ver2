@@ -43,7 +43,7 @@ public class MemberServiceImpl implements MemberService{
 		mapper.insertMemberAuth(auth);
 	}
 
-	/*
+
 	@Override
 	public List<MemberVO> getList() {
 		
@@ -51,12 +51,24 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO read2(String userName) {
+	public MemberVO get(Long mno) {
 		
-		return mapper.read2(userName);
+		return mapper.getmno(mno);
 	}
-*/
-	
+
+	@Transactional
+	@Override
+	public boolean modify(MemberVO member) {
+
+		return mapper.update(member) == 1;
+	}
+
+	@Override
+	public boolean remove(Long mno) {
+
+		
+		return mapper.delete(mno) == 1;
+	}
 	
 
 	

@@ -14,11 +14,13 @@ public interface MemberMapper {
 	public void insertMemberAuth(AuthVO auth);
 
 	
-	/*
+	
 	public List<MemberVO> getList();
 	
-	public MemberVO read2(String userName);
-	*/
+	public MemberVO getmno(Long mno);
 	
+	public int delete(Long mno);
+	
+	public int update(MemberVO member);
 	
 }

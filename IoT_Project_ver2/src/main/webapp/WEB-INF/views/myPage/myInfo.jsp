@@ -12,44 +12,39 @@
 	<div class="col-md-6 p-5 my-5" style="border:1px solid skyblue; border-radius:20px;">
 
 		<div class="text-center mb-5">
-			<button type="button" class="btn btn-outline-primary" style="width:400px; height:50px; font-family:'Jua'; font-size:2.0em;" disabled>회원 정보</button>
+			<button type="button" class="btn btn-outline-primary" style="width:80%; height:50px; font-family:'Jua'; font-size:2.0em;" disabled>회원 정보</button>
 		</div>
 		
-		<hr>
-		userId : ${member.userId }
-		userName : ${member.userName }
-		<hr>
 
 		<div class="mb-3">
 			<label for="userId" class="form-label">아이디</label> 
-			<input type="text" class="form-control" name="userId" id="userId" placeholder="userId" readonly value="${member.userId }">
+			<input type="text" class="form-control" name="userId" id="userId" placeholder="userId" readonly value='<c:out value="${member.userId }"/>'>
 		</div>
 
 		<div class="mb-3">
 			<label for="userName" class="form-label">이름</label> 
 			<input type="text" class="form-control form-control-user"
-					name="userName" id="userName" placeholder="userName" readonly>
+					name="userName" id="userName" placeholder="userName" readonly value='<c:out value="${member.userName }"/>'>
 		</div>
 
 		<div class="mb-3">
 			<label for="userPw" class="form-label">비밀번호</label> 
 			<input type="password" class="form-control form-control-user"
-				name="userPw" id="userPw" placeholder="userPw" readonly>
+				name="userPw" id="userPw" placeholder="userPw" readonly value='<c:out value="${member.userPw }"/>'>
 		</div>
 		
 		<div class="row mb-3">
 			<div class="col-md-4 mb-3 mb-sm-0">
 				<label for="userGender" class="form-label">성별</label>
 				<div class="col">
-           			<input class="form-check-input" type="radio" id="userGender" name="userGender" autocomplete="off" value="man"  checked="checked" disabled>남성     	     		
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="form-check-input" type="radio" id="userGender" name="userGender" autocomplete="off" value="woman" disabled>여성
+					<input type="text" class="form-control form-control-user" name="userGender" readonly value='<c:out value="${member.userGender }"/>' >
+           	
 				</div>
 			</div>
 			<div class="col-md-8 mb-3 mb-sm-0">
 				<label for="userEmail" class="form-label">이메일</label>
-				<input type="text" class="form-control form-control-user"
-					name="userEmail" id="userEmail" placeholder="userEmail" readonly>
+				<input type="Email" class="form-control form-control-user"
+					name="userEmail" id="userEmail" placeholder="userEmail" readonly value='<c:out value="${member.userEmail }"/>'>
 			</div>
 		</div>
 
@@ -58,45 +53,113 @@
 			<div class="col-md-6 mb-3 mb-sm-0">
 				<label for="userAddress1" class="form-label">주소</label> <input
 					type="text" class="form-control form-control-user"
-					name="userAddress1" id="userAddress1" placeholder="userAddress1" readonly>
+					name="userAddress1" id="userAddress1" placeholder="userAddress1" readonly value='<c:out value="${member.userAddress1 }"/>'>
 			</div>
 			<div class="col-md-6">
 				<label for="userAddress2" class="form-label">&nbsp;</label> <input
 					type="text" class="form-control form-control-user"
-					name="userAddress2" id="userAddress2" placeholder="userAddress2" readonly>
+					name="userAddress2" id="userAddress2" placeholder="userAddress2" readonly value='<c:out value="${member.userAddress2 }"/>'>
 			</div>
 		</div>
 
 		<div class="row mb-3">
 			<div class="col-md-3 mb-3 mb-sm-0">
 				<label for="number1" class="form-label">전화번호</label> 
-				<select class="custom-select form-control form-control-user" id="number1" name="number1" disabled>
-                <option selected="selected">010</option>
-                  <option>011</option>
-                  <option>016</option>
+				<select class="custom-select form-control form-control-user" id="number1" name="number1" disabled >
+                   <option value="010">010</option>
+                   <option value="011">011</option>
+                  <option value="016">016</option>
               </select>
 			</div>
 			<div class="col-md-4">
 				<label for="number2" class="form-label">&nbsp;</label>
 				<input type="text" class="form-control form-control-user"
-					name="number2" id="number2" placeholder="number2" readonly>
+					name="number2" id="number2" placeholder="number2" readonly value='<c:out value="${member.number2 }"/>'>
 			</div>
 			<div class="col-md-4">
 				<label for="number3" class="form-label">&nbsp;</label>
 				<input type="text" class="form-control form-control-user"
-					name="number3" id="number3" placeholder="number3" readonly>
+					name="number3" id="number3" placeholder="number3" readonly value='<c:out value="${member.number3 }"/>'>
 			</div>
 		</div>
 
 		<div class="text-center py-5">
-			<button type="button" class="btn btn-primary btn-user btn-block mx-3" onclick="location.href='/myPage/myInfoModify'">회원정보 수정</button>
+			<button type="button" class="btn btn-primary btn-user btn-block mx-3 btn_modify" >회원정보 수정</button>
 		
-			<button type="button" class="btn btn-danger btn-user btn-block mx-3" >회원 탈퇴</button>
+			<button type="button" class="btn btn-danger btn-user btn-block mx-3 btn_remove" >회원 탈퇴</button>
 		</div>
 	</div>
 
 </div>
 
+<form id="actionForm" action="/myPage/myInfoModify"  method="get">
+	<input type="hidden" name="mno" value='<c:out value="${member.mno }"/>'>
+</form>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var actionForm = $("#actionForm");
+	
+	var userid = null;
+	var originaluser = $("#userId").val();	
+	
+	<sec:authorize access="isAuthenticated()">
+		userid = '<sec:authentication property = "principal.username" />';
+	</sec:authorize>
+	
+	console.log(userid);
+	console.log(originaluser);
+	
+	$(".btn_modify").on("click", function(e){
+		if(userid == originaluser){
+			actionForm.attr("action", "/myPage/myInfoModify").attr("method","get").submit();
+		}
+		else{
+			alert("본인의 계정만 수정 할 수 있습니다.");
+			return;
+		}
+	});
+
+	$(".btn_remove").on("click", function(e){
+		var del = confirm("정말 탈퇴하시겠습니까?")
+		
+		if(userid == originaluser){
+			if(del == true){
+				actionForm.append("<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token }' />");
+				actionForm.attr("action", "/myPage/myInfoRemove").attr("method", "post").submit();
+			}
+			else{
+				return;
+			}
+		}
+		else{
+			alert("본인의 계정만 삭제 할 수 있습니다.");
+			return;
+		}
+		
+	});
+
+
+
+	$("#number1 option").each(function(){
+
+	    if($(this).val() == "${member.number1}"){
+
+	      $(this).prop("selected","selected"); // attr적용안될경우 prop으로 
+
+	    }
+
+	  });
+	
+
+	
+
+});
+</script>
 
 
 

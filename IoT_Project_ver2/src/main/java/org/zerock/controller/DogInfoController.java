@@ -101,7 +101,7 @@ public class DogInfoController {
 		log.info("PostMapping dogregister 분양등록 POST 방식 Controller로 들어옴");	
 		String path = "C:\\upload\\";
 		
-		System.out.println("uploadfileName" + uploadfileName);
+		System.out.println("uploadfileName" + uploadfileName.getOriginalFilename());
 		
 		String originfileName =uploadfileName.getOriginalFilename();
 		//MultipartFile originfileName =uploadfileName.getOriginalFilename(); MultipartFile 로 객체선언시 에러발생

@@ -7,13 +7,10 @@
 <%@ include file="/WEB-INF/views/include/header2.jsp"%>
 
 
-
 <div class="row">
 
 	<%@ include file="/WEB-INF/views/include/leftSidebar.jsp"%>
 	
-
-
 	<div class="col-md-8">
 		<div class="panel-heading">
 			<h2 class="panel-title"  style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
@@ -97,9 +94,10 @@
 			<!-- 첨부파일 -->
 			
 			<div class="row " style="margin-top: 10px; margin-bottom: 10px;">
-			<sec:authentication property="principal" var="pinfo"/>
 				<div class="col" align="right">
 					<button type="button" class="btn btn-outline-primary btn_list"><i class="fas fa-bars"></i>목록</button>
+					
+					<sec:authentication property="principal" var="pinfo" />
 					<sec:authorize access="isAuthenticated()">
 						<c:if test="${pinfo.username eq board.writer}">
 							<button type="button" class="btn btn-outline-primary btn_modify"><i class="fas fa-eraser"></i>수정</button>
@@ -142,7 +140,7 @@
 
 						</div>
 						<sec:authorize access="isAuthenticated()">
-							<button type="button" id="addReplyBtn" class="btn btn-outline-primary"  style="float:right;">등록</button>
+						<button type="button" id="addReplyBtn" class="btn btn-outline-primary"  style="float:right;">등록</button>
 						</sec:authorize>
 					</div>
 					
@@ -158,17 +156,9 @@
 			<!-- 댓글 -->
 
 
-
 		</div>
 	</div>
 </div>
-
-
-<div class="bigPictureWrapper">
-	<div class="bigPicture"></div>
-</div>
-
-
 
 <!-- Page 420 새로운 댓글 처리 → 모달창 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -210,11 +200,6 @@
 
 
 
-
-
-
-
-
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -237,6 +222,7 @@
 		$(".btn_remove").on("click", function(e){
 			var del = confirm("정말 삭제하시겠습니까?")
 			if(del == true){
+				actionForm.append("<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token }' />");
 				actionForm.append("<input type='hidden' name='type' value='community'>");
 				actionForm.attr("action", "/board/community/remove").attr("method", "post").submit();
 			}
@@ -252,6 +238,13 @@
 <!-- Page 415 댓글 이벤트 처리 -->
 <script>
 	$(document).ready(function(){
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(header, token);
+		});
 		
 		var bnoValue = '<c:out value="${board.bno}"/>';
 		var replyUL = $(".chat");
@@ -312,9 +305,7 @@
 			replyer = '<sec:authentication property = "principal.username"/>';
 		</sec:authorize>
 		
-		var csrfHeaderName = "${_csrf.headerName}";
-		var csrfTokenValue = "${_csrf.token}";
-		
+				
 		// 댓글 작성 버튼 클릭
 		$("#addReplyBtn").on("click", function(e){
 			modal.find("input").val("");
@@ -324,15 +315,8 @@
 			
 			modalRegisterBtn.show();
 			
-			$(".modal").modal("show");
-			$(document).ajaxSend(function(e,xhr,options){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
-			});
-			
-			
+			$(".modal").modal("show");			
 		});
-		
-		
 		
 		// 등록 버튼 클릭
 		modalRegisterBtn.on("click", function(e){
@@ -374,7 +358,23 @@
 		
 		// Page 426 댓글의 수정/삭제 이벤트 처리
 		modalModBtn.on("click", function(e){
+		
+			var originalReplyer = modalInputReplyer.val();
+		
 			var reply = {rno : modal.data("rno"), reply : modalInputReply.val(), replyer : modalInputReplyer.val()};
+						
+			if(!replyer){
+				alert("로그인 후 수정이 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
+			if(replyer != originalReplyer){
+				alert("자신이 작성한 댓글만 수정이 가능합니다.");
+				modal.modal("hide");
+				return;
+			}
+			
 			replyService.update(reply, function(result){
 				alert("수정 " + result);
 				modal.modal("hide");
@@ -384,8 +384,6 @@
 		
 		modalRemoveBtn.on("click", function(e){
 			var rno = modal.data("rno");
-			console.log("RNO:"+rno);
-			console.log("REPLYER"+replyer);
 			
 			if(!replyer){
 				alert("로그인후 삭제가 가능합니다.");
@@ -401,7 +399,7 @@
 				return;
 			}
 			
-			replyService.remove(rno, function(result){
+			replyService.remove(rno, originalReplyer, function(result){
 				alert("삭제 " + result);
 				modal.modal("hide");
 				showList(pageNum);
@@ -465,6 +463,7 @@
 		
 
 	});
+	
 </script>
 
 

@@ -184,12 +184,12 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 							
 							
 							<div style="text-align:right;">
-								<button type="button" data-oper='dogdetail' class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
+								<button type="button" data-oper='dogdetail' class="btn btn-warning" onclick="location.href='/dogdetail?dno=<c:out value="${list.dno }"/>'">
 								상세보기</button>
-								<%-- <button type="submit" id="detailBtn" class="btn btn-outline-warning">상세보기</button>
+								<%-- <button type="submit" id="detailBtn" class="btn btn-warning">상세보기</button>
 								<input type="hidden" value="<c:out value='${list.dno}'/>"> --%><!--${registerdno} 값으로는 페이지 이동불가 -->
-								<!-- <button type="submit" id="bagBtn" class="btn btn-outline-danger">장바구니담기</button> -->
-								<!-- <button type="submit" id="cartBtn" class="btn btn-outline-danger">장바구니담기</button> -->
+								<!-- <button type="submit" id="bagBtn" class="btn btn-danger">장바구니담기</button> -->
+								<!-- <button type="submit" id="cartBtn" class="btn btn-danger">장바구니담기</button> -->
 							</div>
 						</div>	
 					</div>
@@ -197,12 +197,12 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 	
 				
 					<%-- <button type="button" id="detailBtn"
-					class="btn btn-outline-warning"><a href='/dogdetail?dno=<c:out value="${register.dno}"/>'
+					class="btn btn-warning"><a href='/dogdetail?dno=<c:out value="${register.dno}"/>'
 					target='_blank'>상세보기</a></button> --%>
 					
 					<%-- <form action="/dogdetail" method="get">
 					<input type="hidden" value="{c:out value='${detail.dno}'/>">
-					<button type="button" id="bagBtn" class="btn btn-outline-warning">상세보기</button>
+					<button type="button" id="bagBtn" class="btn btn-warning">상세보기</button>
 					</form> 이 방법 안됨 레이아웃 비틀어짐--%>
 					
 			</c:forEach>
@@ -244,7 +244,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 						</p>
 						
 						<div style="text-align: right;">
-							<button data-oper='dogdetail' class="btn btn-outline-warning"
+							<button data-oper='dogdetail' class="btn btn-warning"
 								onclick="location.href='/doglist>'">상세보기</button>
 						</div>		
 				</div><!-- 끝 <div class="card-body"> -->
@@ -283,7 +283,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 						</p>
 						
 						<div style="text-align: right;">
-							<button data-oper='dogdetail' class="btn btn-outline-warning"
+							<button data-oper='dogdetail' class="btn btn-warning"
 								onclick="location.href='/doglist>'">상세보기</button>
 						</div>		
 				</div><!-- 끝 <div class="card-body"> -->
@@ -319,7 +319,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 						</p>
 						
 					<div style="text-align: right;">
-						<button data-oper='dogdetail' class="btn btn-outline-warning"
+						<button data-oper='dogdetail' class="btn btn-warning"
 							onclick="location.href='/doglist>'">상세보기</button>
 					</div>		
 				</div><!-- 끝 <div class="card-body"> -->

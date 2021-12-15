@@ -188,8 +188,12 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" id="modalModBtn" class="btn btn-outline-primary">수정</button>
-				<button type="button" id="modalRemoveBtn" class="btn btn-outline-danger">삭제</button>
+				<sec:authorize access="isAuthenticated()">
+					<c:if test="${pinfo.username eq board.writer}">
+						<button type="button" id="modalModBtn" class="btn btn-outline-primary">수정</button>
+						<button type="button" id="modalRemoveBtn" class="btn btn-outline-danger">삭제</button>
+					</c:if>
+				</sec:authorize>
 				<button type="button" id='modalRegisterBtn' class="btn btn-outline-primary">등록</button>
 				<button type="button" id='modalCloseBtn'  class="btn btn-outline-default" data-dismiss="modal" aria-hidden="true">닫기</button>
 			</div>

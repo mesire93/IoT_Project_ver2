@@ -208,13 +208,15 @@ $(document).ready(function(){
 		
 	});
 	
-	
+
 	// 모달이벤트
 	var result='<c:out value="${result}"/>';
+	
+	history.replaceState({}, null, null);
 	checkModal(result);
 
 	function checkModal(result){
-		if(result === ""){
+		if(result === "" || history.state == null){
 			return;
 		}
 		if(parseInt(result) > 0){

@@ -70,7 +70,7 @@
 	            	<td scope="col" style="margin: 0px; padding: 7px 0px 6px; background-image: none; font-weight: normal; font-size: 18px;">
 	                    <div class="tb-center" style="padding: 0px 10px;"><input type="checkbox" name="dog" class="MS_input_checkbox" checked="" style="margin: 0px; padding: 0px; font-size: 12px; line-height: 1.25; color: rgb(68, 68, 68); font-family: 'Open Sans', sans-serif, 'Nanum Gothic', nanumgothic, AppleGothic, Helvetica, sans-serif; vertical-align: middle;"></div>
 	                </td>
-	            	<td id="filename" name="filename" background-image: none;><img src="/resources/img/dog/<c:out value="${dog2List.filename}"/>" width="100px" height="80px"/></td>
+	            	<td id="filename" name="filename" style="background-image: none;"><img src="/resources/img/dog/<c:out value="${dog2List.filename}"/>" width="100px" height="80px"/></td>
 	            	<td id="name" name="name" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><c:out value="${dog2List.name}"/></td>
 	            	<td scope="col" style="margin: 0px; padding: 7px 0px 6px; background-image: none; font-weight: normal; font-size: 18px;">
 	                    <div class="tb-center" style="padding: 0px 10px;"></div>

@@ -92,7 +92,6 @@ public class CommunityController {
 
 	
 	// Page 220 삭제 처리와 테스트
-	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		

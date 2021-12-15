@@ -19,7 +19,7 @@
 		<result property="userAddress2" column="useraddress2"/>
 		<result property="enabled" column="enabled"/>
 		<result property="regDate" column="regdate"/>
-		<!-- <result property="updateDate" column="updatedate"/> -->
+		<result property="updateDate" column="updatedate"/>
 		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 	
@@ -48,15 +48,34 @@
 		select userid from membervo where userid=#{userId}
 	</select>
 	
-<!-- 	
+ 	
 	<select id="getList"  resultType="org.zerock.domain.MemberVO">
-		select userid, userpw, username, useremail, usergender, num1, num2, num3, useraddress1, useraddress2 from membervo where userid = #{userId}
+		select * from membervo order by mno desc
 	</select>
 	
-	<select id="read2" resultMap="memberMap">
-		select * from membervo where username = #{userName}
+	<select id="getmno" resultType="org.zerock.domain.MemberVO">
+		select * from membervo where mno = #{mno}
 	</select>
-	 -->
+
+	<delete id="delete">
+		delete from membervo where mno = #{mno}
+	</delete>
+	
+	<update id="update" >
+		update membervo
+		set 
+		username = #{userName},
+		usergender = #{userGender},
+		useremail = #{userEmail},
+		useraddress1 = #{userAddress1},
+		useraddress2 = #{userAddress2},
+		num1 = #{number1},
+		num2 = #{number2},
+		num3 = #{number3}
+		
+		where mno = #{mno}
+	</update>
+
 
 </mapper>
 

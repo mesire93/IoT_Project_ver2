@@ -14,7 +14,7 @@
 
 	<div class="col-md-8">
 		<div class="panel-heading">
-			<h2 class="panel-title">
+			<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
 				<i class="fas fa-comments"></i>커뮤니티 - 게시글 수정
 			</h2>
 		</div>
@@ -146,6 +146,22 @@ $(document).ready(function(){
 		else if(operation === "modify"){
 			var str = "";
 			
+			if($("#valid01").val() == ""){
+					alert("제목을 입력하세요");
+					$("#valid01").focus();
+					return;
+				}
+				if($("#valid02").val() == ""){
+					alert("작성자를 입력하세요");
+					$("#valid02").focus();
+					return;
+				}
+				if($("#valid03").val() == ""){
+					alert("내용을 입력하세요");
+					$("#valid03").focus();
+					return;
+				}
+			
 			$(".uploadResult ul li").each(function(i, obj){
 				
 				var jobj = $(obj);
@@ -164,29 +180,6 @@ $(document).ready(function(){
 		
 	});
 	
-	
-	
-	// 부트스트랩 유효성검사 시작
-	(function () {
-	  'use strict'
-
-	  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-	  var forms = document.querySelectorAll('.needs-validation')
-
-	  // Loop over them and prevent submission
-	  Array.prototype.slice.call(forms)
-	    .forEach(function (form) {
-	      form.addEventListener('submit', function (event) {
-	        if (!form.checkValidity()) {
-	          event.preventDefault()
-	          event.stopPropagation()
-	        }
-
-	        form.classList.add('was-validated')
-	      }, false)
-	    })
-	})()
-	// 부트스트랩 유효성검사 종료
 
 });
 </script>
@@ -244,6 +237,9 @@ $(document).ready(function(){
 	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
 	var maxSize = 5242880;
 	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	
 	$("input[type='file']").change(function(e){
 		
 		var formData = new FormData();
@@ -267,11 +263,11 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
 			data : formData,
 			type : 'POST',
-			beforeSend: function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
 			dataType : 'json',
 			success : function(result){
 				console.log("RESULT : " + result);

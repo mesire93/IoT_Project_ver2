@@ -15,7 +15,7 @@
 
 		<div class="col-md-8">
 			<div class="panel-heading">
-				<h2 class="panel-title">
+				<h2 class="panel-title" style="text-align:center; margin-bottom:30px; font-family:'Jua'; font-size:3.0em;">
 					<i class="fas fa-comments"></i>커뮤니티 - 게시글 등록
 				</h2>
 			</div>
@@ -31,9 +31,9 @@
 					
 					<div class="mb-3">
   						<label class="form-label" for="valid02">작성자</label>
-  						<input type="text" class="form-control" name="writer" 
-  						value='<sec:authentication property="principal.username"/>'
-  						id="valid02" readonly="readonly">
+  						<input type="text" class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' id="valid02" readonly="readonly">
+					
+						<div class="invalid-feedback">작성자를 입력하세요</div>
 					</div>
 					
 					<div class="mb-3">
@@ -92,28 +92,7 @@ $(document).ready(function(){
 		self.location = "/board/community/list?type=community";
 	});
 
-	
-	
-	// 부트스트랩 유효성검사 시작
-	(function () {
-	  'use strict'
 
-	  var forms = document.querySelectorAll('.needs-validation')
-	  
-	  Array.prototype.slice.call(forms)
-	    .forEach(function (form) {
-	      form.addEventListener('submit', function (event) {
-	        if (!form.checkValidity()) {
-	          event.preventDefault()
-	          event.stopPropagation()
-	        }
-
-	        form.classList.add('was-validated')
-	      }, false)
-	    })
-	})()
-	// 부트스트랩 유효성검사 종료
-	
 });
 </script>
 
@@ -131,6 +110,22 @@ $(document).ready(function(){
 		
 		var str = "";
 		
+		if($("#valid01").val() == ""){
+			alert("제목을 입력하세요");
+			$("#valid01").focus();
+			return;
+		}
+		if($("#valid02").val() == ""){
+			alert("작성자를 입력하세요");
+			$("#valid02").focus();
+			return;
+		}
+		if($("#valid03").val() == ""){
+			alert("내용을 입력하세요");
+			$("#valid03").focus();
+			return;
+		}
+		
 		$(".uploadResult ul li").each(function(i, obj){
 			
 			var jobj = $(obj);
@@ -144,12 +139,14 @@ $(document).ready(function(){
 		formObj.append(str).submit();
 	});
 	
-	var csrfHeaderName = "${_csrf.headerName}";
-	var csrfTokenValue = "${_csrf.token}";
+
 	
-	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz)");
+	var reg = new RegExp("(.*?)\.(exe|sh|zip|alz|dll|apk)");
 	var maxSize = 5242880;
 	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+		
 	$("input[type='file']").change(function(e){
 		
 		var formData = new FormData();
@@ -173,9 +170,9 @@ $(document).ready(function(){
 			url : "/uploadAjaxAction",
 			processData : false,
 			contentType : false,
-			beforeSend: function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			}
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
 			data : formData,
 			type : 'POST',
 			dataType : 'json',
@@ -229,8 +226,7 @@ $(document).ready(function(){
 				
 				str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid.substring(0, 6)+"' data-fileName='"+obj.fileName+"' data-type='"+obj.image+"'><div>"+
 						  	"<img src='/resources/img/attach.png'></a>"+
-						  	"<p>"+obj.fileName+"</p>"+
-						  	"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button>"+
+						  	"<p>"+obj.fileName+"<button type='button' class='btn btn-outline-warning btn-circle' data-file=\'"+fileCallPath+"\' data-type='image'>삭제</button></p>"+
 						  	"</div></li>";
 			  	
 			}
@@ -249,8 +245,8 @@ $(document).ready(function(){
 		$.ajax({
 			url : '/deleteFile',
 			data : {fileName : targetFile, type : type},
-			beforeSend: function(xhr){
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
 			},
 			dataType : 'text',
 			type : 'POST',
