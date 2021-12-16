@@ -19,6 +19,8 @@ $(document).ready(function(){
 
 function Submit(){
 	
+	var form =document.form;
+	
 	if( form.simple.length > 65){
 		alert('한줄 특징은 65글자 이하로 입력해주세요.');
 		form.simple.focus();
@@ -29,7 +31,7 @@ function Submit(){
 	// 파일 업로드 확장자 체크
     if( $("#uploadfileName").val() != "" ){
          var ext = $("#uploadfileName").val().split('.').pop().toLowerCase();
- 	  if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+ 	  if($.inArray(ext, ['gif','png','jpg','jpeg','jfif']) == -1) {
  	     alert('등록 할수 없는 파일명입니다.');
  	     $("#uploadfileName").val(""); // input file 파일명을 다시 지워준다.
  	     return;
@@ -50,10 +52,10 @@ function Submit(){
 	    return str.replace(/[^\d]+/g, '');
 	} */
 	//품명DB 들어갈때 문자열 콤마제거-2
-	 if( form.kind.value != "" ) {
+	/*  if( form.kind.value != "" ) {
 	 	var kind = $("#kind").val();
 		return kind.slice(0,-1);
-	 }
+	 } */
 		 	
 	//체중weight 소수점 첫째자리수까지만 DB insert
 	if( form.name.value != "" ) {
@@ -78,10 +80,20 @@ function file(){
  */
 
 </script>
-	
-	
+
+
+<!-- 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
+
+<style>
+.form-control form-control health{font-family: 'Poor Story', cursive; font-size:1.6em;}
+.card-header{font-family: 'Poor Story', cursive; font-size:1.6em; font-weight:700;}
+</style>
       
-<form action="/dogregister" method="post" enctype="multipart/form-data">
+<form action="/dogregister" name="form" id="form" method="post" enctype="multipart/form-data">
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 <br>
 <br>
@@ -232,7 +244,7 @@ function file(){
 			<div class="card-header">강아지 건강상태를 선택해주세요(중복선택가능)</div>
 			<div class="card-body">
 				<div>
-					<label> <input type="checkbox" value="종합백신" name="health">종합백신</label> 
+					<label class="health"> <input type="checkbox" value="종합백신" name="health">종합백신</label> 
 					<label> <input type="checkbox" value="켄넬코프" name="health"> 켄넬코프</label>
 					<label> <input type="checkbox" value="인플루엔자" name="health"> 인플루엔자</label>
 					<label> <input type="checkbox" value="광견병"    name="health">광견병 </label> 

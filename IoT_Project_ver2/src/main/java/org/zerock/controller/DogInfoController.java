@@ -97,7 +97,7 @@ public class DogInfoController {
 	@PostMapping("/dogregister")
 	// public String dogregisterpost(DogInfoDTO dogInfoDTO, RedirectAttributes rttr)
 	// {
-	public String dogregisterpost(DogInfoDTO dogInfoDTO, @RequestParam ("uploadfileName") MultipartFile uploadfileName) throws IOException {	
+	public String dogregisterpost(DogInfoDTO dogInfoDTO, @RequestParam ("uploadfileName") MultipartFile uploadfileName, RedirectAttributes rttr) throws IOException {	
 		log.info("PostMapping dogregister 분양등록 POST 방식 Controller로 들어옴");	
 		String path = "C:\\upload\\";
 		
@@ -136,7 +136,8 @@ public class DogInfoController {
 		 * uploadfileName.transferTo(new File("D:\\upload\\" + fileName)); }
 		 */
 		
-		// rttr.addFlashAttribute("registerdno",dogInfoDTO.getDno());
+		//모달창
+		rttr.addFlashAttribute("result",dogInfoDTO.getDno());
 		return "redirect:/doglist";
 	}
 

@@ -9,6 +9,20 @@
 <%@ include file="/WEB-INF/views/include/header2.jsp" %>
 
 
+<!-- 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
+
+
+<style>
+.card-body{font-family: 'Poor Story', cursive; font-size:1.6em;}
+.card-header{font-family: 'Poor Story', cursive; font-size:1.8em; font-weight:800;}
+.card-body1{font-family: 'Poor Story', cursive; font-size:1.1em;}
+.card-header1{font-family: 'Poor Story', cursive; font-size:1.3em; font-weight:500;}
+</style>
+
 
 <script>
 function cartcheck(){
@@ -57,8 +71,8 @@ function cartcheck(){
 					src="<spring:url value='/image/${detail.fileName}'/>" alt="${detail.name } 이미지파일"/></a>
 				<div class="card-body">
 					<%-- <div class="card-header"><!-- 강아지 특징 -->${dog.name } 특징</div> --%>
-					<div class="card-header"><!-- 강아지 특징 --><c:out value="${detail.name }"/> 특징</div>
-	                <div class="card-body"><!-- 털이 많고 밝은 성격 --><c:out value="${detail.feature }"/></div>
+					<div class="card-header card-header1"><!-- 강아지 특징 --><c:out value="${detail.name }"/> 특징</div>
+	                <div class="card-body card-body1"><!-- 털이 많고 밝은 성격 --><c:out value="${detail.feature }"/></div>
 				</div><!-- <div class="card-body"> 끝-->				
 			</div>
 			<!-- <div class="card mb-4"> 끝-->
@@ -72,7 +86,9 @@ function cartcheck(){
 				<!-- button의 onclick 속성은 redirect  개념으로 Controller에서 @GetMapping으로 처리 -->
 				
 				<!--  아래 코드 한번에 다들어간다. -->
-				 <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart?dno=<c:out value="${detail.dno }"/>'">장바구니담기</button>
+				 <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart?dno=<c:out value="${detail.dno }"/>'">
+				 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
+				 장바구니담기</button>
 				
 				 <!-- <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart'">장바구니담기</button>  -->
 				
@@ -117,7 +133,11 @@ function cartcheck(){
 			<div class="card mb-4">
 				<div class="card-header"><!-- 강아지 건강상태  --><c:out value="${detail.name }"/> 건강상태</div>
 				<%-- <div class="card-header"><!-- 강아지 건강상태  --> ${dog.name } 건강상태</div> --%>
-                <div class="card-body"><!-- 광견병 종합백신 --><c:out value="${detail.health }"/></div>
+                <div class="card-body"><!-- 광견병 종합백신 -->
+                <%-- 문자열뒤의 콤마제거를 위해 아래 코드로 수정 <c:out value="${detail.health}"/> --%>
+                 <c:out value="${fn:split(detail.health,',')[0]}"/> 
+                 <%-- 해당코드 적용불가 <c:out value="${fn:substring(detail.health, length -1, length)}"/> --%>
+                </div>
 			</div>
 			
 			<div class="card mb-4">

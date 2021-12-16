@@ -26,6 +26,14 @@
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <!-- 부트스트랩 CSS, Fontawesome 아이콘, 제이쿼리, reply.js -->
 
+
+
+<!-- 부트스트랩 -->
+<script src="./jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
+<script src="./bootstrapt/js/bootstrap.min.js"></script>
+
+
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -3,11 +3,66 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri = "http://www.springframework.org/security/tags" prefix="sec" %>    
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 
+<!-- 메인상품 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Stylish&display=swap" rel="stylesheet">
 
 
+<!-- 상품목록 구글폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
+
+
+<style>
+p {font-family: 'Cute Font', cursive; font-family: 'Stylish', sans-serif; font-size:1.4em; font-weight:200;}
+.h4 {font-family: 'Poor Story', cursive; font-size:1.9em; font-weight:800;}
+.kind {font-family: 'Poor Story', cursive; font-size:1.6em; font-weight:700;}
+
+</style>
+<!-- ================================================================== -->
+
+<div style="margin:0 auto; text-align: center;">
+	<div><h2 class="h4" style="padding: 30px; font-family:'Jua';">상품 목록</h2></div>
+	<!-- <div style="width: 1300px; display: inline-block; border: 1px solid red;"> -->
+
+<div class="container">
+	<div class="row">	
+		<c:forEach items="${dog1List}" var="dog1List">
+			<div class="col-lg-3">
+				<div class="card mb-3">
+					<div class="card-body">					
+						<!-- <div style="border: 1px solid blue; float: left; width: 260px; margin: 30px;"> -->
+						<div><img src="/resources/img/dog/<c:out value="${dog1List.fileName}"/>" style="width: 250px; height: 200px;"></div>
+						<br>
+						<h2 class="card-title h4 kind">
+							<%-- 콤마 있어서 JSTL 변경 <br> 품종 : <c:out value="${dog1List.kind}"/> --%>
+							품종 : <c:out value="${fn:replace(dog1List.kind, ',', '')}"/>
+						</h2>
+						<p class="card-text" style="text-align:left;">		
+							나이 : <c:out value="${dog1List.age}"/>
+							<br> 성별 : <c:out value="${dog1List.sex}"/>
+							<br> 이름 : <c:out value="${dog1List.name}"/>
+							<br> 분양가 : <fmt:formatNumber value="${dog1List.price}" pattern="#,###,###"/> 원
+							<br>
+						</p>	
+					<button type="button"  class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=${dog1List.dno}'">상세보기</button>
+						
+					</div><!-- 끝 <div class="card-body"> -->
+				</div>	<!-- 끝 <div class="card mb-3"> -->
+			</div><!--끝 <div class="col-lg-3"> -->
+		</c:forEach>
+	</div><!-- 끝 <div class="row">	 -->
+</div><!--끝 <div class="container"> -->
+<!-- ================================================================== -->
+
+
+<%-- 
 <!-- ================================================================== -->
 <div style="margin:0 auto; text-align: center;">
 	<div><h2 style="padding: 30px; font-family:'Jua';">상품 목록</h2></div>
@@ -25,9 +80,7 @@
 	</c:forEach>
 	</div>
 </div>
-<!-- ================================================================== -->
-
-
+<!-- ================================================================== --> --%>
 
 <!-- 지도, 공지사항 -->
 <div class="row mx-5 my-5">

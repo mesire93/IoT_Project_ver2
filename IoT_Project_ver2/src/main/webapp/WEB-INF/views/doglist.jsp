@@ -8,7 +8,7 @@
 <%@ include file="/WEB-INF/views/include/header2.jsp" %>
 
 
-
+<!-- 상품목록 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
 
 $(document).ready(function(){
 	//제이쿼리 ->$ 알려주고 있다. 문법
-	var result ="<c:out value='${registerdno}'/>";
+	var result ="<c:out value='${result}'/>";
 	//Controller 에서 값을 들고오는 $. addFlashAttribute 1번만 값을 전송하라. 
 	
 	checkModal(result);
@@ -34,10 +34,10 @@ $(document).ready(function(){
 		 
 		 
 		if(parseInt(result) > 0 ){
-			$(".modal-body").html("강아지 분양등록이 이루어졌습니다.");
-			$("#myModal").modal("show"); 
+			$(".modal-body").html("분양 강아지가 등록되었어요!");
+			 
 		}		
-			
+		$("#myModal").modal("show");
 	}
 	
 	//doglist 아래 상세보기 버튼 클릭시 자바스크립트로 이동
@@ -137,7 +137,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 								
 							<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="width:200%;" alt="..." /></a> --%>
 							<%-- 안됨<a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="..."/></a> --%>
-								 <a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/></a>
+								 <a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="width:350px; height:400px;" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/></a>
 							<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="object-fit: scale-down" alt="..."/></a> --%>
 							<!-- 안됨<a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down" alt="..."></a> -->
 						
@@ -167,14 +167,14 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 							</h2>
 							
 							
-							<p class="card-text">
+							<p class="card-text" >
 								나이 :
 								<c:out value="${list.age}" />
 								<br> 성별 :
 								<c:out value="${list.sex}" />
-								<br> 특징:
+								<br><br> 특징:
 								<c:out value="${list.simple}" />
-								<br> 분양가:
+								<br><br> 분양가:
 								
 								<%-- 아래 코드로 변경 <c:out value="${list.price}" /> --%>
 								<fmt:formatNumber value="${list.price }" pattern="#,###,###"/>원
@@ -237,7 +237,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 							 나이 : 8개월						
 							<br> 성별 : 여(암컷)
 							<br>
-							<br> 특징 : 황금색 털과 검은 눈, 검은 코 그리고 처진 귀를 가졌고 사람을 아주 잘 따릅니다. 
+							<br> 특징 : 황금색 털과 검은 눈을 가졌고 사람을 아주 잘 따릅니다. 
 							<br>
 							<br> 분양가 : 800,000 원
 
@@ -276,7 +276,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 							 나이 : 2살				
 							<br> 성별 : 여(암컷)
 							<br>
-							<br> 특징 : 몸에 비해 다리는 짧지만 튼튼하고 운동량이 많아서 매일 운동이 필요합니다.
+							<br> 특징 : 다리는 짧지만 튼튼하고 운동량이 많아서 매일 운동이 필요해요.
 							<br>
 							<br> 분양가 : 900,000 원
 
@@ -332,9 +332,28 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 
 
 
+  <!-- 분양등록 확인 Modal-->
+<div class="modal fade"  id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <h4 class="modal-title">알림창</h4>
+      </div>
+      <div class="modal-body">
+        <p>분양 강아지가 등록되었어요!</p>
+      </div>
+      <div class="modal-footer">
+<!--         <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">닫기</button> -->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 
 <!-- 모달창 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -342,18 +361,17 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
                 <h4 class="modal-title" id="myModalLabel">알림창</h4>
             </div>
             <div class="modal-body">
-				강아지 분양등록이 이루어졌습니다
+				분양 강아지가 등록되었어요!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
             </div>
         </div>
-        <!-- /.modal-content -->
+        /.modal-content
  	 </div>
-  <!-- /.modal-dialog -->
+  /.modal-dialog
 </div>
-<!-- /.modal -->
+/.modal -->
 <br>
 <br>
 <br>
