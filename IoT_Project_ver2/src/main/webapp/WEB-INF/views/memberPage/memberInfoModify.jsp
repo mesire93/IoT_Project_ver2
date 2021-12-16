@@ -14,16 +14,18 @@
 		<div class="text-center mb-5">
 			<button type="button" class="btn btn-outline-primary" style="width:80%; height:50px; font-family:'Jua'; font-size:2.0em;" disabled>회원 정보 수정</button>
 		</div>
-<%--		
+	
 		<hr>
 			<p>${member.userId }</p>
 			<p>${member.userName }</p>
 			<p>${member.userPw }</p>
 			<p>${member.userGender }</p>
 			<p>${member.userEmail }</p>
+			<p>${member.number1 }</p>
+			<p>${member.number2 }</p>
 			<p>${member}</p>
 		<hr>
- --%>
+
 	<form class="memberInfoModify" action="/memberPage/memberInfoModify" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
 		<input type="hidden" name="mno" value="${member.mno }">

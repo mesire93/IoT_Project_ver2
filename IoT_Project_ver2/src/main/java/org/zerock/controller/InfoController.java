@@ -59,8 +59,15 @@ public class InfoController {
 	
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/adminInfo")
+	@GetMapping("/adminPage")
 	public void adminInfo(Model model) {
+		model.addAttribute("list", memberService.getList());
+		
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/infoPage")
+	public void Info(Model model) {
 		model.addAttribute("list", memberService.getList());
 		
 	}

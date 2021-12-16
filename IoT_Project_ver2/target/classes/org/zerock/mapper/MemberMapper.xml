@@ -29,7 +29,7 @@
 	</resultMap>
 	
 	<select id="read" resultMap="memberMap">
-		select mem.userid, userpw, username, enabled, regdate, userauth
+		select *
 		from membervo mem left outer join authvo auth 
 				on mem.userid=auth.userid
 		where mem.userid=#{userId}
@@ -50,7 +50,8 @@
 	
  	
 	<select id="getList"  resultType="org.zerock.domain.MemberVO">
-		select * from membervo m, authvo a where m.userid = a.userid order by mno desc
+		select * from membervo m, authvo a where m.userid = a.userid 
+		order by mno desc
 	</select>
 	
 	<select id="getmno" resultType="org.zerock.domain.MemberVO">
