@@ -29,7 +29,7 @@
 					<th>이름</th>
 					<th>계정상태</th>
 					<th>가입일자</th>
-					<th>비고</th>
+					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,7 +45,7 @@
 					<td><c:out value="${list.enabled }"/></td>
 					<td><small><fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${list.regDate }" /></small></td>
 					<td>
-
+						<a class='authModify' style="text-decoration:none;" href='<c:out value="${list.mno}"/>'> <button type="button" id="authModify" class="btn btn-info">회원등급 수정</button></a>
 					</td>
 				</tr>				
 			</c:forEach>
@@ -74,6 +74,12 @@ $(document).ready(function(){
 		actionForm.find("input[name='mno']").val($(this).attr("href"));
 		actionForm.attr("action", "/memberPage/memberInfo");
 		actionForm.submit();
+	});
+	
+	$(".authModify").on("click", function(e){
+		e.preventDefault();
+		actionForm.find("input[name='mno']").val($(this).attr("href"));
+		actionForm.attr("action", "/memberPage/memberAuth").attr("method","get").submit();
 	});
 	
 });

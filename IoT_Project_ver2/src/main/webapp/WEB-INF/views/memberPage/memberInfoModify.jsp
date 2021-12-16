@@ -31,8 +31,8 @@
 		<input type="hidden" name="mno" value="${member.mno }">
 
 		<div class="mb-3">
-			<label for="userId" class="form-label">아이디</label> <input
-				type="text" class="form-control" name="userId" id="userId" placeholder="userId"  readonly value='<c:out value="${member.userId }"/>'>
+			<label for="userId" class="form-label">아이디</label> 
+			<input type="text" class="form-control" name="userId" id="userId" placeholder="userId"  readonly value='<c:out value="${member.userId }"/>'>
 		</div>
 
 		<div class="mb-3">
@@ -89,16 +89,15 @@
 			<div class="col-md-4">
 				<label for="number2" class="form-label">&nbsp;</label>
 				<input type="text" class="form-control form-control-user" name="number2"
-					id="number2" placeholder="number2"  required value='<c:out value="${member.number2 }"/>'>
+					id="number2" maxlength='4' placeholder="number2"  required value='<c:out value="${member.number2 }"/>'>
 			</div>
 			<div class="col-md-4">
 				<label for="number3" class="form-label">&nbsp;</label>
 				<input type="text" class="form-control form-control-user" name="number3"
-					id="number3" placeholder="number3" required  value='<c:out value="${member.number3 }"/>'>
+					id="number3" maxlength='4' placeholder="number3" required  value='<c:out value="${member.number3 }"/>'>
 			</div>
 		</div>
-		
-		
+
 
 		<div class="text-center py-5">
 			<button type="submit" class="btn btn-primary btn-user btn-block mx-3" >수정</button>		

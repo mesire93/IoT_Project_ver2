@@ -19,4 +19,7 @@ public interface MemberService {
 	public boolean modify(MemberVO member);
 	
 	public boolean remove(Long mno);
+	
+	public boolean modifyAuth(AuthVO auth);
+
 }

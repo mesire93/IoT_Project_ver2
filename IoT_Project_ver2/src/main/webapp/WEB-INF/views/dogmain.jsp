@@ -38,11 +38,11 @@ p {font-family: 'Cute Font', cursive; font-family: 'Stylish', sans-serif; font-s
 				<div class="card mb-3">
 					<div class="card-body">					
 						<!-- <div style="border: 1px solid blue; float: left; width: 260px; margin: 30px;"> -->
-						<div><img src="/resources/img/dog/<c:out value="${dog1List.fileName}"/>" style="width: 100%; height: 100%;"></div>
+						<div><img src="/resources/img/dog/<c:out value="${dog1List.fileName}"/>" style="width: 100%; height: 200px;"></div>
 						<br>
 						<h2 class="card-title h4 kind">
 							<%-- 콤마 있어서 JSTL 변경 <br> 품종 : <c:out value="${dog1List.kind}"/> --%>
-							품종 : <c:out value="${fn:replace(dog1List.kind, ',', '')}"/>
+							품종 : <c:out value="${fn:replace(dog1List.kind, ',' , '')}"/>
 						</h2>
 						<p class="card-text" style="text-align:left;">		
 							나이 : <c:out value="${dog1List.age}"/>

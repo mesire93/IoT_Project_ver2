@@ -148,9 +148,9 @@ $(document).ready(function(){
 			var str = "";
 			
 			if($("#valid01").val() == ""){
-			alert("제목을 입력하세요");
-			$("#valid01").focus();
-			return;
+				alert("제목을 입력하세요");
+				$("#valid01").focus();
+				return;
 			}
 			if($("#valid02").val() == ""){
 				alert("작성자를 입력하세요");

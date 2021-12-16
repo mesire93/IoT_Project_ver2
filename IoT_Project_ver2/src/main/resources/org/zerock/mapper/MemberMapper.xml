@@ -74,8 +74,11 @@
 		num1 = #{number1},
 		num2 = #{number2},
 		num3 = #{number3}
-		
 		where mno = #{mno}
+	</update>
+	
+	<update id="updateAuth">
+		update authvo set userauth = #{userAuth} where userId = #{userId}
 	</update>
 
 

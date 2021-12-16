@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.Criteria;
+import org.zerock.domain.AuthVO;
 import org.zerock.domain.MemberVO;
 import org.zerock.service.MemberService;
 
@@ -34,6 +33,28 @@ public class InfoController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/memberAuth")
+	public void memberAuth(@ModelAttribute("mno")Long mno, Model model) {
+
+		model.addAttribute("member", memberService.get(mno));
+		
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/adminPage")
+	public void adminPage(Model model) {
+		model.addAttribute("list", memberService.getList());
+		
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/infoPage")
+	public void InfoPage(Model model) {
+		model.addAttribute("list", memberService.getList());
+		
+	}
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/memberInfoModify")
 	public void getMemberInfoModify(@RequestParam("mno") Long mno, Model model) {
 		model.addAttribute("member", memberService.get(mno));
@@ -41,7 +62,7 @@ public class InfoController {
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/memberInfoModify")
-	public String postMemberInfoModify(MemberVO member) {
+	public String postMemberInfoModify(MemberVO member, AuthVO auth) {
 		
 		memberService.modify(member);
 
@@ -56,19 +77,23 @@ public class InfoController {
 		return "redirect:/dogmain";
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/adminPage")
-	public void adminInfo(Model model) {
-		model.addAttribute("list", memberService.getList());
-		
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/memberAuthModify")
+	public void getMemberAuthModify(@RequestParam("mno") Long mno, Model model) {
+		model.addAttribute("member", memberService.get(mno));
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/infoPage")
-	public void Info(Model model) {
-		model.addAttribute("list", memberService.getList());
+	@PostMapping("/memberAuthModify")
+	public String postMemberAuthModify(MemberVO member, AuthVO auth) {
 		
+		memberService.modifyAuth(auth);
+
+		return "redirect:/dogmain";
 	}
+	
+	
 	
 
 	

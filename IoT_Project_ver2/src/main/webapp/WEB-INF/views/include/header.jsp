@@ -52,9 +52,12 @@
 <script src="/resources/nivo-slider/demo/scripts/jquery-1.9.0.min.js"  type="text/javascript" ></script>
 <script src="/resources/nivo-slider/jquery.nivo.slider.js" type="text/javascript"></script> 
  <script>
- $(window).load(function() {
-    $('#slider').nivoSlider();
-});
+ var newJquery = $.noConflict(true);
+ 
+ $(function(){
+	 newJquery('#slider').nivoSlider();
+ });
+ 
  </script>
  <!-- 니보 슬라이더 -->
 

@@ -68,7 +68,7 @@ public class BuyController {
 	 @GetMapping("delete") 
 	 public String delete(@RequestParam("dno") Long dno, RedirectAttributes rttr) {
 		 dogBuyService.remove(dno); 
-		 return "redirect: /dogcart"; 
+		 return "redirect:/dogcart"; 
 	 }
 	 
 

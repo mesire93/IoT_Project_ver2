@@ -23,4 +23,6 @@ public interface MemberMapper {
 	
 	public int update(MemberVO member);
 	
+	public int updateAuth(AuthVO auth);
+	
 }

@@ -3,9 +3,8 @@ package org.zerock.domain;
 import java.util.Date;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
 public class MemberVO {
@@ -40,6 +39,15 @@ public class MemberVO {
 	private boolean enabled;
 	private Date regDate;
 	private Date updateDate;
+	
+	
+	public List<AuthVO> getAuthList(){
+		return authList;
+	}
+	
+	public void setAuthList(List<AuthVO> authList) {
+		this.authList = authList;
+	}
 	
 	
 }

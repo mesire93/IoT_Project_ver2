@@ -68,6 +68,13 @@ public class MemberServiceImpl implements MemberService{
 		
 		return mapper.delete(mno) == 1;
 	}
+
+
+	@Override
+	public boolean modifyAuth(AuthVO auth) {
+		
+		return mapper.updateAuth(auth) == 1;
+	}
 	
 
 	

@@ -14,7 +14,7 @@
 		<div class="text-center mb-5">
 			<button type="button" class="btn btn-outline-primary" style="width:80%; height:50px; font-family:'Jua'; font-size:2.0em;" disabled>회원 정보</button>
 		</div>
-
+	
 
 		<div class="mb-3">
 			<label for="userId" class="form-label">아이디</label> 
@@ -47,8 +47,7 @@
 					name="userEmail" id="userEmail" placeholder="userEmail" readonly value='<c:out value="${member.userEmail }"/>'>
 			</div>
 		</div>
-
-		
+				
 		<div class="row mb-3">
 			<div class="col-md-6 mb-3 mb-sm-0">
 				<label for="userAddress1" class="form-label">주소</label> <input
@@ -88,7 +87,14 @@
 			<input type="text" class="form-control form-control-user" name="regDate"
 					id="regDate" placeholder="regDate"  readonly value='<fmt:formatDate pattern="yyyy년 MM월 dd일  HH시 mm분 ss초" value="${member.regDate }" />' >
 		</div>
+		
+		<div class="mb-3">
+			<label for="userAuth" class="form-label">회원 등급</label> 
+			<input type="text" class="form-control form-control-user" name="userAuth"
+					id="userAuth" placeholder="userAuth"  readonly value='<c:out value="${member.authList[0].userAuth}"/>' >
+		</div>
 
+				
 		<div class="text-center py-5">
 			<button type="button" class="btn btn-primary btn-user btn-block mx-3 btn_modify" >회원정보 수정</button>
 			<button type="button" class="btn btn-danger btn-user btn-block mx-3 btn_remove" >회원 탈퇴</button>
