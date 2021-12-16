@@ -48,8 +48,13 @@
 
 
 <style>
-/* 	*{font-size:20px;
-		font-family: 'Jua', sans-serif;} */
+body {
+  background-image:url("/resources/img/dog/1.jpg")
+	  ,url("/resources/img/dog/3.jpg");
+	  
+  background-repeat:no-repeat;
+  background-position: 10px 400px, right 300px;
+  background-attachment: fixed;
 </style>
 
 </head>
@@ -141,6 +146,14 @@ $(document).ready(function(){
 	
 	$("#dogcart").on("click", function(){
 		self.location = "/dogcart/";
+	});
+	
+	$("#ddd").on("click", function(){
+		self.location = "/dogorder/";
+	});
+	
+	$("#ddd1").on("click", function(){
+		self.location = "/doglist/";
 	});
 	
 	

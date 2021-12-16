@@ -20,7 +20,7 @@
 
 <select id="dog3List" resultType="org.zerock.domain.DogBuy3VO">
 	<![CDATA[
-		select * from dogorder where bno > 0 
+		SELECT * FROM(SELECT * FROM dogorder ORDER BY ROWNUM DESC) WHERE ROWNUM = 1
 	]]>	
 </select>
 

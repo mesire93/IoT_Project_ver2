@@ -38,7 +38,7 @@ p {font-family: 'Cute Font', cursive; font-family: 'Stylish', sans-serif; font-s
 				<div class="card mb-3">
 					<div class="card-body">					
 						<!-- <div style="border: 1px solid blue; float: left; width: 260px; margin: 30px;"> -->
-						<div><img src="/resources/img/dog/<c:out value="${dog1List.fileName}"/>" style="width: 250px; height: 200px;"></div>
+						<div><img src="/resources/img/dog/<c:out value="${dog1List.fileName}"/>" style="width: 100%; height: 100%;"></div>
 						<br>
 						<h2 class="card-title h4 kind">
 							<%-- 콤마 있어서 JSTL 변경 <br> 품종 : <c:out value="${dog1List.kind}"/> --%>
@@ -81,7 +81,6 @@ p {font-family: 'Cute Font', cursive; font-family: 'Stylish', sans-serif; font-s
 	</div>
 </div>
 <!-- ================================================================== --> --%>
-
 <!-- 지도, 공지사항 -->
 <div class="row mx-5 my-5">
 
@@ -148,61 +147,61 @@ $(document).ready(function(){
 	
 	var actionForm = $("#actionForm");
 		
-	$(".move").on("click", function(e){
-		e.preventDefault();
-		actionForm.find("input[name='bno']").val($(this).attr("href"));
-		actionForm.attr("action", "/board/notice/get");
-		actionForm.submit();
-	});
-
-	var container = document.getElementById('map');
-	var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new kakao.maps.LatLng(35.207447, 129.070227), //지도의 중심좌표.
-			level: 3 //지도의 레벨(확대, 축소 정도)
-		};
-
-	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		$(".move").on("click", function(e){
+			e.preventDefault();
+			actionForm.find("input[name='bno']").val($(this).attr("href"));
+			actionForm.attr("action", "/board/notice/get");
+			actionForm.submit();
+		});
 	
-	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+		var container = document.getElementById('map');
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+				center: new kakao.maps.LatLng(35.207447, 129.070227), //지도의 중심좌표.
+				level: 3 //지도의 레벨(확대, 축소 정도)
+			};
 	
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+		var mapTypeControl = new kakao.maps.MapTypeControl();
 	
-	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(35.207447, 129.070227); 
-
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition,
-	    clickable:true
-	});
-
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
+		// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+		// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 	
-	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-	var iwContent = '<div style="padding:5px; height:30px;">5층으로 오세요</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-	// 인포윈도우를 생성합니다
-	var infowindow = new kakao.maps.InfoWindow({
-	    content : iwContent,
-	    removable : iwRemoveable
-	});
-
-	// 마커에 클릭이벤트를 등록합니다
-	kakao.maps.event.addListener(marker, 'click', function() {
-	      // 마커 위에 인포윈도우를 표시합니다
-	      infowindow.open(map, marker); 
-	});
-
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+		
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng(35.207447, 129.070227); 
+	
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition,
+		    clickable:true
+		});
+	
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+		var iwContent = '<div style="padding:5px; height:30px;">5층으로 오세요</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	
+		// 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+	
+		// 마커에 클릭이벤트를 등록합니다
+		kakao.maps.event.addListener(marker, 'click', function() {
+		      // 마커 위에 인포윈도우를 표시합니다
+		      infowindow.open(map, marker); 
+		});
+	
 	
 });
 
