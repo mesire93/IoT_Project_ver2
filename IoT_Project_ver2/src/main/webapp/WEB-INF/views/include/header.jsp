@@ -20,19 +20,19 @@
 <!-- 부트스트랩 CSS, Fontawesome 아이콘, 제이쿼리, reply.js -->
 <link href="/resources/css/styles.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <!-- 부트스트랩 CSS, Fontawesome 아이콘, 제이쿼리, reply.js -->
 
 
 
-<!-- 부트스트랩 -->
+<!-- 부트스트랩
 <script src="./jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
 <script src="./bootstrapt/js/bootstrap.min.js"></script>
-
+ -->
 
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,9 +59,12 @@
  <!-- 니보 슬라이더 -->
 
 
+
 <style>
 /* 	*{font-size:20px;
 		font-family: 'Jua', sans-serif;} */
+		
+
 </style>
 
 </head>
@@ -97,11 +100,12 @@
 			        </sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class="fas fa-undo-alt"></i>&nbsp;Logout</a></li>
-						<li class="nav-item"><a class="nav-link active" href="/memberPage/infoPage" id="memberInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
+						<li class="nav-item" id="infoPage"><a class="nav-link active" href="/memberPage/infoPage" id="memberInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
+			        	<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="nav-item" id="adminPage"><a class="nav-link active" href="/memberPage/adminPage"><i class="fas fa-address-card"></i>&nbsp;관리자페이지</a></li>
+						</sec:authorize>
 			        </sec:authorize>
-			         <sec:authorize access="hasRole('ROLE_ADMIN')">
-						<li class="nav-item"><a class="nav-link active" href="/memberPage/adminPage"><i class="fas fa-address-card"></i>&nbsp;관리자페이지</a></li>
-					</sec:authorize>
+			         
 				</ul>
 			</div>
 		</div>
@@ -117,16 +121,15 @@
         		       <img src="/resources/nivo-slider/demo/images/1.jpg" data-thumb="/resources/nivo-slider/demo/images/1.jpg" alt="" />
          		  	   <img src="/resources/nivo-slider/demo/images/2.jpg" data-thumb="/resources/nivo-slider/demo/images/2.jpg" alt="" />
         		       <img src="/resources/nivo-slider/demo/images/3.jpg" data-thumb="/resources/nivo-slider/demo/images/3.jpg" alt=""/>
+        		       <img src="/resources/nivo-slider/demo/images/4.jpg" data-thumb="/resources/nivo-slider/demo/images/4.jpg" alt=""/>
+        		       <img src="/resources/nivo-slider/demo/images/5.jpg" data-thumb="/resources/nivo-slider/demo/images/5.jpg" alt=""/>
+        		       <img src="/resources/nivo-slider/demo/images/6.jpg" data-thumb="/resources/nivo-slider/demo/images/6.jpg" alt=""/>
       		     </div>
    		 	   </div>
   		 	</div>
 		</div>
 	</header>
-<%-- 	
-	<form id='actionForm' action="/memberPage/memberInfo" method='get'>
-		<input type="hidden" name="mno" value="${member.mno}"> 
-	</form>
-	 --%>
+
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <script type="text/javascript">
@@ -164,16 +167,20 @@ $(document).ready(function(){
 		self.location = "/dogcart/";
 	});
 	
-/* 	
-	var actionForm = $("#actionForm");
 	
-	$("#memberInfo").on("click", function(e){
-		e.preventDefault();
-		actionForm.find("input[name='mno']").val($(this).attr("href"));
-		actionForm.attr("action", "/memberPage/memberInfo");
-		actionForm.submit();
-	});
-	 */
+	var role = null;
 	
+	<sec:authorize access="isAuthenticated()">
+		role = '<sec:authentication property = "principal.Authorities" />'
+	</sec:authorize>
+			
+	if(role.indexOf("ADMIN") == -1){
+		$("#adminPage").hide();
+	}
+	else{
+		$("#infoPage").hide();
+	}
+	
+
 });
 </script>

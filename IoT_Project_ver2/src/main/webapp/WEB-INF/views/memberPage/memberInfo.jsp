@@ -14,7 +14,7 @@
 		<div class="text-center mb-5">
 			<button type="button" class="btn btn-outline-primary" style="width:80%; height:50px; font-family:'Jua'; font-size:2.0em;" disabled>회원 정보</button>
 		</div>
-		
+
 
 		<div class="mb-3">
 			<label for="userId" class="form-label">아이디</label> 
@@ -110,16 +110,24 @@ $(document).ready(function(){
 	var actionForm = $("#actionForm");
 	
 	var userid = null;
+	var role = null;
 	var originaluser = $("#userId").val();	
 	
 	<sec:authorize access="isAuthenticated()">
 		userid = '<sec:authentication property = "principal.username" />';
+		role = '<sec:authentication property = "principal.Authorities" />'
 	</sec:authorize>
 	
 	console.log(userid);
+	console.log(role.indexOf("ADMIN"));
 	console.log(originaluser);
 	
 	$(".btn_modify").on("click", function(e){
+		if(role.indexOf("ADMIN") != -1){
+			actionForm.attr("action", "/memberPage/memberInfoModify").attr("method","get").submit();
+			return;
+		}
+		
 		if(userid == originaluser){
 			actionForm.attr("action", "/memberPage/memberInfoModify").attr("method","get").submit();
 		}
@@ -131,6 +139,11 @@ $(document).ready(function(){
 
 	$(".btn_remove").on("click", function(e){
 		var del = confirm("정말 탈퇴하시겠습니까?")
+		if(role.indexOf("ADMIN") != -1){
+			actionForm.append("<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token }' />");
+			actionForm.attr("action", "/memberPage/memberInfoRemove").attr("method", "post").submit();
+			return;
+		}
 		
 		if(userid == originaluser){
 			if(del == true){

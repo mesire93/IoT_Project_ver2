@@ -52,7 +52,7 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input name="remember-me" type="checkbox" value="Remember Me">자동 로그인
+                                    <input name="remember-me" type="checkbox" >자동 로그인
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->

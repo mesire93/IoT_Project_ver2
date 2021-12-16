@@ -20,6 +20,7 @@
 		<result property="enabled" column="enabled"/>
 		<result property="regDate" column="regdate"/>
 		<result property="updateDate" column="updatedate"/>
+		<result property="mno" column="MNO"/>
 		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 	
@@ -49,13 +50,13 @@
 	</select>
 	
  	
-	<select id="getList"  resultType="org.zerock.domain.MemberVO">
+	<select id="getList"  resultMap="memberMap" resultType="org.zerock.domain.MemberVO">
 		select * from membervo m, authvo a where m.userid = a.userid 
-		order by mno desc
+		order by MNO desc
 	</select>
 	
-	<select id="getmno" resultType="org.zerock.domain.MemberVO">
-		select * from membervo m, authvo a where m.userid = a.userid and mno = #{mno}
+	<select id="getmno"  parameterType="Long" resultMap="memberMap" resultType="org.zerock.domain.MemberVO">
+		select * from membervo m, authvo a where m.userid = a.userid and MNO = #{mno}
 	</select>
 
 	<delete id="delete">

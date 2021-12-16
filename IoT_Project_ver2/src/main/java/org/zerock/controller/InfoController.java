@@ -43,13 +43,12 @@ public class InfoController {
 	@PostMapping("/memberInfoModify")
 	public String postMemberInfoModify(MemberVO member) {
 		
-		System.out.println(member);
 		memberService.modify(member);
-		
-		System.out.println("--------------------------------------");
+
 		return "redirect:/dogmain";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/memberInfoRemove")
 	public String memberInfoRemove(@RequestParam("mno") Long mno) {
 		memberService.remove(mno);
@@ -57,8 +56,7 @@ public class InfoController {
 		return "redirect:/dogmain";
 	}
 	
-	//@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/adminPage")
 	public void adminInfo(Model model) {
 		model.addAttribute("list", memberService.getList());
