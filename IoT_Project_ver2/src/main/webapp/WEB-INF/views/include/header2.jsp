@@ -78,8 +78,11 @@
 			        </sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class="fas fa-undo-alt"></i>&nbsp;Logout</a></li>
-						<li class="nav-item"><a class="nav-link active" href="/myPage/adminInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/memberPage/adminInfo" id="memberInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
 			        </sec:authorize>
+			        <sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="nav-item"><a class="nav-link active" href="/memberPage/adminInfo"><i class="fas fa-address-card"></i>&nbsp;관리자페이지</a></li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>

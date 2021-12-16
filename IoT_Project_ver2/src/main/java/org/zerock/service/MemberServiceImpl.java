@@ -56,7 +56,6 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.getmno(mno);
 	}
 
-	@Transactional
 	@Override
 	public boolean modify(MemberVO member) {
 

@@ -39,7 +39,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+<!-- 	
 	<filter>
 		<filter-name>encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -53,7 +53,7 @@
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>
 	
-	
+	 -->
 	<!-- Page 715 스프링 시큐리티 한글처리 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

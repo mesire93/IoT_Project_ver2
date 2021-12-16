@@ -82,17 +82,22 @@
 					name="number3" id="number3" placeholder="number3" readonly value='<c:out value="${member.number3 }"/>'>
 			</div>
 		</div>
+		
+		<div class="mb-3">
+			<label for="regDate" class="form-label">가입일자</label> 
+			<input type="text" class="form-control form-control-user" name="regDate"
+					id="regDate" placeholder="regDate"  readonly value='<fmt:formatDate pattern="yyyy년 MM월 dd일  HH시 mm분 ss초" value="${member.regDate }" />' >
+		</div>
 
 		<div class="text-center py-5">
 			<button type="button" class="btn btn-primary btn-user btn-block mx-3 btn_modify" >회원정보 수정</button>
-		
 			<button type="button" class="btn btn-danger btn-user btn-block mx-3 btn_remove" >회원 탈퇴</button>
 		</div>
 	</div>
 
 </div>
 
-<form id="actionForm" action="/myPage/myInfoModify"  method="get">
+<form id="actionForm" action="/memberPage/memberInfoModify"  method="get">
 	<input type="hidden" name="mno" value='<c:out value="${member.mno }"/>'>
 </form>
 
@@ -116,7 +121,7 @@ $(document).ready(function(){
 	
 	$(".btn_modify").on("click", function(e){
 		if(userid == originaluser){
-			actionForm.attr("action", "/myPage/myInfoModify").attr("method","get").submit();
+			actionForm.attr("action", "/memberPage/memberInfoModify").attr("method","get").submit();
 		}
 		else{
 			alert("본인의 계정만 수정 할 수 있습니다.");
@@ -130,7 +135,7 @@ $(document).ready(function(){
 		if(userid == originaluser){
 			if(del == true){
 				actionForm.append("<input type='hidden' name='${_csrf.parameterName}' value='${_csrf.token }' />");
-				actionForm.attr("action", "/myPage/myInfoRemove").attr("method", "post").submit();
+				actionForm.attr("action", "/memberPage/memberInfoRemove").attr("method", "post").submit();
 			}
 			else{
 				return;

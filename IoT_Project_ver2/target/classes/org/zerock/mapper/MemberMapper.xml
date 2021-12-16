@@ -36,8 +36,8 @@
 	</select>
 	
 	<insert id="insertMember">
-		insert into membervo(userid,username,userpw,useremail,usergender,num1,num2,num3,useraddress1,useraddress2,regdate)
-			values(#{userId},#{userName},#{userPw},#{userEmail},#{userGender},#{number1},#{number2},#{number3},#{userAddress1},#{userAddress2},sysdate)		
+		insert into membervo(userid,username,userpw,useremail,usergender,num1,num2,num3,useraddress1,useraddress2,regdate, mno)
+			values(#{userId},#{userName},#{userPw},#{userEmail},#{userGender},#{number1},#{number2},#{number3},#{userAddress1},#{userAddress2},sysdate, seq_member.nextval)		
 	</insert>
 	<insert id="insertMemberAuth">
 		insert into authvo(userid,userauth)
@@ -50,11 +50,11 @@
 	
  	
 	<select id="getList"  resultType="org.zerock.domain.MemberVO">
-		select * from membervo order by mno desc
+		select * from membervo m, authvo a where m.userid = a.userid order by mno desc
 	</select>
 	
 	<select id="getmno" resultType="org.zerock.domain.MemberVO">
-		select * from membervo where mno = #{mno}
+		select * from membervo m, authvo a where m.userid = a.userid and mno = #{mno}
 	</select>
 
 	<delete id="delete">

@@ -14,16 +14,17 @@
 		<div class="text-center mb-5">
 			<button type="button" class="btn btn-outline-primary" style="width:80%; height:50px; font-family:'Jua'; font-size:2.0em;" disabled>회원 정보 수정</button>
 		</div>
-		
+<%--		
 		<hr>
 			<p>${member.userId }</p>
 			<p>${member.userName }</p>
 			<p>${member.userPw }</p>
 			<p>${member.userGender }</p>
 			<p>${member.userEmail }</p>
+			<p>${member}</p>
 		<hr>
-		
-	<form class="myInfoModify" action="/myPage/myInfoModify" method="post">
+ --%>
+	<form class="memberInfoModify" action="/memberPage/memberInfoModify" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }" />
 		<input type="hidden" name="mno" value="${member.mno }">
 
@@ -94,6 +95,13 @@
 					id="number3" placeholder="number3" required  value='<c:out value="${member.number3 }"/>'>
 			</div>
 		</div>
+		
+		<div class="mb-3">
+			<label for="regDate" class="form-label">가입일자</label> 
+			<input type="text" class="form-control form-control-user" name="regDate"
+					id="regDate" placeholder="regDate"  readonly value='<fmt:formatDate pattern="yyyy년 MM월 dd일  HH시 mm분 ss초" value="${member.regDate }" />' >
+		</div>
+		
 
 		<div class="text-center py-5">
 			<button type="submit" class="btn btn-primary btn-user btn-block mx-3" >수정</button>		

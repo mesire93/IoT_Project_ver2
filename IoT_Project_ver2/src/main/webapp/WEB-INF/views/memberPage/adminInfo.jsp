@@ -54,7 +54,7 @@
 
 
 
-	<form id="actionForm" action="/myPage/myInfo" method="get">
+	<form id="actionForm" action="/memberPage/memberInfo" method="get">
 		<input type="hidden" name="mno">
 	</form>
 		
@@ -72,7 +72,7 @@ $(document).ready(function(){
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		actionForm.find("input[name='mno']").val($(this).attr("href"));
-		actionForm.attr("action", "/myPage/myInfo");
+		actionForm.attr("action", "/memberPage/memberInfo");
 		actionForm.submit();
 	});
 	

@@ -89,8 +89,11 @@
 			        </sec:authorize>
 					<sec:authorize access="isAuthenticated()">
 			            <li class="nav-item"><a class="nav-link" href="/user/customLogout"><i class="fas fa-undo-alt"></i>&nbsp;Logout</a></li>
-						<li class="nav-item"><a class="nav-link active" href="/myPage/adminInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/memberPage/adminInfo" id="memberInfo"><i class="fas fa-address-card"></i>&nbsp;마이페이지</a></li>
 			        </sec:authorize>
+			         <sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="nav-item"><a class="nav-link active" href="/memberPage/adminInfo"><i class="fas fa-address-card"></i>&nbsp;관리자페이지</a></li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>
@@ -111,9 +114,11 @@
   		 	</div>
 		</div>
 	</header>
-	
-	
-	
+<%-- 	
+	<form id='actionForm' action="/memberPage/memberInfo" method='get'>
+		<input type="hidden" name="mno" value="${member.mno}"> 
+	</form>
+	 --%>
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <script type="text/javascript">
@@ -151,6 +156,16 @@ $(document).ready(function(){
 		self.location = "/dogcart/";
 	});
 	
+/* 	
+	var actionForm = $("#actionForm");
+	
+	$("#memberInfo").on("click", function(e){
+		e.preventDefault();
+		actionForm.find("input[name='mno']").val($(this).attr("href"));
+		actionForm.attr("action", "/memberPage/memberInfo");
+		actionForm.submit();
+	});
+	 */
 	
 });
 </script>

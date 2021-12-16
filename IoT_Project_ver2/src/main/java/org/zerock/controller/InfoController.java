@@ -18,39 +18,40 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/myPage/*")
+@RequestMapping("/memberPage/*")
 @AllArgsConstructor
-public class myController {
+public class InfoController {
 
 	private MemberService memberService;
 	
 	
 	
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/myInfo")
-	public void myInfo(@ModelAttribute("mno")Long mno, Model model) {
+	@GetMapping("/memberInfo")
+	public void memberInfo(@ModelAttribute("mno")Long mno, Model model) {
 
 		model.addAttribute("member", memberService.get(mno));
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/myInfoModify")
-	public void getmyInfoModify(@RequestParam("mno") Long mno, Model model) {
+	@GetMapping("/memberInfoModify")
+	public void getMemberInfoModify(@RequestParam("mno") Long mno, Model model) {
 		model.addAttribute("member", memberService.get(mno));
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/myInfoModify")
-	public String postmyInfoModify(MemberVO member) {
+	@PostMapping("/memberInfoModify")
+	public String postMemberInfoModify(MemberVO member) {
 		
 		System.out.println(member);
 		memberService.modify(member);
-
+		
+		System.out.println("--------------------------------------");
 		return "redirect:/dogmain";
 	}
 	
-	@PostMapping("/myInfoRemove")
-	public String myInfoRemove(@RequestParam("mno") Long mno) {
+	@PostMapping("/memberInfoRemove")
+	public String memberInfoRemove(@RequestParam("mno") Long mno) {
 		memberService.remove(mno);
 		
 		return "redirect:/dogmain";
