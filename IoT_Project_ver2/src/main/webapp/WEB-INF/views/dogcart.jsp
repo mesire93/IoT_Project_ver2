@@ -86,9 +86,7 @@
 	            	
 	            	<td id="price" name="price" style="margin: 0px; padding: 18px 10px; font-size: 18px; background-image: none;"><fmt:formatNumber  type="number" value="${dog2List.price}" pattern="#,###,###" /> 원</td>
 	            	<td style="margin: 0px; padding: 18px 0px; font-size: 18px; border-top: 1px solid rgb(227, 227, 227); background-image: none;">
-	                    <sec:authorize access="isAuthenticated()">
 	                    <input type="button" value="삭제" onclick="del(${dog2List.dno})">
-	                    </sec:authorize>
 	                </td>
 	            </tr>
           	  </c:forEach>
@@ -103,6 +101,7 @@
 	<c:forEach var="dog2List" items="${dog2List}" varStatus="status">     
 		<tr>
 			<c:set var= "total" value="${total + dog2List.price}"/></c:forEach>
+			
 			<c:if test="${total != 0 }">
 			<td style="font-size: 25px; color: red;">총 가격 : <fmt:formatNumber  type="number" value="${total}" pattern="#,###,###" /> 원</td>
     		</c:if>
@@ -120,10 +119,8 @@
 <center>
 
 <c:if test="${total != 0 }">
-<sec:authorize access="isAuthenticated()">
 <button type="button" onClick="location.href='dogorder.html'" name="submit" id="ddd" style="color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: -0.3px; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(242, 244, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; letter-spacing: -0.3px; text-align: center; box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; padding: 12px 0px; font-size: 18px; background: rgb(243, 80, 78); display: inline-block; font-weight: bold; border: 1px solid rgb(211, 50, 48); width: 200px; cursor: pointer; color: rgb(255, 255, 255) !important;">
 결제하기</button>
-</sec:authorize>
 </c:if>
 <c:if test="${total == 0 }">
 <button type="button" onClick="location.href='doglist.html'" name="submit" id="ddd1" style="color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: -0.3px; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(242, 244, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; letter-spacing: -0.3px; text-align: center; box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; padding: 12px 0px; font-size: 18px; background: rgb(243, 80, 78); display: inline-block; font-weight: bold; border: 1px solid rgb(211, 50, 48); width: 200px; cursor: pointer; color: rgb(255, 255, 255) !important;">

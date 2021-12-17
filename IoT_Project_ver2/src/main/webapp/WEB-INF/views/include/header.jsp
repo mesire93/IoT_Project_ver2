@@ -176,15 +176,14 @@ $(document).ready(function(){
 	<sec:authorize access="isAuthenticated()">
 		role = '<sec:authentication property = "principal.Authorities" />'
 	</sec:authorize>
-	
-	if(role != null){
-		if(role.indexOf("ADMIN") == -1){
-			$("#adminPage").hide();
-		}
-		else{
-			$("#infoPage").hide();
-		}
+			
+	if(role.indexOf("ADMIN") == -1){
+		$("#adminPage").hide();
 	}
+	else{
+		$("#infoPage").hide();
+	}
+	
 
 });
 </script>

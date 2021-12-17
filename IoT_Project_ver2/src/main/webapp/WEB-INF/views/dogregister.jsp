@@ -282,9 +282,7 @@ function file(){
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8">
-			<sec:authorize access="isAuthenticated()">
 			<button type="submit" class="btn btn-warning" onclick="return Submit()">위 내용으로 분양 강아지를 등록합니다</button>
-			</sec:authorize>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
