@@ -49,9 +49,7 @@
 
 <style>
 body {
-  background-image:url("/resources/img/dog/1.jpg")
-	  ,url("/resources/img/dog/3.jpg");
-	  
+  background-image:url("/resources/img/dog/1.jpg") ,url("/resources/img/dog/3.jpg");	  
   background-repeat:no-repeat;
   background-position: 10px 400px, right 300px;
   background-attachment: fixed;

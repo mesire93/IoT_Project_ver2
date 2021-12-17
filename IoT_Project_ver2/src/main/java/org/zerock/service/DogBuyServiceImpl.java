@@ -80,7 +80,6 @@ public class DogBuyServiceImpl implements DogBuyService{
 
 	@Override
 	public boolean remove(Long dno) {
-		dogBuymapper.delete(dno);
 		return dogBuymapper.delete(dno) == 1;
 	}
 
