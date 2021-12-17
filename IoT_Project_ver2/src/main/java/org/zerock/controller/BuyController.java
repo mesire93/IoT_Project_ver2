@@ -25,7 +25,7 @@ public class BuyController {
 
 		 model.addAttribute("dog2List", dogBuyService.dog2List());
 	}
-	
+
 	@GetMapping("/dogorder")
 	 public void buy3Get(Model model) {
 
@@ -41,6 +41,10 @@ public class BuyController {
 	 }
 
 
+	@GetMapping("/card")
+	 public void aaa3(Model model) {
+
+	 }
 	
 	@PostMapping("/dogorder") 
 	public String dogorder(DogBuy2VO dog2BuyVO, RedirectAttributes rttr) { 
@@ -68,7 +72,7 @@ public class BuyController {
 	 @GetMapping("delete") 
 	 public String delete(@RequestParam("dno") Long dno, RedirectAttributes rttr) {
 		 dogBuyService.remove(dno); 
-		 return "redirect:/dogcart"; 
+		 return "redirect: /dogcart"; 
 	 }
 	 
 

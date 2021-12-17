@@ -154,6 +154,10 @@ $(document).ready(function(){
 		self.location = "/doglist/";
 	});
 	
+	$("#card").on("click", function(){
+		self.location = "/card";
+	});
+	
 	
 	var role = null;
 	

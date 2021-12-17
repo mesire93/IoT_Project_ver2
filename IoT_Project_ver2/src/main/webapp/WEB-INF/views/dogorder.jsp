@@ -8,6 +8,18 @@
 <%@ include file="/WEB-INF/views/include/header2.jsp"%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<!-- 결제 팝업창 -->
+ <script type="text/javascript">
+   $(document).ready(function() {
+    $('#pop_bt').click(function() {
+     $('#pop').show();
+    });
+
+    $('#close').click(function() {
+     $('#pop').hide();
+    });
+   });
+</script>
 
 
 
@@ -154,18 +166,193 @@
 		<div class="payment-heading clearfix" style="box-sizing: border-box; text-align:center; margin: 0px; padding: 5px; border: 0px; background: none;">
 			
 			
-			<div class="radio pull-left ps_none ico-card" style="box-sizing: border-box; margin: 5px; text-align: center; padding: 0px; position: relative; text-align: center; width: 286.578px; float: left !important;">
-				<label class="check-new-pay w100-new" tabindex="15" style="box-sizing: border-box; background-color:rgb(246, 231, 250); margin: 0px; padding: 0px; display: inline-block; max-width: 100%; width: 286.578px; outline: none; min-height: 20px; cursor: pointer; line-height: 22px;"><span style="box-sizing: border-box; margin: 0px; padding: 25px 0px; background-image: url(&quot;/img/icon_pay_02.png&quot;); background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; text-indent: 27px; display: inline-block; font-size: 18px; font-weight: bold; border: 1px solid rgb(34, 34, 34); width: 286.578px; cursor: pointer; line-height: 20px; background-position: 88px 27px !important;">신용카드</span></label>
+			<div class="radio pull-left ps_none ico-card" onClick="location.href='card.html'" id="card" style="box-sizing: border-box; margin: 5px; text-align: center; padding: 0px; position: relative; text-align: center; width: 286.578px; float: left !important;">
+				<label class="check-new-pay w100-new" tabindex="15" id="card" style="box-sizing: border-box;  background-color:rgb(246, 231, 250); margin: 0px; padding: 0px; display: inline-block; max-width: 100%; width: 286.578px; outline: none; min-height: 20px; cursor: pointer; line-height: 22px;">
+				<span style="box-sizing: border-box;  margin: 0px; padding: 25px 0px; background-image: url(&quot;/img/icon_pay_02.png&quot;); background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; text-indent: 27px; display: inline-block; font-size: 18px; font-weight: bold; border: 1px solid rgb(34, 34, 34); width: 286.578px; cursor: pointer; line-height: 20px; background-position: 88px 27px !important;">
+				신용카드</span></label>
 			</div>
+			
 			<div class="radio pull-left ps_none ico-card" style="box-sizing: border-box; margin: 5px; text-align: center; padding: 0px; position: relative; text-align: center; width: 286.578px; float: left !important;">
-				<label class="check-new-pay w100-new" tabindex="15" style="box-sizing: border-box; background-color:rgb(246, 231, 250); margin: 0px; padding: 0px; display: inline-block; max-width: 100%; width: 286.578px; outline: none; min-height: 20px; cursor: pointer; line-height: 22px;"><span style="box-sizing: border-box; margin: 0px; padding: 25px 0px; background-image: url(&quot;/img/icon_pay_02.png&quot;); background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; text-indent: 27px; display: inline-block; font-size: 18px; font-weight: bold; border: 1px solid rgb(34, 34, 34); width: 286.578px; cursor: pointer; line-height: 20px; background-position: 88px 27px !important;">계좌이체</span></label>
+				<label class="check-new-pay w100-new" tabindex="15"  style="box-sizing: border-box;  background-color:rgb(246, 231, 250); margin: 0px; padding: 0px; display: inline-block; max-width: 100%; width: 286.578px; outline: none; min-height: 20px; cursor: pointer; line-height: 22px;">
+				<span style="box-sizing: border-box;  margin: 0px; padding: 25px 0px; background-image: url(&quot;/img/icon_pay_02.png&quot;); background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; text-indent: 27px; display: inline-block; font-size: 18px; font-weight: bold; border: 1px solid rgb(34, 34, 34); width: 286.578px; cursor: pointer; line-height: 20px; background-position: 88px 27px !important;">
+				계좌이체</a></span></label>
 			</div>
-			<div class="radio pull-left ps_none ico-card" style="box-sizing: border-box; margin: 5px; text-align: center; padding: 0px; position: relative; text-align: center; width: 286.578px; float: left !important;">
-				<label class="check-new-pay w100-new" tabindex="15" style="box-sizing: border-box; background-color:rgb(246, 231, 250); margin: 0px; padding: 0px; display: inline-block; max-width: 100%; width: 286.578px; outline: none; min-height: 20px; cursor: pointer; line-height: 22px;"><span style="box-sizing: border-box; margin: 0px; padding: 25px 0px; background-image: url(&quot;/img/icon_pay_02.png&quot;); background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; text-indent: 27px; display: inline-block; font-size: 18px; font-weight: bold; border: 1px solid rgb(34, 34, 34); width: 286.578px; cursor: pointer; line-height: 20px; background-position: 88px 27px !important;">무통장입금</span></label>
+			
+			<div class="radio pull-left ps_none ico-card" id="pop_bt"  style="box-sizing: border-box; margin: 5px; text-align: center; padding: 0px; position: relative; text-align: center; width: 286.578px; float: left !important;">
+				<label class="check-new-pay w100-new" tabindex="15"  style="box-sizing: border-box;  background-color:rgb(246, 231, 250); margin: 0px; padding: 0px; display: inline-block; max-width: 100%; width: 286.578px; outline: none; min-height: 20px; cursor: pointer; line-height: 22px;">
+				<span style="box-sizing: border-box;  margin: 0px; padding: 25px 0px; background-image: url(&quot;/img/icon_pay_02.png&quot;); background-size: initial; background-repeat: no-repeat; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; text-indent: 27px; display: inline-block; font-size: 18px; font-weight: bold; border: 1px solid rgb(34, 34, 34); width: 286.578px; cursor: pointer; line-height: 20px; background-position: 88px 27px !important;">
+				무통장입금</a></span></label>
 			</div>
 		</div>
-		
-		
+<!-- ==============================================무통장 입금======================================== -->
+		<div id="pop" style="display:none;">
+    <table border="0" cellpadding="7" cellspacing="0" class="w93 __se_tbl_ext" style="border: 0px; border-collapse: collapse; margin: 0px auto; padding: 0px; width: 677.031px; font-family: 굴림;">
+    <colgroup style="box-sizing: border-box;">
+        <col width="20%" class="tbl002 lpad20" style="box-sizing: border-box; padding-left: 20px; background-color: rgb(247, 247, 247); color: rgb(18, 18, 18); letter-spacing: -1px;">
+        <col width="80%" class="lpad15" style="box-sizing: border-box; padding-left: 15px;">
+    </colgroup>
+    <tbody style="box-sizing: border-box;">
+   		
+   	
+   	<c:set var = "total" value = "0" />
+	<c:forEach var="dog2List" items="${dog2List}" varStatus="status">     
+	<c:set var= "total" value="${total + dog2List.price}"/></c:forEach>
+  		
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="2" class="tbl001" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(101, 101, 101); padding: 0px;"></td>
+        </tr>
+        <tr bgcolor="FFFFFF" style="box-sizing: border-box;">
+            <td class="tbl002" nowrap="" style="box-sizing: border-box; color: rgb(18, 18, 18); font-size: 12px; background-color: rgb(247, 247, 247); letter-spacing: -1px;">선택방법</td>
+            <td style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px;">무통장입금 결제</td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl003" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(222, 222, 222); padding: 0px;"></td>
+        </tr>
+        <tr bgcolor="FFFFFF" style="box-sizing: border-box;">
+            <td class="tbl002" nowrap="" style="box-sizing: border-box; color: rgb(18, 18, 18); font-size: 12px; background-color: rgb(247, 247, 247); letter-spacing: -1px;">총주문액</td>
+            <td style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px;">
+                <font class="red" style="box-sizing: border-box; color: rgb(210, 0, 0);"><b style="box-sizing: border-box;"><span class="px17" style="box-sizing: border-box; font-size: 17px;"><fmt:formatNumber  type="number" value="${total}" pattern="#,###,###" /></span>원</b></font>
+            </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl003" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(222, 222, 222); padding: 0px;"></td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl001" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(101, 101, 101); padding: 0px;"></td>
+        </tr>
+
+    </tbody>
+</table>
+<br>
+<table border="0" cellpadding="7" cellspacing="0" class="w93 tblfix nowrap __se_tbl_ext" style="border: 0px; border-collapse: collapse; margin: 0px auto; padding: 0px; table-layout: fixed; width: 677.031px; white-space: nowrap; font-family: 굴림;">
+    <colgroup style="box-sizing: border-box;">
+        <col width="20%" style="box-sizing: border-box;">
+    </colgroup>
+    <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="2" class="tbl001 pad0" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding: 0px; background-color: rgb(101, 101, 101); overflow: hidden;"></td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td class="tbl002 lpad20" nowrap="" style="box-sizing: border-box; color: rgb(18, 18, 18); font-size: 12px; padding-left: 20px; background-color: rgb(247, 247, 247); letter-spacing: -1px; overflow: hidden;">입금은행</td>
+            <td class="lpad15" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding-left: 15px; overflow: hidden;">
+            <input type="radio" name="account1" value="" style="margin-top: 0px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(102, 102, 102); font-size: 12px;">
+            신한은행 :111-22-345678&nbsp;<font class="olive" style="box-sizing: border-box; color: rgb(61, 110, 116);">
+            - 예금주 : 홍길동</font><br style="box-sizing: border-box;"><input type="radio" name="account1" value="" style="margin-top: 0px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(102, 102, 102); font-size: 12px;">
+            국민은행 :111-22-345678&nbsp;<font class="olive" style="box-sizing: border-box; color: rgb(61, 110, 116);">
+            - 예금주 : 홍길동</font><br style="box-sizing: border-box;"><input type="radio" name="account1" value="" style="margin-top: 0px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(102, 102, 102); font-size: 12px;">
+            부산은행 :111-22-345678&nbsp;<font class="olive" style="box-sizing: border-box; color: rgb(61, 110, 116);">
+            - 예금주 : 홍길동</font><br style="box-sizing: border-box;"></td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl003 pad0" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding: 0px; background-color: rgb(222, 222, 222); overflow: hidden;"></td>
+        </tr>
+        <tr bgcolor="FFFFFF" style="box-sizing: border-box;">
+            <td class="tbl002a lpad20a" nowrap="" style="box-sizing: border-box; color: rgb(18, 18, 18); font-size: 12px; padding-left: 20px; background-color: rgb(247, 247, 247); letter-spacing: -1px; overflow: hidden;">입금자명</td>
+            <td class="lpad15a" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding-left: 15px; overflow: hidden;"><input type="text" name="bankowner" class="box" style="box-sizing: border-box; margin: 0px; padding-top: 2px; padding-bottom: 2px; color: rgb(102, 102, 102); font-size: 12px; font-family: 굴림; border-width: 1px; border-style: solid; border-color: rgb(221, 221, 221); background-color: rgb(255, 255, 255); vertical-align: middle;">&nbsp;<font class="small" style="box-sizing: border-box; font-size: 11px; letter-spacing: -1px;">- 실제 입금하실 분의 성함을 정확히 입력해 주세요.</font>
+            </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl003 pad0" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding: 0px; background-color: rgb(222, 222, 222); overflow: hidden;"></td>
+        </tr>
+        <tr bgcolor="FFFFFF" style="box-sizing: border-box;">
+            <td class="tbl002 lpad20" nowrap="" style="box-sizing: border-box; color: rgb(18, 18, 18); font-size: 12px; padding-left: 20px; background-color: rgb(247, 247, 247); letter-spacing: -1px; overflow: hidden;">입금예정일</td>
+            <td class="lpad15" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding-left: 15px; overflow: hidden;"><select name="bankdate_year" class="box" style="color: rgb(102, 102, 102); font-size: 12px; font-family: 굴림; border-color: rgb(221, 221, 221); background-color: rgb(255, 255, 255); padding: 2px; vertical-align: middle;">
+                    <option value="2021" selected="" style="box-sizing: border-box;">2021</option>
+                    <option value="2022" style="box-sizing: border-box;">2022</option>
+                    <option value="2023" style="box-sizing: border-box;">2023</option>
+                    <option value="2024" style="box-sizing: border-box;">2024</option>
+                </select>년&nbsp;<select name="bankdate_month" class="box" style="color: rgb(102, 102, 102); font-size: 12px; font-family: 굴림; border-color: rgb(221, 221, 221); background-color: rgb(255, 255, 255); padding: 2px; vertical-align: middle;">
+                    <option value="01" style="box-sizing: border-box;">01</option>
+                    <option value="02" style="box-sizing: border-box;">02</option>
+                    <option value="03" style="box-sizing: border-box;">03</option>
+                    <option value="04" style="box-sizing: border-box;">04</option>
+                    <option value="05" style="box-sizing: border-box;">05</option>
+                    <option value="06" style="box-sizing: border-box;">06</option>
+                    <option value="07" style="box-sizing: border-box;">07</option>
+                    <option value="08" style="box-sizing: border-box;">08</option>
+                    <option value="09" style="box-sizing: border-box;">09</option>
+                    <option value="10" style="box-sizing: border-box;">10</option>
+                    <option value="11" style="box-sizing: border-box;">11</option>
+                    <option value="12" selected="" style="box-sizing: border-box;">12</option>
+                </select>월&nbsp;<select name="bankdate_day" class="box" style="color: rgb(102, 102, 102); font-size: 12px; font-family: 굴림; border-color: rgb(221, 221, 221); background-color: rgb(255, 255, 255); padding: 2px; vertical-align: middle;">
+                    <option value="01" style="box-sizing: border-box;">01</option>
+                    <option value="02" style="box-sizing: border-box;">02</option>
+                    <option value="03" style="box-sizing: border-box;">03</option>
+                    <option value="04" style="box-sizing: border-box;">04</option>
+                    <option value="05" style="box-sizing: border-box;">05</option>
+                    <option value="06" style="box-sizing: border-box;">06</option>
+                    <option value="07" style="box-sizing: border-box;">07</option>
+                    <option value="08" style="box-sizing: border-box;">08</option>
+                    <option value="09" style="box-sizing: border-box;">09</option>
+                    <option value="10" style="box-sizing: border-box;">10</option>
+                    <option value="11" style="box-sizing: border-box;">11</option>
+                    <option value="12" style="box-sizing: border-box;">12</option>
+                    <option value="13" style="box-sizing: border-box;">13</option>
+                    <option value="14" style="box-sizing: border-box;">14</option>
+                    <option value="15" style="box-sizing: border-box;">15</option>
+                    <option value="16" style="box-sizing: border-box;">16</option>
+                    <option value="17" selected="" style="box-sizing: border-box;">17</option>
+                    <option value="18" style="box-sizing: border-box;">18</option>
+                    <option value="19" style="box-sizing: border-box;">19</option>
+                    <option value="20" style="box-sizing: border-box;">20</option>
+                    <option value="21" style="box-sizing: border-box;">21</option>
+                    <option value="22" style="box-sizing: border-box;">22</option>
+                    <option value="23" style="box-sizing: border-box;">23</option>
+                    <option value="24" style="box-sizing: border-box;">24</option>
+                    <option value="25" style="box-sizing: border-box;">25</option>
+                    <option value="26" style="box-sizing: border-box;">26</option>
+                    <option value="27" style="box-sizing: border-box;">27</option>
+                    <option value="28" style="box-sizing: border-box;">28</option>
+                    <option value="29" style="box-sizing: border-box;">29</option>
+                    <option value="30" style="box-sizing: border-box;">30</option>
+                    <option value="31" style="box-sizing: border-box;">31</option>
+                </select>일</td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl003 pad0" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding: 0px; background-color: rgb(222, 222, 222); overflow: hidden;"></td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl001 pad0" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; padding: 0px; background-color: rgb(101, 101, 101); overflow: hidden;"></td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<table border="0" cellpadding="7" cellspacing="0" class="w93 __se_tbl_ext" style="border: 0px; border-collapse: collapse; margin: 0px auto; padding: 0px; width: 677.031px; font-family: 굴림;">
+    <colgroup style="box-sizing: border-box;">
+        <col width="20%" class="tbl002 lpad20" style="box-sizing: border-box; padding-left: 20px; background-color: rgb(247, 247, 247); color: rgb(18, 18, 18); letter-spacing: -1px;">
+        <col width="80%" class="lpad15" style="box-sizing: border-box; padding-left: 15px;">
+    </colgroup>
+    <tbody style="box-sizing: border-box;">
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="2" class="tbl001" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(101, 101, 101); padding: 0px;"></td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td class="tbl002" nowrap="" style="box-sizing: border-box; color: rgb(18, 18, 18); font-size: 12px; background-color: rgb(247, 247, 247); letter-spacing: -1px;">현금영수증 발행</td>
+            <td style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px;"><input type="radio" name="taxsave" value="e" style="margin-top: 0px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(102, 102, 102); font-size: 12px;">발행합니다.&nbsp;<input type="radio" name="taxsave" value="n" checked="" style="margin-top: 0px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(102, 102, 102); font-size: 12px;">발행하지 않습니다.<br style="box-sizing: border-box;">
+                <div style="box-sizing: border-box; margin: 0px; padding: 0px; height: 5px; overflow: hidden;"></div>
+                <font class="small" style="box-sizing: border-box; font-size: 11px; letter-spacing: -1px;">- 현금영수증 발행을 위해선&nbsp;<a href="http://xn--jj0bm49a1zcwveq9t.kr/" target="_blank" style="box-sizing: border-box; color: rgb(89, 89, 89); text-decoration-line: none; font-size: 12px;">
+                        <font class="sky small" style="box-sizing: border-box; color: rgb(66, 137, 162); font-size: 11px;">국세청 현금영수증 사이트 - 현금영수증.kr</font>
+                    </a>&nbsp;에 가입이 되어있어야 합니다.<br style="box-sizing: border-box;">- 현금영수증 발행내역은 주문 후&nbsp;<font class="sky" style="box-sizing: border-box; color: rgb(66, 137, 162);">마이페이지</font>에서 확인 가능하며, 마이페이지에서 발행신청도 가능합니다.<br style="box-sizing: border-box;"></font>
+            </td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl003" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(222, 222, 222); padding: 0px;"></td>
+        </tr>
+        <tr style="box-sizing: border-box;">
+            <td colspan="2" height="1" class="tbl001" style="box-sizing: border-box; color: rgb(89, 89, 89); font-size: 12px; background-color: rgb(101, 101, 101); padding: 0px;"></td>
+        </tr>
+    </tbody>
+</table>
+
+    <div>
+      <div id="close">
+      close
+      </div>
+     </div>
+  </div>
+<!-- ==============================================무통장 입금======================================== -->
+
 		<div class="naverPayGuideDiv" id="naverPayGuideDiv" style="box-sizing: border-box; margin: 0px; padding: 0px;">
 			<div class="stit-area" style="box-sizing: border-box; margin: 0px; padding: 5px 0px 0px; border-top: 1px solid rgb(240, 241, 245); font-size: 15px; line-height: 52px; letter-spacing: -0.5px;">
 				<div class="help-block txt-info" style="box-sizing: border-box; margin: 5px 0px 0px; padding: 5px 0px 5px; color: rgb(136, 136, 136); font-size: 13px; line-height: 21px;">
@@ -178,14 +365,33 @@
 		</div>
 	</div>
 	&nbsp;
-	<sec:authorize access="isAuthenticated()">
 	<p>
 	<button type="submit" onclick="javascript:submit()" id="submit" name="submit" style="color: rgb(34, 34, 34); font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: -0.3px; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(242, 244, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none; font-family: &quot;Apple SD Gothic Neo&quot;, &quot;Malgun Gothic&quot;, &quot;맑은 고딕&quot;, Dotum, 돋움, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; letter-spacing: -0.3px; text-align: center; box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; padding: 12px 0px; font-size: 18px; background: rgb(243, 80, 78); display: inline-block; font-weight: bold; border: 1px solid rgb(211, 50, 48); width: 200px; cursor: pointer; color: rgb(255, 255, 255) !important;">
 	결제하기</button><br>
 	</p>
-	</sec:authorize>
 </form>
 </center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ============== -->
 
 
 
