@@ -21,12 +21,17 @@ function Submit(){
 	
 	var form =document.form;
 	
-	if( form.simple.length > 65){
+	if( form.simple.value.length > 65){
 		alert('한줄 특징은 65글자 이하로 입력해주세요.');
 		form.simple.focus();
 		return false;
 	}
 	
+	if( form.feature.value.length > 300){
+		alert('상세특징은 300글자 이하로 입력해주세요.');
+		form.feature.focus();
+		return false;
+	}
 	
 	// 파일 업로드 확장자 체크
     if( $("#uploadfileName").val() != "" ){
@@ -108,7 +113,7 @@ function file(){
 	<div class="row">
 		<div class="col-lg-8"><!-- 없을경우 전체화면 가로차지한다 -->
 			<div class="card-header">강아지 이름을 입력하세요</div>
-			<input type="text" class="form-control" name="name" placeholder="강아지 이름을 입력하세요">
+			<input type="text" class="form-control" name="name" placeholder="강아지 이름을 입력하세요" required>
 		</div>
 	</div>
 </div>
@@ -118,7 +123,7 @@ function file(){
 	<div class="row">
 		<div class="col-lg-8"><!-- 없을경우 전체화면 가로차지한다 -->
 			<div class="card-header">강아지 체중을 입력하세요(소수점 첫자리까지만 입력해주세요)단위kg 생략</div>
-			<input type="text" class="form-control" name="weight" placeholder="강아지 체중을 입력하세요">
+			<input type="text" class="form-control" name="weight" placeholder="강아지 체중을 입력하세요" required>
 		</div>
 	</div>
 </div>
@@ -206,7 +211,7 @@ function file(){
 		<div class="col-lg-8">
 			<div class="card-header">강아지 사진을 올려주세요</div>
 			<div class="form-group">
-				<label><input type="file" name="uploadfileName"> </label> 
+				<label><input type="file" name="uploadfileName" required> </label> 
 			</div>
 		</div>
 	</div>
@@ -218,7 +223,7 @@ function file(){
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="card-header">강아지 특징을 한줄로 요약해주세요</div>
-			<input type="text" name="simple" class="form-control" placeholder="한줄로 요약해주세요">
+			<input type="text" name="simple" class="form-control" placeholder="한줄로 요약해주세요" required>
 		</div>
 	</div>
 </div>
@@ -229,7 +234,7 @@ function file(){
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="card-header">강아지 특징을 적어주세요</div>
-			<textarea class="form-control" name="feature" rows="7"></textarea>
+			<textarea class="form-control" name="feature" rows="7" required></textarea>
 		</div>
 	</div>
 </div>

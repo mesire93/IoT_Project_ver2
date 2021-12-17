@@ -67,8 +67,8 @@ function cartcheck(){
 		<div class="col-lg-8">
 			<!-- Featured blog post-->
 			<div class="card mb-4">
-				<a ><img class="card-img-top"
-					src="<spring:url value='/image/${detail.fileName}'/>" alt="${detail.name } 이미지파일"/></a>
+				<img class="card-img-top"
+					src="<spring:url value='/image/${detail.fileName}'/>" alt="${detail.name } 이미지파일"/>
 				<div class="card-body">
 					<%-- <div class="card-header"><!-- 강아지 특징 -->${dog.name } 특징</div> --%>
 					<div class="card-header card-header1"><!-- 강아지 특징 --><c:out value="${detail.name }"/> 특징</div>
