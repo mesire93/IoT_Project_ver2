@@ -78,18 +78,21 @@ function cartcheck(){
 			<!-- <div class="card mb-4"> 끝-->
 			
 			<div style="text-align:center;">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<!-- <button type="submit" class="btn btn-warning" onclick="location.href='/remove'">삭제합니다</button> -->
 				<button type="submit" class="btn btn-outline-danger">삭제합니다</button>
 				<!-- 삭제처리를 위해  form 태그의 method 속성을 POST지정하고 submit 버튼 클릭시 Controller 에서 처리된다. -->
-
+				</sec:authorize>
+				
 				<button type="button" class="btn btn-outline-primary" onclick="location.href='/doglist'">목록으로</button>
 				<!-- button의 onclick 속성은 redirect  개념으로 Controller에서 @GetMapping으로 처리 -->
 				
 				<!--  아래 코드 한번에 다들어간다. -->
+				<sec:authorize access="isAuthenticated()">
 				 <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart?dno=<c:out value="${detail.dno }"/>'">
 				 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 
 				 장바구니담기</button>
-				
+				</sec:authorize>
 				 <!-- <button type="button" id="cartBtn" class="btn btn-outline-primary" onclick="location.href='/cart'">장바구니담기</button>  -->
 				
 				<!-- button의 onclick 속성은 redirect  개념으로 Controller에서 @GetMapping으로 처리 -->
