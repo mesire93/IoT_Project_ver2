@@ -47,13 +47,13 @@
 
 
 
-<style>
+<!-- <style>
 body {
   background-image:url("/resources/img/dog/1.jpg") ,url("/resources/img/dog/3.jpg");	  
   background-repeat:no-repeat;
   background-position: 10px 400px, right 300px;
   background-attachment: fixed;
-</style>
+</style> -->
 
 </head>
 
@@ -63,7 +63,7 @@ body {
 	<!-- 내비게이션 바 -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
 		<div class="container">
-			<a class="navbar-brand" href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;홈페이지이름</a>
+			<a class="navbar-brand" href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;HOME</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"

@@ -78,7 +78,7 @@
 	<!-- Responsive navbar-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" >
 		<div class="container">
-			<a class="navbar-brand" href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;홈페이지이름</a>
+			<a class="navbar-brand" href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;HOME</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"

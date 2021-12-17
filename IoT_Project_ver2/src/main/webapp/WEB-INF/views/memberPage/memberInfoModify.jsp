@@ -97,6 +97,18 @@
 					id="number3" maxlength='4' placeholder="number3" required  value='<c:out value="${member.number3 }"/>'>
 			</div>
 		</div>
+		
+		<div class="mb-3">
+			<label for="regDate" class="form-label">가입일자</label> 
+			<label class="form-control form-control-user" name="regDate"
+					id="regDate" readonly><fmt:formatDate pattern="yyyy년 MM월 dd일  HH시 mm분 ss초" value="${member.regDate }" /></label>
+		</div>
+		
+		<div class="mb-3">
+			<label for="userAuth" class="form-label">회원 등급</label> 
+			<label class="form-control form-control-user" name="userAuth"
+					id="userAuth" readonly><c:out value="${member.authList[0].userAuth}"/></label>
+		</div>
 
 
 		<div class="text-center py-5">

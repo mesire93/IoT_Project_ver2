@@ -186,10 +186,8 @@
 			
 			<div class="modal-footer">
 				<sec:authorize access="isAuthenticated()">
-					<c:if test="${pinfo.username eq board.writer}">
 						<button type="button" id="modalModBtn" class="btn btn-outline-primary">수정</button>
 						<button type="button" id="modalRemoveBtn" class="btn btn-outline-danger">삭제</button>
-					</c:if>
 				</sec:authorize>
 				<button type="button" id='modalRegisterBtn' class="btn btn-outline-primary">등록</button>
 				<button type="button" id='modalCloseBtn'  class="btn btn-outline-default" data-dismiss="modal" aria-hidden="true">닫기</button>
@@ -391,8 +389,8 @@
 				return;
 			}
 			
-			var originalReplyer = modalInputReplyer.yal();
-			console.log("Original Replyer:"+ orginalReplyer);
+			var originalReplyer = modalInputReplyer.val();
+			console.log("Original Replyer:"+ originalReplyer);
 			if(replyer != originalReplyer){
 				alert("자신이 작성한 댓글만 삭제가 가능합니다.");
 				modal.modal("hide");
