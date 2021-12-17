@@ -51,7 +51,7 @@ p {font-family: 'Cute Font', cursive; font-family: 'Stylish', sans-serif; font-s
 							<br> 분양가 : <fmt:formatNumber value="${dog1List.price}" pattern="#,###,###"/> 원
 							<br>
 						</p>	
-					<button type="button"  class="btn btn-outline-warning" onclick="location.href='/dogdetail?dno=${dog1List.dno}'">상세보기</button>
+					<button type="button"  class="btn btn-warning" onclick="location.href='/dogdetail?dno=${dog1List.dno}'">상세보기</button>
 						
 					</div><!-- 끝 <div class="card-body"> -->
 				</div>	<!-- 끝 <div class="card mb-3"> -->

@@ -137,7 +137,7 @@ p{font-family: 'Poor Story', cursive; font-size:1.6em;}
 								
 							<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="width:200%;" alt="..." /></a> --%>
 							<%-- 안됨<a href="#"><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="object-fit: scale-down" alt="..."/></a> --%>
-								 <a ><img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="width:350px; height:400px;" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/></a>
+								 <img class="card-img-top" src="<spring:url value='/image/${list.fileName}'/>" style="width:350px; height:400px;" alt="<c:out value='${list.kind}'/>" title="<c:out value='${list.kind}'/>"/>
 							<%-- 안됨<a href="#"><img class="card-img-top" src="C://upload/${list.fileName}" style="object-fit: scale-down" alt="..."/></a> --%>
 							<!-- 안됨<a href="#"><img class="card-img-top" src="resources/img/dog/닥스훈트.png" style="object-fit: scale-down" alt="..."></a> -->
 						
